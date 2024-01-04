@@ -1,0 +1,59 @@
+<!-- categories container -->
+<div class="container mt-5 mb-5"> 
+    <div class="container " >  
+        <div class="text-end">
+            <button class="btn btn-sm btn-outline-success" (click)="viewCategories()" > Show All Categories</button>
+        </div>
+        <!-- <app-categories /> -->
+        <div class="container mt-n3 mb-3">
+            <h1 class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-success ">Categories</h1>
+            <div class="card-group card-group-scroll mt-3">
+                @for (cat of categories; track $index){
+                    <div class="card border border-success m-1" style="width: 18rem;">
+                        <div class="card-body  shadow">
+                            <img src="..." class="card-img-top" alt="...">
+                            <h5 class="card-title">{{cat.category}}</h5>
+                            <a class="btn btn-success">See {{cat.category}}</a>
+                        </div>
+                    </div>
+                }
+            </div>  
+        </div>
+    </div>  
+</div>
+<!-- famous stores container -->
+<div class="container mt-5 mb-5"> 
+    <div class="container" >
+        <div class="text-end">
+            <button class="btn btn-sm btn-outline-success" (click)="viewFamousRestaurants()" > Show All Famous Stores</button>
+        </div>
+        <!-- <app-famous /> -->
+        <div class="container mt-n3 mb-3">
+            <h1 class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-success ">Famous Stores</h1>
+            <div class="card-group card-group-scroll mt-3">
+                @for (famousRest of famousRestaurants; track $index){
+                    <div class="card border border-success m-1" style="width: 18rem;">
+                        <div class="card-body  shadow">
+                            <img src="..." class="card-img-top" alt="...">
+                            <h5 class="card-title">{{famousRest.name}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted"> {{famousRest.category}}</h6>
+                            <p class="card-text">Address: {{famousRest.address}}</p>
+                            <a class="btn btn-success">See {{famousRest.name}}</a>
+                        </div>
+                    </div>
+                }
+            </div>  
+        </div>
+    </div>
+</div>
+<!-- all stores container -->
+<div class="container mt-5 mb-5"> 
+    <div class="container" >
+        <div class="text-end">
+            <button class="btn btn-sm btn-outline-success" (click)="viewRestaurants()" > Show All Stores</button>
+        </div>
+        <div class="mt-n4">
+            <app-all-restaurants />
+        <div></div>
+    </div>     
+</div>
