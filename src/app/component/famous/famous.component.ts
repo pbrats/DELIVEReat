@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FamousRestaurantsService } from '../../service/famous-restaurants.service';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-famous',
@@ -22,5 +23,8 @@ export class FamousComponent {
       } 
     });
   }
+  constructor(private titleService: Title) {
+    titleService.setTitle("Famous Stores");
+}
 
 }

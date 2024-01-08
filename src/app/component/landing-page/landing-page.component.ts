@@ -1,11 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { NavigationEnd, Router} from '@angular/router';
+import { filter } from 'rxjs';
+import { PublisherService } from '../../service/publisher.service';
+import { Title } from '@angular/platform-browser';
 
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-
-
-// import { Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-landing-page',
@@ -28,28 +28,20 @@ import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
     ])),(trigger('moveImage', [
       transition(':enter', [
         style({ transform: 'translateX(100%)' }),
-        animate('900ms ease-in', style({ transform: 'translateX(0%)' })),
+        animate('850ms ease-in', style({ transform: 'translateX(0%)' })),
       ]),
     ]))
   ]
 })
 
-export class LandingPageComponent {
+export class LandingPageComponent implements OnInit{
   animateHeading = false;
   animateButton = false;
   animateImage = false;
-
-
- 
-  // constructor(private renderer: Renderer2) {
-  //   this.renderer.setStyle(document.body, 'background', 'url("https://templatekit.jegtheme.com/deliverra/wp-content/uploads/sites/61/2021/03/deliv-297x300.png")');
-  //   this.renderer.setStyle(document.body, 'background-size', 'cover');
-  //   this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
-  //   this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
-  // }
-  ngOnInit(){
-    this. triggerAnimation();
-  }
+  
+  isWelcomePage=true;
+  publisherService =inject(PublisherService);
+  pS=this.publisherService.publishData(this.isWelcomePage);
 
   triggerAnimation() {
     this.animateHeading = true;
@@ -57,4 +49,29 @@ export class LandingPageComponent {
     this.animateImage = true;
   }
 
+constructor(private router: Router,private titleService: Title) {
+  titleService.setTitle("Welcome");
+}
+
+  ngOnInit() {
+
+    this. triggerAnimation();
+    // console.log(isWelcomePage);
+    // this.router.events.subscribe((event) => console.log(event));
+  
+    this.router.events.pipe(
+      filter((event: any) => event instanceof NavigationEnd)
+    ).subscribe((event) => {
+      this.isWelcomePage=false;
+      // console.log(isWelcomePage);
+      this.publisherService.publishData(this.isWelcomePage);
+    });
+
+    // if (event instanceof NavigationEnd) {
+    //   this.isWelcomePage=false;
+    //   // console.log(isWelcomePage);
+    //   this.publisherService.publishData(this.isWelcomePage);
+      
+    // }
+  }
 }

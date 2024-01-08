@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RestaurantsService } from '../../service/restaurants.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-all-restaurants',
@@ -21,5 +22,8 @@ export class AllRestaurantsComponent {
       } 
     });
   }
-
+  constructor(private titleService: Title) {
+    titleService.setTitle("Stores");
 }
+}
+

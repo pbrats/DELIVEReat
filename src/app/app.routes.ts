@@ -6,6 +6,9 @@ import { FamousComponent } from './component/famous/famous.component';
 import { AllRestaurantsComponent } from './component/all-restaurants/all-restaurants.component';
 import { CategoriesComponent } from './component/categories/categories.component';
 
+
+
+
 export const routes: Routes = [
     {path: "", redirectTo: "welcome", pathMatch:"full"},
     {path: "welcome", component: LandingPageComponent},

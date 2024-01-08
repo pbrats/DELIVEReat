@@ -10,5 +10,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './landing-header.component.css'
 })
 export class LandingHeaderComponent {
+  constructor() {}
 
 }
