@@ -8,6 +8,7 @@ import { FamousRestaurantsService } from '../../service/famous-restaurants.servi
 import { RestaurantsService } from '../../service/restaurants.service';
 import { UniqueCategoryPipe } from "../../unique-category.pipe";
 import { Title } from '@angular/platform-browser';
+import { CategoriesService } from '../../service/categories.service';
 
 @Component({
     selector: 'app-main',
@@ -23,13 +24,21 @@ export class MainComponent {
   categories:any;
   categories1:any;
   categories2:any;
+  fCategories:any;
   restaurantsService: RestaurantsService =inject(RestaurantsService);
+  catService: CategoriesService =inject(CategoriesService);
+  
   
   constructor(private route: ActivatedRoute,private titleService: Title) {
     titleService.setTitle("Discovery");
   }
 
   ngOnInit() {
+    // get categories from CategoriesService obj if so allazei sto html kai mpainei fCategories
+    this.catService.getCategories().subscribe((data) => {
+      this.fCategories = data;
+    });
+    // get categories from restaurantsService
     this.restaurantsService.getRestaurants()
     .subscribe({
       next: response => {
@@ -37,12 +46,14 @@ export class MainComponent {
         this.categories1 =response;
       } 
     });
+    // get categories from famousRestaurantsService
     this.famousService.getFamousRestaurants()
     .subscribe({
       next: response => {
         console.log(response);
         this.famousRestaurants =response;
         this.categories2 =response;
+        // enonei categories if so allazei sto html kai mpainei categories
         this.categories=this.categories1.concat(this.categories2)
       } 
     });
@@ -57,5 +68,7 @@ viewRestaurants(){
 viewCategories(){
   this.router.navigate(["categories"]);
 }
-
+onCategoryClick(category: string) {
+  this.router.navigate(["categories",category]);
+}
 }

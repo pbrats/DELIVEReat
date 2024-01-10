@@ -5,6 +5,7 @@ import { LandingPageComponent } from './component/landing-page/landing-page.comp
 import { FamousComponent } from './component/famous/famous.component';
 import { AllRestaurantsComponent } from './component/all-restaurants/all-restaurants.component';
 import { CategoriesComponent } from './component/categories/categories.component';
+import { SelectedCategoryComponent } from './component/selected-category/selected-category.component';
 
 
 
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path: "famous-stores", component: FamousComponent},
     {path: "stores", component: AllRestaurantsComponent},
     {path: "categories", component: CategoriesComponent},
+    {path: "categories/:category",component: SelectedCategoryComponent},
     // {path: "users/:id", component: UserDetailsComponent},
     // {path: "stores", component: AllStoresComponent},
     {path: "**", component: NotFoundComponent}
