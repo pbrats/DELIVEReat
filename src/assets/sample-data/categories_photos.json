@@ -1,0 +1,23 @@
+[
+    {"category": "FAST_FOOD",
+    "background_image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyum4bEwPKv0UsfsFYw2UYgiDHS8qhUhbzkA&usqp=CAU"
+    },
+    {"category": "PIZZA",
+    "background_image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbGlU2mkPoGwRwo9PpuHN8xmKw_HcGKk8Y2g&usqp=CAU"
+    },
+    {"category": "SOUVLAKI",
+    "background_image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs_vjD4c95YTH3VvPYHGN0zH7x_HS_yXkbEA&usqp=CAU"
+    },
+    {"category": "COFFEE",
+    "background_image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQO6qEA-gOtkiNm5bGo4cVVROXyFqjiNSIrA&usqp=CAU"
+    },
+    {"category": "DONUTS",
+    "background_image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnWpPTYZTRtPuWcdW4X3oqbp9YQbdNCAugKw&usqp=CAU"
+    },
+    {"category": "OTHER",
+    "background_image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2bA_UiGFQ82beIn4uBuG6w6FtNSu-C8j0og&usqp=CAU"
+    },
+    {"category": "ASIAN",
+    "background_image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC21wO_-GOmI0gRXA0mOIQUfCq4e4NpSq5rg&usqp=CAU"
+    }
+]

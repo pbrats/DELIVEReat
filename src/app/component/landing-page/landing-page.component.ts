@@ -25,7 +25,8 @@ import { Title } from '@angular/platform-browser';
         style({ transform: 'translateX(-100%)' }),
         animate('750ms ease-in', style({ transform: 'translateX(0%)' })),
       ]),
-    ])),(trigger('moveImage', [
+    ])),
+    (trigger('moveImage', [
       transition(':enter', [
         style({ transform: 'translateX(100%)' }),
         animate('850ms ease-in', style({ transform: 'translateX(0%)' })),

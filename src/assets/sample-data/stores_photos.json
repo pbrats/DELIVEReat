@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "name": "McDonald's",
+        "background_image": "https://mcdonalds.gr/wp-content/uploads/2021/03/McD_GoldenArches.png"
+    },
+    {
+        "id": 12,
+        "name": "Pizza Fan",
+        "background_image": "https://www.pizzafan.gr/assets/site/images/logoHor.png?v=2"
+    },
+    {
+        "id": 8,
+        "name": "Roma Pizza",
+        "background_image": "https://romapizza.gr/wp-content/uploads/2023/07/Logo-Roma-Pizza-Red-White-01-2.png"
+    },
+    {
+        "id": 105,
+        "name": "Goodys Burger House",
+        "background_image": "https://www.goodys.com/Content/Media/logo.svg"
+    },
+    {
+        "id": 80,
+        "name": "The Big Bad Wolf",
+        "background_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgvGazpjF_dZIG5CYvgbA3ygDasguo4BOrsQ&usqp=CAU"
+    },
+    {
+        "id": 34,
+        "name": "Mikel",
+        "background_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoqw_pe-Yao2lX-zjX2k5kKHZ3Kx1Qi1tlHA&usqp=CAU"
+    },
+    {
+        "id": 2,
+        "name": "StreetWok",
+        "background_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1cVutPrH_pdWgPvtecMinWOa_JglRYoEI9A&usqp=CAU"
+    },
+    {
+        "id": 4,
+        "name": "Coffee Lab",
+        "background_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhNvfnYISi0iQCj7oIH0mlPKEjwUYnlZ8tBQ&usqp=CAU"
+    },
+    {
+        "id": 5,
+        "name": "Gregory",
+        "background_image": "https://www.gregorys.gr/Content/Media/gr/logo.svg?version=2"
+    },
+    {
+        "id": 3,
+        "name": "Nanou Donuts House",
+        "background_image": "https://www.nanoudonutshouse.com/wp-content/uploads/2020/02/Nanou-Donuts-Logo.png"
+    },
+    {
+        "id": 18,
+        "name": "FoodTek",
+        "background_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1CDqNXfcnLurSXyvuB4LlARdbBx-B4ObvkQ&usqp=CAU"
+    }
+]

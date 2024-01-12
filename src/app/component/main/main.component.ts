@@ -9,6 +9,8 @@ import { RestaurantsService } from '../../service/restaurants.service';
 import { UniqueCategoryPipe } from "../../unique-category.pipe";
 import { Title } from '@angular/platform-browser';
 import { CategoriesService } from '../../service/categories.service';
+import { CategoriesPhotoService } from '../../service/categories-photo.service';
+import { StoresPhotosService } from '../../service/stores-photos.service';
 
 @Component({
     selector: 'app-main',
@@ -27,7 +29,12 @@ export class MainComponent {
   fCategories:any;
   restaurantsService: RestaurantsService =inject(RestaurantsService);
   catService: CategoriesService =inject(CategoriesService);
-  
+  catPhotoService: CategoriesPhotoService =inject(CategoriesPhotoService);
+  photosCategories: any;
+  storePhotoService: StoresPhotosService =inject(StoresPhotosService);
+  storePhotos: any;
+  hasLoadedCategories : boolean= false;
+  hasLoadedFamous : boolean= false;
   
   constructor(private route: ActivatedRoute,private titleService: Title) {
     titleService.setTitle("Discovery");
@@ -35,27 +42,42 @@ export class MainComponent {
 
   ngOnInit() {
     // get categories from CategoriesService obj if so allazei sto html kai mpainei fCategories
-    this.catService.getCategories().subscribe((data) => {
-      this.fCategories = data;
+    this.catService.getCategories().subscribe({
+      next: data => {
+        setTimeout(() =>{
+      // (data) => {
+        this.fCategories = data;
+        this.hasLoadedCategories=true;
+        },500);
+      }
+    });
+    this.catPhotoService.getCategoriesPhotos().subscribe((response) => {
+      this.photosCategories = response;
+    });
+    this.storePhotoService.getStoresPhotos().subscribe((response) => {
+      this.storePhotos = response;
     });
     // get categories from restaurantsService
-    this.restaurantsService.getRestaurants()
-    .subscribe({
-      next: response => {
-        console.log(response);
-        this.categories1 =response;
-      } 
-    });
+    // this.restaurantsService.getRestaurants()
+    // .subscribe({
+    //   next: response => {
+    //     console.log(response);
+    //     this.categories1 =response;
+    //   } 
+    // });
     // get categories from famousRestaurantsService
     this.famousService.getFamousRestaurants()
     .subscribe({
       next: response => {
-        console.log(response);
-        this.famousRestaurants =response;
-        this.categories2 =response;
+        setTimeout(() =>{
+          console.log(response);
+          this.famousRestaurants =response;
+          this.hasLoadedFamous=true;
+        // this.categories2 =response;
         // enonei categories if so allazei sto html kai mpainei categories
-        this.categories=this.categories1.concat(this.categories2)
-      } 
+        // this.categories=this.categories1.concat(this.categories2)
+        },500);
+      }
     });
   }
 
