@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService } from '../../service/categories.service';
 import { Title } from '@angular/platform-browser';
-import { StoresPhotosService } from '../../service/stores-photos.service';
+import { StoresInfosService } from '../../service/stores-infos.service';
+import { RestaurantsService } from '../../service/restaurants.service';
 
 @Component({
   selector: 'app-selected-category',
@@ -18,15 +19,20 @@ export class SelectedCategoryComponent {
   stores: any[]=[];
   router: Router =inject(Router);
   catService: CategoriesService =inject(CategoriesService);
-  storePhotoService: StoresPhotosService =inject(StoresPhotosService);
-  storePhotos: any;
+  storeInfosService: StoresInfosService =inject(StoresInfosService);
+  storeInfos: any;
   hasLoadedStores : boolean= false;
+  restaurants:any;
+  restaurantsService: RestaurantsService =inject(RestaurantsService);
 
   constructor(private titleService: Title) {}
 
   ngOnInit(): void {
-    this.storePhotoService.getStoresPhotos().subscribe((response) => {
-      this.storePhotos = response;
+    this.storeInfosService.getStoresInfos().subscribe((response) => {
+      this.storeInfos = response;
+    });
+    this.restaurantsService.getRestaurants().subscribe((response) => {
+      this.restaurants = response;
     });
     this.activatedRoute.params.subscribe({
       next: params => {
@@ -46,4 +52,13 @@ export class SelectedCategoryComponent {
       }
     });
   } 
+  onStoreClick(clickName: string) {
+    const foundStore = this.restaurants.find((store: any) => store.name === clickName);
+    console.log(foundStore);
+    if (foundStore){
+      this.router.navigate(["stores",clickName]);
+    }else{
+      this.router.navigate(["menu-not-found"]);
+    }
+  }
 }

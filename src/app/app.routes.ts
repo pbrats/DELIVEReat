@@ -7,6 +7,10 @@ import { AllRestaurantsComponent } from './component/all-restaurants/all-restaur
 import { CategoriesComponent } from './component/categories/categories.component';
 import { SelectedCategoryComponent } from './component/selected-category/selected-category.component';
 import { SelectedStoreComponent } from './component/selected-store/selected-store.component';
+import { AboutComponent } from './component/about/about.component';
+import { FaqComponent } from './component/faq/faq.component';
+import { SupportComponent } from './component/support/support.component';
+import { TermsOfUseComponent } from './component/terms-of-use/terms-of-use.component';
 
 
 
@@ -20,7 +24,10 @@ export const routes: Routes = [
     {path: "stores/:name", component: SelectedStoreComponent},
     {path: "categories", component: CategoriesComponent},
     {path: "categories/:category",component: SelectedCategoryComponent},
-    // {path: "users/:id", component: UserDetailsComponent},
-    
+    {path: "menu-not-found",component: NotFoundComponent},
+    {path: "about", component: AboutComponent},
+    {path: "faqs", component: FaqComponent},
+    {path: "support", component: SupportComponent},
+    {path: "terms-of-use", component: TermsOfUseComponent},
     {path: "**", component: NotFoundComponent}
 ];

@@ -2,7 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { NavigationEnd, Router} from '@angular/router';
-import { filter } from 'rxjs';
+import { Subject, filter, interval, takeUntil } from 'rxjs';
 import { PublisherService } from '../../service/publisher.service';
 import { Title } from '@angular/platform-browser';
 
@@ -39,10 +39,13 @@ export class LandingPageComponent implements OnInit{
   animateHeading = false;
   animateButton = false;
   animateImage = false;
-  
   isWelcomePage=true;
   publisherService =inject(PublisherService);
-  pS=this.publisherService.publishData(this.isWelcomePage);
+
+  private destroy$ = new Subject<void>();
+  orderTexts: string[] = ['Pizza', 'Burger', 'Asian', 'Donut', 'Coffee','Fast Food'];
+  currentIndex = 0;
+  orderText: string = this.orderTexts[0];
 
   triggerAnimation() {
     this.animateHeading = true;
@@ -52,21 +55,37 @@ export class LandingPageComponent implements OnInit{
 
 constructor(private router: Router,private titleService: Title) {
   titleService.setTitle("Welcome");
+  this.isWelcomePage=true;
+    this.publisherService.publishData(this.isWelcomePage);
+    console.log(this.isWelcomePage);
+    this.router.events.subscribe((event) => console.log(event));
+    this.router.events.subscribe(event=>{
+      if(event instanceof NavigationEnd){
+        if (event.url.includes('welcome')||event.url.includes('')){
+          this.isWelcomePage=true;
+          this.publisherService.publishData(this.isWelcomePage);
+        }else{
+          this.isWelcomePage=false;
+          this.publisherService.publishData(this.isWelcomePage);
+        }
+      }
+    });
 }
 
   ngOnInit() {
 
     this. triggerAnimation();
+    this.startUpdatingText();
     // console.log(isWelcomePage);
     // this.router.events.subscribe((event) => console.log(event));
   
-    this.router.events.pipe(
-      filter((event: any) => event instanceof NavigationEnd)
-    ).subscribe((event) => {
-      this.isWelcomePage=false;
-      // console.log(isWelcomePage);
-      this.publisherService.publishData(this.isWelcomePage);
-    });
+    // this.router.events.pipe(
+    //   filter((event: any) => event instanceof NavigationEnd)
+    // ).subscribe((event) => {
+    //   this.isWelcomePage=false;
+    //   // console.log(isWelcomePage);
+    //   this.publisherService.publishData(this.isWelcomePage);
+    // });
 
     // if (event instanceof NavigationEnd) {
     //   this.isWelcomePage=false;
@@ -74,5 +93,17 @@ constructor(private router: Router,private titleService: Title) {
     //   this.publisherService.publishData(this.isWelcomePage);
       
     // }
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+  private startUpdatingText() {
+    interval(700)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.orderText = this.orderTexts[this.currentIndex];
+        this.currentIndex = (this.currentIndex + 1) % this.orderTexts.length;
+      });
   }
 }

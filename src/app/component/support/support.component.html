@@ -1,0 +1,31 @@
+<div class="container p-2">
+    <div class="container border my-5">
+        <h1 class="text-success">Support</h1>
+        <p>If you did't find the answer to your question in the FAQs section, contact us: </p>
+        <ul>
+            <li>Send us an email at: info&#64;wldelivery.gr</li>
+            <li>Call us: 210 123 4567 </li>
+            <li>Complete the following form</li>
+        </ul>
+        <div class="border border-success m-5 p-5">
+            <h6 class="text-success">Contact Form</h6>
+            <form [formGroup]="FormData" (ngSubmit)="onSubmit(FormData!.value)">
+                <div class="form-group">
+                    <label  class="text-success" for="Email">Email</label>
+                    <input type="email" class="form-control" name="Email" aria-describedby="emailHelp" placeholder="Enter email"formControlName="Email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label  class="text-success" for="fullname">Full Name</label>
+                    <input type="text" class="form-control" name="Fullname" placeholder="Full Name" formControlName="Fullname">
+                </div>
+                <div class="form-group">
+                    <label  class="text-success" for="comment">Comment</label>
+                    <textarea class="form-control" formControlName="Comment" name="Comment">
+                    </textarea>
+                </div>
+                <button type="submit" class="btn btn-success" [disabled]="!FormData.valid">Submit</button>
+            </form>
+        </div>  
+    </div>
+</div>

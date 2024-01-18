@@ -6,11 +6,11 @@ import { AllRestaurantsComponent } from '../all-restaurants/all-restaurants.comp
 import { CategoriesComponent } from '../categories/categories.component';
 import { FamousRestaurantsService } from '../../service/famous-restaurants.service';
 import { RestaurantsService } from '../../service/restaurants.service';
-import { UniqueCategoryPipe } from "../../unique-category.pipe";
+import { UniqueCategoryPipe } from "../../pipe/unique-category.pipe";
 import { Title } from '@angular/platform-browser';
 import { CategoriesService } from '../../service/categories.service';
 import { CategoriesPhotoService } from '../../service/categories-photo.service';
-import { StoresPhotosService } from '../../service/stores-photos.service';
+import { StoresInfosService } from '../../service/stores-infos.service';
 
 @Component({
     selector: 'app-main',
@@ -23,16 +23,15 @@ export class MainComponent {
   router: Router =inject(Router);
   famousRestaurants:any;
   famousService: FamousRestaurantsService =inject(FamousRestaurantsService);
-  categories:any;
-  categories1:any;
-  categories2:any;
+  // categories:any;
+  // categories1:any;
+  // categories2:any;
   fCategories:any;
+  restaurants:any;
   restaurantsService: RestaurantsService =inject(RestaurantsService);
   catService: CategoriesService =inject(CategoriesService);
   catPhotoService: CategoriesPhotoService =inject(CategoriesPhotoService);
   photosCategories: any;
-  storePhotoService: StoresPhotosService =inject(StoresPhotosService);
-  storePhotos: any;
   hasLoadedCategories : boolean= false;
   hasLoadedFamous : boolean= false;
   
@@ -51,11 +50,11 @@ export class MainComponent {
         },500);
       }
     });
+    this.restaurantsService.getRestaurants().subscribe((response) => {
+      this.restaurants = response;
+    });
     this.catPhotoService.getCategoriesPhotos().subscribe((response) => {
       this.photosCategories = response;
-    });
-    this.storePhotoService.getStoresPhotos().subscribe((response) => {
-      this.storePhotos = response;
     });
     // get categories from restaurantsService
     // this.restaurantsService.getRestaurants()
@@ -80,17 +79,25 @@ export class MainComponent {
       }
     });
   }
-
-viewFamousRestaurants(){
-  this.router.navigate(["famous-stores"]);
-}
-viewRestaurants(){
-  this.router.navigate(["stores"]);
-}
-viewCategories(){
-  this.router.navigate(["categories"]);
-}
-onCategoryClick(category: string) {
-  this.router.navigate(["categories",category]);
-}
+  viewFamousRestaurants(){
+    this.router.navigate(["famous-stores"]);
+  }
+  viewRestaurants(){
+    this.router.navigate(["stores"]);
+  }
+  viewCategories(){
+    this.router.navigate(["categories"]);
+  }
+  onCategoryClick(category: string) {
+    this.router.navigate(["categories",category]);
+  }
+  onStoreClick(clickName: string) {
+    const foundStore = this.restaurants.find((store: any) => store.name === clickName);
+    console.log(foundStore);
+    if (foundStore){
+      this.router.navigate(["stores",clickName]);
+    }else{
+      this.router.navigate(["menu-not-found"]);
+    }
+  }
 }

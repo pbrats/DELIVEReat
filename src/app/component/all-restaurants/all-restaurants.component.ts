@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RestaurantsService } from '../../service/restaurants.service';
 import { Title } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { StoresPhotosService } from '../../service/stores-photos.service';
+import { StoresInfosService } from '../../service/stores-infos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -15,15 +15,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AllRestaurantsComponent {
   restaurants:any;
   restaurantsService: RestaurantsService =inject(RestaurantsService);
-  storePhotoService: StoresPhotosService =inject(StoresPhotosService);
-  storePhotos: any;
+  storeInfosService: StoresInfosService =inject(StoresInfosService);
+  storeInfos: any;
   hasLoadedStores : boolean= false;
   router: Router =inject(Router);
   activatedRoute =inject(ActivatedRoute);
 
   ngOnInit() {
-    this.storePhotoService.getStoresPhotos().subscribe((response) => {
-      this.storePhotos = response;
+    this.storeInfosService.getStoresInfos().subscribe((response) => {
+      this.storeInfos = response;
     });
     this.restaurantsService.getRestaurants()
     .subscribe({
@@ -39,8 +39,14 @@ export class AllRestaurantsComponent {
   constructor(private titleService: Title) {
     titleService.setTitle("Stores");
 }
-onStoreClick(name: string) {
-  this.router.navigate(["stores",name]);
-}
+  onStoreClick(clickName: string) {
+    const foundStore = this.restaurants.find((store: any) => store.name === clickName);
+    console.log(foundStore);
+    if (foundStore){
+      this.router.navigate(["stores",clickName]);
+    }else{
+      this.router.navigate(["menu-not-found"]);
+    }
+  }
 }
 
