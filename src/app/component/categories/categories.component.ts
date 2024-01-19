@@ -66,5 +66,11 @@ export class CategoriesComponent implements OnInit{
   }
   constructor(private titleService: Title) {
     titleService.setTitle("Categories");
-}
+  }
+  sortStoresAlphabetically():void {
+    this.fCategories.sort((a: { category: string; }, b: { category: string; }) => a.category.localeCompare(b.category));
+  }
+  sortStoresZtoA():void {
+    this.fCategories.sort((a: { category: string; }, b: { category: string; }) => b.category.localeCompare(a.category));
+  }
 }

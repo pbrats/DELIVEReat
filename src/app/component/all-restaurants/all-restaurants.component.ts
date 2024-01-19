@@ -48,5 +48,29 @@ export class AllRestaurantsComponent {
       this.router.navigate(["menu-not-found"]);
     }
   }
+  sortStoresByRating(): void {
+    this.restaurants.forEach((restaurant: any) => {
+      const matchingStore = this.storeInfos.find((store: { name: any; }) => store.name === restaurant.name);
+      if (matchingStore) {
+        restaurant.rating = matchingStore.rating;
+      }
+    });
+    this.restaurants.sort((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
+  }
+  sortStoresByDeliveryTime():void {
+    this.restaurants.forEach((restaurant: any) => {
+      const matchingStore = this.storeInfos.find((store: { name: any; }) => store.name === restaurant.name);
+      if (matchingStore) {
+        restaurant.delivery_time = matchingStore.delivery_time;
+      }
+    });
+    this.restaurants.sort((a: { delivery_time: number; }, b: { delivery_time: number; }) =>  a.delivery_time - b.delivery_time);
+  }
+  sortStoresAlphabetically():void {
+    this.restaurants.sort((a: { name: string; }, b: { name: string; }) => a.name.localeCompare(b.name));
+  }
+  sortStoresZtoA():void {
+    this.restaurants.sort((a: { name: string; }, b: { name: string; }) => b.name.localeCompare(a.name));
+  }
 }
 

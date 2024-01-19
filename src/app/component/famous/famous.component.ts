@@ -54,5 +54,17 @@ export class FamousComponent {
       this.router.navigate(["menu-not-found"]);
     }
   }
+  sortStoresByRating(): void {
+    this.famousRestaurants.sort((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
+  }
+  sortStoresByDeliveryTime():void {
+    this.famousRestaurants.sort((a: { delivery_time: number; }, b: { delivery_time: number; }) =>  a.delivery_time - b.delivery_time);
+  }
+  sortStoresAlphabetically():void {
+    this.famousRestaurants.sort((a: { name: string; }, b: { name: string; }) => a.name.localeCompare(b.name));
+  }
+  sortStoresZtoA():void {
+    this.famousRestaurants.sort((a: { name: string; }, b: { name: string; }) => b.name.localeCompare(a.name));
+  }
 }
 
