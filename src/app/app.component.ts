@@ -27,8 +27,5 @@ export class AppComponent {
       this.isWelcomePage=data;
       console.log(this.isWelcomePage);
     })
-
   }
-  
-
 }
