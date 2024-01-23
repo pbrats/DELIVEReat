@@ -19,7 +19,13 @@ export class MenuComponent {
   productCategoryList: string[] = [];
   groupedProducts: { category: string, products: any[] }[] = [];
   $index: any;
+  currentName:any;
+  currentUrl: any;
 
+  constructor(){
+    this.currentUrl = this.router.url;
+    console.log(this.currentUrl)
+  }
   ngOnInit() {
     this.productPhotoService.getProdusctsPhotos().subscribe((response) => {
       this.productPhotos = response;

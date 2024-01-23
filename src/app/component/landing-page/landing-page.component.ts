@@ -63,6 +63,7 @@ constructor(private router: Router,private titleService: Title) {
       if(event instanceof NavigationEnd){
         if (event.url.includes('welcome')||event.url.includes('')){
           this.isWelcomePage=true;
+          // this.publisherService.publishData({from: "landing-page", value: this.isWelcomePage});
           this.publisherService.publishData(this.isWelcomePage);
         }else{
           this.isWelcomePage=false;

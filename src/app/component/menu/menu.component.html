@@ -6,25 +6,29 @@
     <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresAlphabetically()"><i class="bi bi-sort-alpha-down fs-6"></i></button>
     <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresZtoA()"><i class="bi bi-sort-alpha-down-alt fs-6"></i></button>
 </div>
-<div class="">
-        <!-- position fixed -->
+<div class="fixed-div">
     <nav id="navbar-example2" class="navbar navbar-light bg-light px-3 my-2">
     <ul class="nav nav-pills ">
         @for(categoryGroup of groupedProducts;track $index;let id1=$index;){
             <li class="nav-item">
                 <!-- [href]="'#scrollspyHeading'+categoryGroup.category" (click)="scrollToCategory(categoryGroup)" -->
-                <a class="nav-link text-success" [href]="'#scrollspyHeading'+(id1+1)">{{categoryGroup.category}}</a>
+                <a class="nav-link text-success" [href]="currentUrl+'#scrollspyHeading'+(id1+1)">{{categoryGroup.category}}</a>
             </li>
         }
     </ul>
     </nav>
+    <!-- <div id="list-example" class="list-group bg-light  my-2">
+        @for(categoryGroup of groupedProducts;track $index;let id1=$index;){
+        <a class="list-group-item list-group-item-action" [href]="currentUrl+'#scrollspyHeading'+(id1+1)">{{categoryGroup.category}}</a>
+        }
+    </div> -->
 </div>
-<div class="j ">
-    <div data-bs-spy="scroll" data-bs-target="#navbar-example2"  data-bs-offset="0" class="scrollspy-example" tabindex="0">
+<div class="mx-5">
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="500" class="scrollspy-example" tabindex="0">
         @for (categoryGroup of groupedProducts; track $index;let id2=$index;){
             <!-- @for (item of productsList; track $index){ -->
-            <h3 class="text-success" [id]="'scrollspyHeading'+(id2+1)">{{ categoryGroup.category }}</h3>
-            @for (item of categoryGroup.products; track $index){
+            <h3 class="text-success my-4">{{ categoryGroup.category }}</h3>
+            <div *ngFor="let item of categoryGroup.products" [id]="'scrollspyHeading'+(id2+1)">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -42,12 +46,12 @@
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3 mt-n2"> 
                                     <button class="btn btn-success px-auto">+</button>
                                 </div>
-                                <p class="card-text fw-light fst-italic">A delicious <span class="text-lowercase text-success">{{item.category}}</span> named <span class="text-lowercase text-success">{{item.name}}</span> at only {{item.price| number:'1.2-2' }} &euro;</p>
+                                <p class="card-text fw-light fst-italic">A delicious<span class="text-lowercase text-success">{{item.category}}</span> named <span class="text-lowercase text-success">{{item.name}}</span> at only {{item.price| number:'1.2-2' }} &euro;</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            }
+            </div>
         }
     </div>
 </div>

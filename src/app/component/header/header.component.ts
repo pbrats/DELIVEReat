@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { Publisher2Service } from '../../service/publisher2.service';
-import { FamousRestaurantsService } from '../../service/famous-restaurants.service';
-
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,35 +13,20 @@ import { FamousRestaurantsService } from '../../service/famous-restaurants.servi
 export class HeaderComponent {
   form!: FormGroup;
   router: Router =inject(Router);
-  publisherService2 =inject(Publisher2Service);
-  famousService: FamousRestaurantsService =inject(FamousRestaurantsService);
-  stores: any;
-
+  searchQuery: string = '';
+  constructor(private route: ActivatedRoute){}
   ngOnInit(){
     this.setFormValues();
   }
   setFormValues(){
     this.form= new FormGroup({
-      searchData : new FormControl("")
+      searchData : new FormControl("",[Validators.required])
     });
   }
-  onSubmit(){
-    console.log("auto")
-    let wantedName=this.form.get("searchData")?.value
-    console.log(wantedName);
-
-    this.famousService.getFamousRestaurants().subscribe((response) => {
-    this.stores=response;
-    const searchResult = this.stores.filter((store: { name: string; }) =>
-        store.name.toLowerCase().includes(wantedName.toLowerCase())
-      );
-      console.log(searchResult);
-      this.publisherService2.publishData2(searchResult);
-      this.router.navigate(['search']);
-    });
+  onSubmit() {
     // console.log(this.form.get("searchData")?.value);
-    // let wantedName=this.form.get("searchData")?.value;
-    // this.publisherService2.publishData2(wantedName);
-    // this.router.navigate(["search"]);
+    this.searchQuery=this.form.get("searchData")?.value;
+    console.log( this.searchQuery);
+    this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });
   }
 }
