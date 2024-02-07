@@ -19,7 +19,6 @@ export class MenuComponent {
   productCategoryList: string[] = [];
   groupedProducts: { category: string, products: any[] }[] = [];
   $index: any;
-  currentName:any;
   currentUrl: any;
 
   constructor(){

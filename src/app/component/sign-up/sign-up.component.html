@@ -1,0 +1,39 @@
+<div class="container m-5">
+    <div *ngIf="showErrorAlert" class="alert alert-danger alert-dismissible" role="alert">
+        <div class="text-danger fw-bold fst-italic text-center">Invalid email or password!<br>Please try again</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+            (click)="closeErrorAlert()"></button>
+    </div>
+    <form (submit)="onSubmit()" [formGroup]="signUpForm">
+        <div class="form-group">
+            <label class="mb-2" for="email">Email:</label>
+            <input type="text" id="email" name="email" class="form-control" formControlName="email"
+                placeholder="mail@mail.com" aria-label="email" autocomplete="email">
+            <div *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched">
+                <span class="text-danger fw-bold fst-italic">Email is required.</span>
+            </div>
+            <div *ngIf="signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched">
+                <span class="text-danger fw-bold fst-italic">Invalid email format.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="my-2" for="password">Password:</label>
+            <input type="password" id="password" name="password" class="form-control" formControlName="password"
+                placeholder="****" autocomplete="current-password">
+            <div *ngIf="signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">
+                <span class="text-danger fw-bold fst-italic">Password is required.</span>
+            </div>
+            <div *ngIf="signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched">
+                <span class="text-danger fw-bold fst-italic">Password must be at least {{
+                    signUpForm.get('password')?.errors?.['minlength'].requiredLength }} characters.</span>
+            </div>
+            <div *ngIf="signUpForm.get('password')?.hasError('maxlength') && signUpForm.get('password')?.touched">
+                <span class="text-danger fw-bold fst-italic">Password must be max {{
+                    signUpForm.get('password')?.errors?.['maxlength'].requiredLength }} characters.</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success col-12 text-center mt-5 mb-2" routerLink="/discovery" routerLinkActive="active" [disabled]="!signUpForm.valid">
+            Time to order
+        </button>
+    </form>
+</div>

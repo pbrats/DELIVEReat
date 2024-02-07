@@ -12,9 +12,9 @@ import { FaqComponent } from './component/faq/faq.component';
 import { SupportComponent } from './component/support/support.component';
 import { TermsOfUseComponent } from './component/terms-of-use/terms-of-use.component';
 import { SearchComponent } from './component/search/search.component';
-
-
-
+import { ProfileComponent } from './component/profile/profile.component';
+import { PreviousOrdersComponent } from './component/previous-orders/previous-orders.component';
+import { SignUpComponent } from './component/sign-up/sign-up.component';
 
 export const routes: Routes = [
     {path: "", redirectTo: "welcome", pathMatch:"full"},
@@ -31,5 +31,8 @@ export const routes: Routes = [
     {path: "support", component: SupportComponent},
     {path: "terms-of-use", component: TermsOfUseComponent},
     {path: "search", component: SearchComponent},
+    {path: "user", component: ProfileComponent},
+    {path: "previous-orders", component: PreviousOrdersComponent},
+    {path: "sign-up", component: SignUpComponent},
     {path: "**", component: NotFoundComponent}
 ];

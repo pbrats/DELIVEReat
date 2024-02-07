@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink, RouterLinkActive, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { LandingHeaderComponent } from './component/landing-header/landing-header.component';
@@ -24,6 +24,7 @@ export class AppComponent {
   constructor(private router: Router,private route: ActivatedRoute) {
     this.publisherService.listenForData()
     .subscribe((data)=>{
+      // if(data.from==="landing-page"||data.from==="sign-up-page"){
       // if(data.from==="landing-page"){
       this.isWelcomePage=data;
       console.log(this.isWelcomePage);

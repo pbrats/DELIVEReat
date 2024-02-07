@@ -1,0 +1,16 @@
+<div class="card" style="width: 18rem;">
+    <img [src]="authenticatedUser.photo" class="card-img-top" alt="{{authenticatedUser.name}} {{authenticatedUser.lastname}} user's photo" style="width:100%;">
+    <div class="card-body">
+      <h5 class="card-title">{{authenticatedUser.name}} {{authenticatedUser.lastname}}</h5>
+      <p class="card-text"></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{authenticatedUser.telephone}}</li>
+      <li class="list-group-item">{{authenticatedUser.email}}</li>
+      <li class="list-group-item">{{authenticatedUser.address}}</li>
+    </ul>
+    <div class="card-body">
+      <a routerLink="previous-orders" routerLinkActive="active" class="card-link">Previous Orders</a>
+      <a routerLink="welcome" routerLinkActive="active" class="card-link">Signout</a>
+    </div>
+  </div>

@@ -5,7 +5,8 @@
         "lastname":"Doe",
         "address":"Ioanninon 2",
         "telephone":"6977777777",
-        "email":"johndoe@mailcom",
+        "email":"johndoe@mail.com",
+        "photo":"assets/users/john.png",
         "password":"1234",
         "previous_orders":[
             {
@@ -28,18 +29,19 @@
     "lastname":"Doe",
     "address":"Patras 16",
     "telephone":"6944444444",
-    "email":"janedoe@mailcom",
-    "password":"5555",
+    "email":"janedoe@mail.com",
+    "password":"1111",
+    "photo":"assets/users/jane.png",
     "previous_orders":[
         {
             "id":1,
-            "store_name":"MCoffee Lab",
+            "store_name":"Coffee Lab",
             "total":6,
             "date":"01/01/24"
          },
          {
             "id":2,
-            "store_name":"Gregory",
+            "store_name":"Gregory's",
             "total":9,
             "date":"12/12/23"
          }
@@ -52,8 +54,28 @@
     "lastname":"Pentagiotissa",
     "address":"Tripoleos 127",
     "telephone":"6999999999",
-    "email":"mariap@mailcom",
-    "password":"1111",
-    "previous_orders":[ ]
+    "email":"mariap@mail.com",
+    "password":"2222",
+    "photo":"assets/users/mariap.png",
+    "previous_orders":[ 
+        {
+            "id":1,
+            "store_name":"Domino's",
+            "total":18,
+            "date":"22/12/23"
+         }
+    ]
+},
+{
+    
+    "id":4,
+    "name":"Chuck",
+    "lastname":"Norris",
+    "address":"Akropoleos 2",
+    "telephone":"6911111111",
+    "email":"chucknorris@mail.com",
+    "password":"0000",
+    "photo":"assets/users/chuck.png",
+    "previous_orders":[]
 }
 ]
