@@ -8,7 +8,7 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule,SignUpComponent,RouterLink,RouterLinkActive],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,RouterLink,RouterLinkActive],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -34,9 +34,9 @@ export class LoginComponent {
       // console.log( this.loginValues);
       // this.loginValues=this.loginForm.get("password")?.value;
       // console.log( this.loginValues);
-      let email = this.loginForm.value.email;
-      let password = this.loginForm.value.password;
-      this.userService.authenticate(email, password).subscribe(authenticatedUser => {
+      let typedemail = this.loginForm.value.email;
+      let typedpassword = this.loginForm.value.password;
+      this.userService.authenticate(typedemail, typedpassword).subscribe(authenticatedUser => {
         if (authenticatedUser) {
           // Authentication successful, you can navigate or perform other actions
           console.log('Login successful!');
@@ -55,6 +55,14 @@ export class LoginComponent {
           this.showErrorAlert = true;
         }
       });
+      if(this.loginForm.valid){
+        console.log("valid!");
+      } else {
+        this.loginForm.markAllAsTouched();
+        console.log("invalid");
+      }
+      this.loginForm.reset();
+      // console.log(this.form);
       this.loginValues=this.loginForm.value;
       console.log( this.loginValues);
       console.log(this.loginForm.value);
@@ -115,11 +123,7 @@ export class LoginComponent {
   //   //   });
   //   // }
   // }
-  // closeErrorAlert() {
-  //   this.showErrorAlert = false;
-  // }
   closeErrorAlert() {
     this.showErrorAlert = false;
   }
-
 }

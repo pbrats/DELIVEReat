@@ -3,19 +3,18 @@
         <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-header">
-        <h3 id="offcanvasRightLabel" class="text-success text-center mx-5 px-5">Welcome back! <br> Let's login</h3>
+        <h3 id="offcanvasRightLabel" class="text-success text-center mx-5 px-5" style="white-space: nowrap;">Welcome back! <br> Let's Login!</h3>
     </div>
     <div class="offcanvas-body">
         <div *ngIf="showErrorAlert" class="alert alert-danger alert-dismissible" role="alert">
             <div class="text-danger fw-bold fst-italic text-center">Invalid email or password!<br>Please try again</div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                (click)="closeErrorAlert()"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeErrorAlert()"></button>
         </div>
         <form (submit)="onSubmit()" [formGroup]="loginForm">
             <div class="form-group">
-                <label class="mb-2" for="email">Email:</label>
-                <input type="text" id="email" name="email" class="form-control" formControlName="email"
-                    placeholder="mail@mail.com" aria-label="email" autocomplete="email">
+                <label class="mb-2" for="email-l">Email: <span class="text-danger">*</span></label>
+                <input type="email" id="email-l" name="email" class="form-control" formControlName="email"
+                    placeholder="mail@mail.com" autocomplete="email">
                 <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
                     <span class="text-danger fw-bold fst-italic">Email is required.</span>
                 </div>
@@ -24,8 +23,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="my-2" for="password">Password:</label>
-                <input type="password" id="password" name="password" class="form-control" formControlName="password"
+                <label class="my-2" for="password-l">Password: <span class="text-danger">*</span></label>
+                <input type="password" id="password-l" name="password" class="form-control" formControlName="password"
                     placeholder="****" autocomplete="current-password">
                 <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
                     <span class="text-danger fw-bold fst-italic">Password is required.</span>
@@ -39,9 +38,11 @@
                         loginForm.get('password')?.errors?.['maxlength'].requiredLength }} characters.</span>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success col-12 text-center mt-5 mb-2" data-bs-dismiss="offcanvas" aria-label="Close" [disabled]="!loginForm.valid">
-                Time to order
-            </button>
+            <div *ngIf="!showErrorAlert" >
+                <button type="submit" class="btn btn-success col-12 text-center mt-5 mb-2"  [disabled]="!loginForm.valid">
+                    Time to order
+                </button>
+            </div>
         </form>
         <div class="mt-5 text-center">
             <p>Don't have an account?</p>
