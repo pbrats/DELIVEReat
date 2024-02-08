@@ -2,13 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../service/users.service';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { SignUpComponent } from '../sign-up/sign-up.component';
+import { Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule,RouterLink,RouterLinkActive],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -18,7 +17,7 @@ export class LoginComponent {
   userService: UsersService=inject(UsersService);
   showErrorAlert = false;
 
-  constructor(private router: Router,private route: ActivatedRoute){}
+  constructor(private router: Router){}
   ngOnInit() {
     this.setFormValues();
   }
@@ -42,9 +41,11 @@ export class LoginComponent {
           console.log('Login successful!');
           console.log(authenticatedUser)
           this.showErrorAlert = false;
-          localStorage.setItem('authenticatedUser', JSON.stringify(authenticatedUser));
-          this.router.navigate(["discovery"],{ queryParams: { loginSuccess: true } });
-        
+          localStorage.setItem('alertShown','no');
+          localStorage.setItem('User', JSON.stringify(authenticatedUser));
+          // sessionStorage.setItem('User', JSON.stringify(authenticatedUser));
+          this.router.navigate(["discovery"]);
+          // this.router.navigate(["discovery"],{ queryParams: { loginSuccess: true } });
           // this.showAlertFlag = true;
           // const dataToSend = this.showAlertFlag;
           // this.shareDataService.setData(dataToSend);
@@ -55,17 +56,18 @@ export class LoginComponent {
           this.showErrorAlert = true;
         }
       });
+      // console.log(this.loginForm);
+      // this.loginValues=this.loginForm.value;
+      // console.log(this.loginValues);
+      // console.log(this.loginForm.value);
+      // console.log(this.loginForm.value.email);
+      // console.log(this.loginForm.value.password);
       if(this.loginForm.valid){
         console.log("valid!");
+        this.loginForm.reset();
       } else {
-        this.loginForm.markAllAsTouched();
         console.log("invalid");
       }
-      this.loginForm.reset();
-      // console.log(this.form);
-      this.loginValues=this.loginForm.value;
-      console.log( this.loginValues);
-      console.log(this.loginForm.value);
   }
   // onSubmit() { 
   //   // if (this.loginForm.valid) {

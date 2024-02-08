@@ -12,14 +12,14 @@
         </div>
         <form (submit)="onSubmit()" [formGroup]="loginForm">
             <div class="form-group">
-                <label class="mb-2" for="email-l">Email: <span class="text-danger">*</span></label>
+                <label class="form-label mb-2" for="email-l">Email: <span class="text-danger">*</span></label>
                 <input type="email" id="email-l" name="email" class="form-control" formControlName="email"
                     placeholder="mail@mail.com" autocomplete="email">
                 <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
-                    <span class="text-danger fw-bold fst-italic">Email is required.</span>
+                    <span class="text-danger fst-italic">Email is</span><span class="text-danger fw-bold"> required.</span>
                 </div>
                 <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched">
-                    <span class="text-danger fw-bold fst-italic">Invalid email format.</span>
+                    <span class="text-danger fst-italic">Invalid </span><span class="text-danger fw-bold">email </span><span class="text-danger fst-italic"> format.</span>
                 </div>
             </div>
             <div class="form-group">
@@ -27,19 +27,19 @@
                 <input type="password" id="password-l" name="password" class="form-control" formControlName="password"
                     placeholder="****" autocomplete="current-password">
                 <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
-                    <span class="text-danger fw-bold fst-italic">Password is required.</span>
+                    <span class="text-danger fst-italic">Password is </span><span class="text-danger fw-bold"> required.</span>
                 </div>
                 <div *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched">
-                    <span class="text-danger fw-bold fst-italic">Password must be at least {{
+                    <span class="text-danger fst-italic">Password must be </span><span class="text-danger fw-bold">at least {{
                         loginForm.get('password')?.errors?.['minlength'].requiredLength }} characters.</span>
                 </div>
                 <div *ngIf="loginForm.get('password')?.hasError('maxlength') && loginForm.get('password')?.touched">
-                    <span class="text-danger fw-bold fst-italic">Password must be max {{
+                    <span class="text-danger fst-italic">Password must be </span><span class="text-danger fw-bold">maximum {{
                         loginForm.get('password')?.errors?.['maxlength'].requiredLength }} characters.</span>
                 </div>
             </div>
-            <div *ngIf="!showErrorAlert" >
-                <button type="submit" class="btn btn-success col-12 text-center mt-5 mb-2"  [disabled]="!loginForm.valid">
+            <div *ngIf="!showErrorAlert">
+                <button type="submit" class="btn btn-success col-12 text-center mt-5 mb-2" [disabled]="!loginForm.valid">
                     Time to order
                 </button>
             </div>
@@ -47,7 +47,6 @@
         <div class="mt-5 text-center">
             <p>Don't have an account?</p>
             <button class="btn btn-sm btn-outline-success" routerLink="sign-up" routerLinkActive="active" data-bs-dismiss="offcanvas" aria-label="Close">Sign up here</button>
-
         </div>
     </div>
 </div>

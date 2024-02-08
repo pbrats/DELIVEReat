@@ -1,7 +1,7 @@
-<!-- login alert -->
+<!-- login/signup alert -->
 <div *ngIf="showAlertFlag" class="alert alert-success alert-dismissible mt-3" role="alert">
     <!-- {{login.email}} {{login.password}} -->
-    <div><i class="bi bi-person-fill-check m-2" style="width:40px; height:40px"></i>Welcome <span class="text-success">{{authenticatedUser.name}}</span>!</div>
+    <div><i class="bi bi-person-fill-check m-2" style="width:40px; height:40px"></i>Welcome <span class="text-success">{{User.name}} {{User.lastname}}</span>!</div>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 <!-- categories container -->

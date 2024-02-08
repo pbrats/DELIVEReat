@@ -45,7 +45,7 @@ export class SupportComponent {
   }
   setFormValues(){
     this.FormData= new FormGroup({
-    Fullname: new FormControl('', [Validators.required]),
+    Fullname: new FormControl('', [Validators.required,Validators.pattern('[a-zA-Z ]*')]),
     Email: new FormControl('', (Validators.compose([Validators.required, Validators.email]))),
     Comment: new FormControl('', [Validators.required])
     })
@@ -54,5 +54,8 @@ export class SupportComponent {
     console.log(this.FormData.value)
     this.FormData.reset();
     // alert("your form was submitted");
+  }
+  removeSymbols(inputString: string): string {
+    return inputString.replace(/[^a-zA-Z\- ]/g, ''); // This regular expression removes all characters except numbers and spaces
   }
 }

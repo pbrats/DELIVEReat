@@ -19,8 +19,6 @@ import { CategoriesPhotoService } from '../../service/categories-photo.service';
     imports: [CommonModule, FamousComponent, AllRestaurantsComponent, CategoriesComponent, UniqueCategoryPipe]
 })
 export class MainComponent {
-  router: Router =inject(Router);
-  ActivatedRoute: ActivatedRoute=inject(ActivatedRoute); 
   famousRestaurants:any;
   famousService: FamousRestaurantsService =inject(FamousRestaurantsService);
   // categories:any;
@@ -35,14 +33,14 @@ export class MainComponent {
   hasLoadedCategories : boolean= false;
   hasLoadedFamous : boolean= false;
   showAlertFlag= false;
+  User: any;
   // authService:AuthenticationService=inject(AuthenticationService)
   // shareDataService= inject(SharedDataService);
+  // login:any;
   // isWelcomePage=false;
   // publisherService =inject(PublisherService);
-  login:any;
-  authenticatedUser: any; 
 
-  constructor(private titleService: Title) {
+  constructor(private titleService: Title, private router: Router,private route: ActivatedRoute) {
     titleService.setTitle("Discovery");
     // this.isWelcomePage=false;
     // this.publisherService.publishData(this.isWelcomePage);
@@ -63,7 +61,7 @@ export class MainComponent {
   }
   ngOnInit() {
     this.titleService.setTitle("Discovery");
-    this.ActivatedRoute.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       console.log(params)
       this.showAlertFlag = params['loginSuccess'];
       console.log(this.showAlertFlag)
@@ -79,16 +77,31 @@ export class MainComponent {
       // }
     });
     // Retrieve the stored user information from local storage
-    const storedUser = localStorage.getItem('authenticatedUser');
+    const storedUser = localStorage.getItem('User');
     console.log( storedUser);
     if (storedUser) {
       // Parse the stored JSON string back into a JavaScript object
-      this.authenticatedUser = JSON.parse(storedUser);
-      console.log(this.authenticatedUser);
-      // Now, this.authenticatedUser contains the information of the authenticated user
+      this.User = JSON.parse(storedUser);
+      console.log(this.User);
+      // Now, this.User contains the information of the authenticated user
+      const hasAlertBeenShown = localStorage.getItem('alertShown');
+      console.log(hasAlertBeenShown);
+      if (this.User && hasAlertBeenShown==='no') {
+        this.showAlertFlag = true;
+        setTimeout(() => {
+            this.showAlertFlag = false;
+
+            // A WAY TO FIX THE PROBLEMATIC LOAD
+            // window.location.reload();
+
+          }, 3000); 
+        // Set the flag in local storage to indicate that the alert has been shown
+        localStorage.setItem('alertShown', 'yes');
+        }
     } else {
       // Handle the case when no user information is stored in local storage
       console.log('No user information found in local storage');
+      this.showAlertFlag = false;
     }
     // });
     // this.shareDataService.getData().subscribe(data => {
