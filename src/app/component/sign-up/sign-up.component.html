@@ -116,9 +116,10 @@
                         signUpForm.get('password')?.errors?.['maxlength'].requiredLength }} characters.</span>
                 </div> -->
                 <!-- <div *ngIf="signUpForm.get('password')?.errors && signUpForm.get('password')?.errors?.['invalidPassword']"> -->
-                <div *ngIf="signUpForm.get('password')?.hasError('invalidPassword')">
+                <div *ngIf="signUpForm.get('password')?.hasError('invalidPassword') && signUpForm.get('password')?.touched">
                     <span class="text-danger fst-italic">Password must have </span><span class="text-danger fw-bold">at least one uppercase, one lowercase, one special character</span><span class="text-danger fst-italic">, and be between 6 to 12 characters long.</span>
-                  </div>
+                    <!-- {{signUpForm.get('password')?.errors?.['invalidPassword']}}   -->
+                </div>
             </div>
         </div>
         <div class="form-group row my-3">
