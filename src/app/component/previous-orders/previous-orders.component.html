@@ -15,19 +15,19 @@
             <tbody >
                 @for( order of User.previous_orders; track $index;let i=$index ){
             <tr>
-                <th scope="row">{{i+1}}</th>
-                <td class="text-start">
+                <th scope="row"class="text-center border">{{i+1}}</th>
+                <td class="text-start border">
                     {{order.store_name}}
                     <div class="text-end" *ngFor="let info of storesInfos">
-                        <div *ngIf="info.name==order.store_name">
+                        <div *ngIf="info.name==order.store_name"  (click)="onStoreClick(info.name)" title="click for details">
                             <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo" style="width: 100px; height:10%">
-                            <a class="link-success link-offset-1 link-offset-2-hover link-underline-opacity-75 link-underline-opacity-100-hover mx-5" (click)="onStoreClick(info.name)" title="click for details">View store</a>
+                            <button class=" btn btn-link link-success link-offset-1 link-offset-2-hover link-underline-opacity-75 link-underline-opacity-100-hover mx-5">View store</button>
                         </div>
                     </div>
                 </td>
-                <td>{{order.date}}</td>
-                <td>{{order.total}} &euro;</td>
-                <td>
+                <td class="border">{{order.date}}</td>
+                <td class="border">{{order.total}} &euro;</td>
+                <td class="border">
                     <div class="rate">
                     <input type="radio" id="star5_{{i}}" name="rate{{i}}" value="5"/>
                     <label for="star5_{{i}}" title="text">5 stars</label>
