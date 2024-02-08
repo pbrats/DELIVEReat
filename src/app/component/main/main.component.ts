@@ -61,21 +61,21 @@ export class MainComponent {
   }
   ngOnInit() {
     this.titleService.setTitle("Discovery");
-    this.route.queryParams.subscribe(params => {
-      console.log(params)
-      this.showAlertFlag = params['loginSuccess'];
-      console.log(this.showAlertFlag)
-      // if (this.showAlertFlag) {
-    // this.shareDataService.getData().subscribe(data => {
-    //   this.showAlertFlag = data;
-    //   console.log("flag")
+    // this.route.queryParams.subscribe(params => {
+    //   console.log(params)
+    //   this.showAlertFlag = params['loginSuccess'];
     //   console.log(this.showAlertFlag)
-        setTimeout(() => {
-          this.showAlertFlag = false;
-            // window.location.reload();
-        }, 5000); 
-      // }
-    });
+    //   // if (this.showAlertFlag) {
+    // // this.shareDataService.getData().subscribe(data => {
+    // //   this.showAlertFlag = data;
+    // //   console.log("flag")
+    // //   console.log(this.showAlertFlag)
+    //     setTimeout(() => {
+    //       this.showAlertFlag = false;
+    //         // window.location.reload();
+    //     }, 5000); 
+    //   // }
+    // });
     // Retrieve the stored user information from local storage
     const storedUser = localStorage.getItem('User');
     console.log( storedUser);
