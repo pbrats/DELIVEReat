@@ -16,7 +16,7 @@ export class LoginComponent {
   loginValues: any;
   userService: UsersService=inject(UsersService);
   showErrorAlert = false;
-
+  private currentTime: Date = new Date();
   constructor(private router: Router){}
   ngOnInit() {
     this.setFormValues();
@@ -41,6 +41,7 @@ export class LoginComponent {
           console.log('Login successful!');
           console.log(authenticatedUser)
           this.showErrorAlert = false;
+          localStorage.setItem('lastVisit',JSON.stringify(this.currentTime));
           localStorage.setItem('alertShown','no');
           localStorage.setItem('User', JSON.stringify(authenticatedUser));
           // sessionStorage.setItem('User', JSON.stringify(authenticatedUser));

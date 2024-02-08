@@ -15,6 +15,7 @@ import { passwordValidator } from '../../passwordValidator';
 export class SignUpComponent {
   signUpForm!: FormGroup;
   signUpValues: any;
+  private currentTime: Date = new Date();
 
   constructor(private router: Router, private route: ActivatedRoute) { }
   ngOnInit() {
@@ -39,6 +40,7 @@ export class SignUpComponent {
 
   onSubmit() {
     if (this.signUpForm.valid) {
+      localStorage.setItem('lastVisit',JSON.stringify(this.currentTime));
       localStorage.setItem('alertShown', 'no');
       localStorage.setItem('User', JSON.stringify(this.signUpForm.value));
       // sessionStorage.setItem("User",JSON.stringify(this.signUpForm.value));
