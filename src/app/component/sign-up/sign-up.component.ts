@@ -32,7 +32,8 @@ export class SignUpComponent {
       address: new FormControl(""),
       // password: new FormControl("", [Validators.required, Validators.minLength(8),Validators.maxLength(12)]),
       password: new FormControl("", [Validators.required, passwordValidator()]),
-      confirmPassword: new FormControl("", [Validators.required])
+      // confirmPassword: new FormControl("", Validators.required)
+      confirmPassword: new FormControl("")
     }, { validators: PasswordMatcher.match });
   }
 
