@@ -1,16 +1,40 @@
-<div class="card" style="width: 18rem;">
-    <img [src]="authenticatedUser.photo" class="card-img-top" alt="{{authenticatedUser.name}} {{authenticatedUser.lastname}} user's photo" style="width:100%;">
-    <div class="card-body">
-      <h5 class="card-title">{{authenticatedUser.name}} {{authenticatedUser.lastname}}</h5>
-      <p class="card-text"></p>
+<div class="container mt-5">
+  <h1 class="text-success mb-3">Profile</h1>
+</div>
+<div class="container mt-4">
+  <div class="row">
+    <div class="card bg-dark bg-gradient text-bg-dark mx-auto">
+      <div class="card-header text-center">
+        <h3>{{ User.name }} {{ User.lastname }}</h3>
+      </div>
+      <div class="text-center mt-2 mb-2">
+        <img [src]="User.photo" onerror="this.src='../assets/users/blank-profile.png';" class="card-img-top"
+          alt="{{ User.name }} {{ User.lastname }} user's photo" style="width: 300px" />
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-dark text-bg-dark">
+          <h4>Phone number:</h4>
+          <p>{{ User.telephone }}</p>
+        </li>
+        <li class="list-group-item bg-dark text-bg-dark">
+          <h4>Email:</h4>
+          <p>{{ User.email }}</p>
+        </li>
+        <li class="list-group-item bg-dark text-bg-dark">
+          <h4>Address:</h4>
+          <p>{{ User.address }}</p>
+        </li>
+        <li class="list-group-item bg-dark text-bg-dark">
+          <h4>Postal Code:</h4>
+          <p>{{ User.postalCode }}</p>
+        </li>
+      </ul>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{authenticatedUser.telephone}}</li>
-      <li class="list-group-item">{{authenticatedUser.email}}</li>
-      <li class="list-group-item">{{authenticatedUser.address}}</li>
-    </ul>
-    <div class="card-body">
-      <a routerLink="previous-orders" routerLinkActive="active" class="card-link">Previous Orders</a>
-      <a routerLink="welcome" routerLinkActive="active" class="card-link">Signout</a>
+
+  </div>
+  <div class="row">
+    <div class="col-6 mx-auto d-grid gap-2 pt-4 pb-4">
+      <button class="btn btn-danger" routerLink="/welcome" routerLinkActive="active" (click)="SignOut()">Sign out</button>
     </div>
   </div>
+</div>
