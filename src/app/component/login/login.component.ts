@@ -15,8 +15,10 @@ export class LoginComponent {
   loginForm!: FormGroup;
   loginValues: any;
   userService: UsersService=inject(UsersService);
-  showErrorAlert = false;
+  showErrorAlert: boolean = false;
+  // isAuthenticated:boolean=false;
   private currentTime: Date = new Date();
+ 
   constructor(private router: Router){}
   ngOnInit() {
     this.setFormValues();
@@ -37,24 +39,25 @@ export class LoginComponent {
       let typedpassword = this.loginForm.value.password;
       this.userService.authenticate(typedemail, typedpassword).subscribe(authenticatedUser => {
         if (authenticatedUser) {
+          // this.isAuthenticated = true;
           // Authentication successful, you can navigate or perform other actions
           console.log('Login successful!');
           console.log(authenticatedUser)
           this.showErrorAlert = false;
+          // this.shouldCloseOffcanvas();
           localStorage.setItem('lastVisit',JSON.stringify(this.currentTime));
           localStorage.setItem('alertShown','no');
           localStorage.setItem('User', JSON.stringify(authenticatedUser));
           // sessionStorage.setItem('User', JSON.stringify(authenticatedUser));
           this.router.navigate(["discovery"]);
           // this.router.navigate(["discovery"],{ queryParams: { loginSuccess: true } });
-          // this.showAlertFlag = true;
-          // const dataToSend = this.showAlertFlag;
-          // this.shareDataService.setData(dataToSend);
         } else {
           // Authentication failed, show error message or take appropriate action
           console.log('Invalid email or password');
-          console.log(authenticatedUser)
+          // this.isAuthenticated = false;
+          // console.log(authenticatedUser)
           this.showErrorAlert = true;
+          // this.shouldCloseOffcanvas();
         }
       });
       // console.log(this.loginForm);
@@ -70,43 +73,6 @@ export class LoginComponent {
         console.log("invalid");
       }
   }
-  // onSubmit() { 
-  //   // if (this.loginForm.valid) {
-  //     // this.loginValues=this.loginForm.get("email")?.value;
-  //     // console.log( this.loginValues);
-  //     // this.loginValues=this.loginForm.get("password")?.value;
-  //     // console.log( this.loginValues);
-  //     let email = this.loginForm.value.email;
-  //     let password = this.loginForm.value.password;
-  //     this.userService.authenticate(email, password).subscribe(authenticatedUser => {
-  //       if (authenticatedUser) {
-  //         // Authentication successful, you can navigate or perform other actions
-  //         console.log('Login successful!');
-  //         console.log(authenticatedUser)
-  //         this.showErrorAlert = false;
-  //         localStorage.setItem('authenticatedUser', JSON.stringify(authenticatedUser));
-  //         this.router.navigate(["discovery"],{ queryParams: { loginSuccess: true } });
-        
-  //         // this.showAlertFlag = true;
-  //         // const dataToSend = this.showAlertFlag;
-  //         // this.shareDataService.setData(dataToSend);
-  //       } else {
-  //         // Authentication failed, show error message or take appropriate action
-  //         console.log('Invalid email or password');
-  //         console.log(authenticatedUser)
-  //         this.showErrorAlert = true;
-  //       }
-  //     });
-    
-  //     this.loginValues=this.loginForm.value;
-  //     console.log( this.loginValues);
-  //     console.log(this.loginForm.value);
-  //     // this.router.navigate(["discovery"]);
-  //     // this.showAlertFlag = true;
-  //     // const dataToSend = this.showAlertFlag;
-  //     // this.shareDataService.setData(dataToSend);
-  //     // const dataToSend2 = this.loginValues;
-  //     // this.shareDataService.setData(dataToSend2);
 
   //   // } else {
   //   //   Object.keys(this.loginForm.controls).forEach(controlName => {
@@ -126,7 +92,24 @@ export class LoginComponent {
   //   //   });
   //   // }
   // }
+
+  // shouldCloseOffcanvas(): boolean {
+  //   if(!this.showErrorAlert){
+  //     if (this.isAuthenticated) {
+  //     return this.isAuthenticated;
+  //     // return false;
+  //     }else{
+  //       // return this.isAuthenticated
+  //       return false;
+  //     }
+  //   }else{
+  //     return false;
+  //   }
+  // }
   closeErrorAlert() {
     this.showErrorAlert = false;
+  }
+  resetForm(){
+    this.loginForm.reset();
   }
 }
