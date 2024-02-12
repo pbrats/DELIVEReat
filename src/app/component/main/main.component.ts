@@ -64,17 +64,13 @@ export class MainComponent {
     // this.route.queryParams.subscribe(params => {
     //   console.log(params)
     //   this.showAlertFlag = params['loginSuccess'];
-    //   console.log(this.showAlertFlag)
-    //   // if (this.showAlertFlag) {
-    // // this.shareDataService.getData().subscribe(data => {
-    // //   this.showAlertFlag = data;
-    // //   console.log("flag")
-    // //   console.log(this.showAlertFlag)
-    //     setTimeout(() => {
+    //   console.log(this.showAlertFlag);
+    //   const hasAlertBeenShown = localStorage.getItem('alertShown');
+    //   if (this.showAlertFlag && hasAlertBeenShown==='no') {
     //       this.showAlertFlag = false;
-    //         // window.location.reload();
-    //     }, 5000); 
-    //   // }
+    //       this.router.navigate(["discovery"]);
+    //       localStorage.setItem('alertShown', 'no'); 
+    //   }
     // });
     // Retrieve the stored user information from local storage
     const storedUser = localStorage.getItem('User');
@@ -92,7 +88,7 @@ export class MainComponent {
             this.showAlertFlag = false;
 
             // A WAY TO FIX THE PROBLEMATIC LOAD
-            // window.location.reload();
+            window.location.reload();
 
           }, 3000); 
         // Set the flag in local storage to indicate that the alert has been shown

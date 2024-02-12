@@ -6,10 +6,10 @@ import { Observable, map } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersService {
-  private http=inject(HttpClient);
+  // private http=inject(HttpClient);
   private endpointUrl="assets/sample-data/users.json";
-  
- getUsers():Observable<any[]>{
+  constructor(private http: HttpClient){}
+  getUsers():Observable<any[]>{
     return this.http.get<any[]>(this.endpointUrl);
   }
   authenticate(email: string, password: string): Observable<any> {

@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../service/users.service';
 import { Router, RouterLink} from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +19,10 @@ export class LoginComponent {
   showErrorAlert: boolean = false;
   // isAuthenticated:boolean=false;
   private currentTime: Date = new Date();
- 
-  constructor(private router: Router){}
+  @Input()showOffcanvas?: boolean;
+  // @ViewChild('offcanvasRight') offcanvas!: ElementRef;
+  // private authenticationSubscription: Subscription | undefined;
+  constructor(private router: Router, private renderer: Renderer2){}
   ngOnInit() {
     this.setFormValues();
   }
@@ -30,6 +33,9 @@ export class LoginComponent {
     });
   }
   onSubmit() { 
+    // if (this.authenticationSubscription) {
+    //   this.authenticationSubscription.unsubscribe();
+    // }
     // if (this.loginForm.valid) {
       // this.loginValues=this.loginForm.get("email")?.value;
       // console.log( this.loginValues);
@@ -37,6 +43,7 @@ export class LoginComponent {
       // console.log( this.loginValues);
       let typedemail = this.loginForm.value.email;
       let typedpassword = this.loginForm.value.password;
+      // this.authenticationSubscription = this.userService.authenticate(typedemail, typedpassword).subscribe(authenticatedUser => {
       this.userService.authenticate(typedemail, typedpassword).subscribe(authenticatedUser => {
         if (authenticatedUser) {
           // this.isAuthenticated = true;
@@ -44,11 +51,13 @@ export class LoginComponent {
           console.log('Login successful!');
           console.log(authenticatedUser)
           this.showErrorAlert = false;
-          // this.shouldCloseOffcanvas();
           localStorage.setItem('lastVisit',JSON.stringify(this.currentTime));
           localStorage.setItem('alertShown','no');
           localStorage.setItem('User', JSON.stringify(authenticatedUser));
           // sessionStorage.setItem('User', JSON.stringify(authenticatedUser));
+
+          // this.closeOffcanvas();
+          this.showOffcanvas=false;
           this.router.navigate(["discovery"]);
           // this.router.navigate(["discovery"],{ queryParams: { loginSuccess: true } });
         } else {
@@ -57,7 +66,6 @@ export class LoginComponent {
           // this.isAuthenticated = false;
           // console.log(authenticatedUser)
           this.showErrorAlert = true;
-          // this.shouldCloseOffcanvas();
         }
       });
       // console.log(this.loginForm);
@@ -73,7 +81,6 @@ export class LoginComponent {
         console.log("invalid");
       }
   }
-
   //   // } else {
   //   //   Object.keys(this.loginForm.controls).forEach(controlName => {
   //   //     const control = this.loginForm.controls[controlName];
@@ -92,19 +99,15 @@ export class LoginComponent {
   //   //   });
   //   // }
   // }
-
-  // shouldCloseOffcanvas(): boolean {
-  //   if(!this.showErrorAlert){
-  //     if (this.isAuthenticated) {
-  //     return this.isAuthenticated;
-  //     // return false;
-  //     }else{
-  //       // return this.isAuthenticated
-  //       return false;
-  //     }
-  //   }else{
-  //     return false;
+  // ngOnDestroy() {
+  //   // Unsubscribe from authentication subscription when component is destroyed
+  //   if (this.authenticationSubscription) {
+  //     this.authenticationSubscription.unsubscribe();
   //   }
+  // }
+  // closeOffcanvas() {
+  //   const offcanvasElement = this.offcanvas.nativeElement as HTMLElement;
+  //   this.renderer.setStyle(offcanvasElement, 'display', 'none');
   // }
   closeErrorAlert() {
     this.showErrorAlert = false;

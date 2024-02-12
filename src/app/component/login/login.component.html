@@ -1,5 +1,6 @@
+<div *ngIf="showOffcanvas" #offcanvasRight>
 <div class="offcanvas offcanvas-end text-bg-dark bg-gradient" tabindex="-1" id="offcanvasRight"
-    aria-labelledby="offcanvasRightLabel">
+    aria-labelledby="offcanvasRightLabel"  #offcanvas>
     <div class="text-end  mt-3 mx-3">
         <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"
             aria-label="Close"></button>
@@ -51,7 +52,7 @@
                 <!-- [attr.data-bs-dismiss]="shouldCloseOffcanvas() ? 'offcanvas' : null" [attr.aria-label]="shouldCloseOffcanvas() ? 'Close' : null" -->
                 <!-- [attr.data-bs-dismiss]="isAuthenticated ? 'offcanvas' : null" aria-label="Close"  -->
                 <!-- [attr.data-bs-dismiss]="isAuthenticated ? 'offcanvas' : null" [attr.aria-label]="isAuthenticated ? 'Close' : null" -->
-            <button type="submit" class="btn btn-success col-12 text-center mt-5 mb-2" [disabled]="!loginForm.valid">
+            <button type="submit" class="btn btn-success col-12 text-center mt-5 mb-2" [disabled]="!loginForm.valid" >
                 Time to order
             </button>
             <!-- </div> -->
@@ -62,4 +63,5 @@
                 routerLinkActive="active" data-bs-dismiss="offcanvas" aria-label="Close">Sign up here</button>
         </div>
     </div>
+</div>
 </div>
