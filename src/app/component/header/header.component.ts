@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +13,16 @@ import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/r
 })
 export class HeaderComponent {
   form!: FormGroup;
-  router: Router =inject(Router);
   searchQuery: string = '';
-  constructor(private route: ActivatedRoute){}
+  currentRoute: string = '';
+  constructor(private route: ActivatedRoute,private router: Router){}
   ngOnInit(){
+    this.router.events
+    .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+    .subscribe((event: NavigationEnd) => {
+      this.currentRoute = event.urlAfterRedirects.split('/')[1];
+    });
+
     this.setFormValues();
   }
   setFormValues(){

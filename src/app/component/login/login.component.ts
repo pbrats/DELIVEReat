@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, Renderer2, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../service/users.service';
-import { Router, RouterLink} from '@angular/router';
-import { Subscription } from 'rxjs';
+import { NavigationEnd, Router, RouterLink} from '@angular/router';
+import { Subscription, filter } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -22,8 +22,14 @@ export class LoginComponent {
   @Input()showOffcanvas?: boolean;
   // @ViewChild('offcanvasRight') offcanvas!: ElementRef;
   // private authenticationSubscription: Subscription | undefined;
+  // currentRoute: string = '';
   constructor(private router: Router, private renderer: Renderer2){}
   ngOnInit() {
+    // this.router.events
+    // .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+    // .subscribe((event: NavigationEnd) => {
+    //   this.currentRoute = event.urlAfterRedirects.split('/')[1];
+    // });
     this.setFormValues();
   }
   setFormValues(){

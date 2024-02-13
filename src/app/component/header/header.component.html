@@ -18,28 +18,32 @@
               </a>
             </li> -->
             <li>
-              <a routerLink="discovery" routerLinkActive="active" class="nav-link text-white" class="btn btn-success active" role="button" data-bs-toggle="button" aria-pressed="true">
+              <button routerLink="discovery" routerLinkActive="active" class="btn {{ currentRoute === 'discovery' ? 'btn-outline-success text-white active' : 'btn-outline text-white' }}">
+              <!-- <button routerLink="discovery" routerLinkActive="active" class="btn btn-outline-success text-white active" > -->
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="#shop"/></svg>
                 Discovery
-              </a>
+              </button>
             </li>
             <li>
-              <a routerLink="previous-orders" routerLinkActive="active" class="nav-link text-white">
+              <button routerLink="previous-orders" routerLinkActive="active" class="btn {{ currentRoute === 'previous-orders' ? 'btn-outline-success text-white active' : 'btn-outline text-white' }}">
+              <!-- <button routerLink="previous-orders" routerLinkActive="active" class="btn btn-outline text-white"> -->
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="#receipt"/></svg>
                 Previous Orders
-              </a>
+              </button>
             </li>
             <li>
-                <a routerLink="user" routerLinkActive="active" class="nav-link text-white">
+              <button routerLink="user" routerLinkActive="active"  class="btn {{ currentRoute === 'user' ? 'btn-outline-success text-white active' : 'btn-outline text-white' }}">
+                <!-- <button routerLink="user" routerLinkActive="active"  class="btn btn-outline text-white"> -->
                   <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="#people-circle"/></svg>
                   Profile
-                </a>
+                </button>
               </li>
             <li>
-              <a href="#" class="nav-link text-white">
+              <!-- <button routerLink="cart" routerLinkActive="active"  class="btn {{ currentRoute === 'cart' ? 'btn-outline-success text-white active' : 'btn-outline text-white' }}"> -->
+              <button href="#" class="btn btn-outline text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="#cart"/></svg>
                 My cart
-              </a>
+              </button>
             </li>
 
           </ul>

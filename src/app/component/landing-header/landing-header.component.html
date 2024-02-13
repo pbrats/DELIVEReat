@@ -7,7 +7,8 @@
             DELIVEReat
         </a>
           <div class="">
-            <button type="button" class="btn btn-success mx-3 text-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Login / Sign up</button>
+            <!-- <button *ngIf="currentRoute !== 'sign-up'" type="button" class="btn btn-success mx-3 text-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Login / Sign up</button> -->
+            <button type="button" class="btn {{ currentRoute === 'sign-up' ? 'btn btn-success mx-3 text-end disabled' : 'btn btn-success mx-3 text-end' }}" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Login / Sign up</button>
             <app-login [showOffcanvas]="true" />
           </div>
         </div>
