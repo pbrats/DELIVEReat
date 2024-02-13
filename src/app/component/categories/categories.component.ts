@@ -34,12 +34,24 @@ export class CategoriesComponent implements OnInit{
       setTimeout(() =>{
     // (data) => {
       this.fCategories = data;
+      this.fCategories.forEach((cat: any) => {
+        // console.log('Before replacement - category:', cat.category);
+        cat.category = cat.category.replace(/_/g, ' ');
+        // console.log('After replacement - category:', cat.category);
+      });
+      // console.log('After replacement:', this.fCategories);
       this.hasLoadedCategories=true;
       },500);
     }
   });
     this.catPhotoService.getCategoriesPhotos().subscribe((data) => {
       this.photosCategories = data;
+      this.photosCategories.forEach((photoCat: any) => {
+        // console.log('Before replacement - category:', photoCat.category);
+        photoCat.category = photoCat.category.replace(/_/g, ' ');
+        // console.log('After replacement - category:', photoCat.category);
+      });
+      // console.log('After replacement:', this.photosCategories);
     });
     // get categories from stores
     // this.restaurantsService.getRestaurants()

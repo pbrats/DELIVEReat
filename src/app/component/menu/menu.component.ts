@@ -32,6 +32,8 @@ export class MenuComponent {
     console.log(this.productsList);
     this.productCategoryList= this.getUniqueProductCategories(this.productsList);
     console.log(this.productCategoryList);
+    this.productCategoryList = this.productCategoryList.map(category => category.replace(/_/g, ' '));
+    console.log(this.productCategoryList);
     this.groupedProducts = this.groupProductsByCategory(this.productsList);
     console.log(this.groupedProducts);
     // console.log(this.groupedProducts.length)
@@ -53,11 +55,12 @@ export class MenuComponent {
   groupProductsByCategory(originalArray: any[]): { category: string, products: any[] }[] {
     const groupedProducts: { category: string, products: any[] }[] = [];
     originalArray.forEach(product => {
-      const categoryGroup = groupedProducts.find(group => group.category === product.category);
+      const categoryWithoutUnderscore = product.category.replace(/_/g, ' '); // Replace underscores with spaces
+      const categoryGroup = groupedProducts.find(group => group.category === categoryWithoutUnderscore);
       if (categoryGroup) {
         categoryGroup.products.push(product);
       } else {
-        groupedProducts.push({ category: product.category, products: [product] });
+        groupedProducts.push({ category: categoryWithoutUnderscore, products: [product] });
       }
     });
     return groupedProducts;

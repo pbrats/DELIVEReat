@@ -44,8 +44,14 @@ export class SelectedCategoryComponent {
           console.log(this.selectedCategory);
           this.titleService.setTitle(`${this.selectedCategory}`);
           this.catService.getCategories().subscribe((data:any) => {
-            this.stores = data.filter((store:any) => store.category === this.selectedCategory);
+            this.stores = data.filter((store:any) => store.category.replace(/_/g, ' ') === this.selectedCategory);
             console.log(this.stores);
+            this.stores.forEach((store: any) => {
+              // console.log('Before replacement - category:', store.category);
+              store.category = store.category.replace(/_/g, ' ');
+              // console.log('After replacement - category:', store.category);
+            });
+            // console.log('After replacement:', this.stores);
           });
           this.hasLoadedStores=true;
           },500);

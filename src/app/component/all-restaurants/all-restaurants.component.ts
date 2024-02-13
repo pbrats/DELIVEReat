@@ -31,6 +31,12 @@ export class AllRestaurantsComponent {
         setTimeout(() =>{
           console.log(response);
           this.restaurants =response;
+          this.restaurants.forEach((restaurant: any) => {
+            // console.log('Before replacement - category:', restaurant.category);
+            restaurant.category = restaurant.category.replace(/_/g, ' ');
+            // console.log('After replacement - category:', restaurant.category);
+          });
+          // console.log('After replacement:', this.restaurants);
           this.hasLoadedStores=true;
         },500);
       }

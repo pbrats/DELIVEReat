@@ -37,6 +37,12 @@ export class FamousComponent {
         setTimeout(() =>{
           console.log(response);
           this.famousRestaurants =response;
+          this.famousRestaurants.forEach((famousRest: any) => {
+            // console.log('Before replacement - category:', famousRest.category);
+            famousRest.category = famousRest.category.replace(/_/g, ' ');
+            // console.log('After replacement - category:', famousRest.category);
+          });
+          // console.log('After replacement:', this.famousRestaurants);
           this.hasLoadedFamous=true;     
       },500);
       }

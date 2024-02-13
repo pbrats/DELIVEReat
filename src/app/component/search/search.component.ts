@@ -37,7 +37,13 @@ export class SearchComponent {
             ||
             store.category.toLowerCase().includes(this.query.toLowerCase())
           );
-          console.log(this.searchResult)
+          // console.log(this.searchResult);
+          this.searchResult.forEach((store: any) => {
+            // console.log('Before replacement - category:', store.category);
+            store.category = store.category.replace(/_/g, ' ');
+            // console.log('After replacement - category:', store.category);
+          });
+          // console.log('After replacement:', this.searchResult);
         });
       }
     });

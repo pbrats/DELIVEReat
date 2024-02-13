@@ -26,7 +26,6 @@ export class SelectedStoreComponent {
   storeInfos:any;
   
   constructor(private titleService: Title) {}
-  
   ngOnInit(): void {    
     this.storeInfosService.getStoresInfos().subscribe((response) => {
       this.storeInfos = response;
@@ -38,7 +37,13 @@ export class SelectedStoreComponent {
           this.titleService.setTitle(`${this.selectedStore}`);
           this.storesService.getRestaurants().subscribe((data:any) => {
             this.items = data.filter((item:any) => item.name === this.selectedStore);
-            console.log(this.items);
+            // console.log('Before replacement:', this.items);
+            this.items.forEach((item: any) => {
+              // console.log('Before replacement - category:', item.category);
+              item.category = item.category.replace(/_/g, ' ');
+              // console.log('After replacement - category:', item.category);
+            });
+            // console.log('After replacement:', this.items);
             // allos tropos na paei sto not found alla etsi den paei piso gt fortonei prota ti selida tou magaziou meta ti selida not found on loop
             // if(this.items.length==0){
             //   this.router.navigate(["menu-not-found"]);}

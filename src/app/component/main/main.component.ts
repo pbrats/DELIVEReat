@@ -118,6 +118,12 @@ export class MainComponent {
         setTimeout(() =>{
       // (data) => {
         this.fCategories = data;
+        this.fCategories.forEach((cat: any) => {
+          // console.log('Before replacement - category:', cat.category);
+          cat.category = cat.category.replace(/_/g, ' ');
+          // console.log('After replacement - category:', cat.category);
+        });
+        // console.log('After replacement:', this.fCategories);
         this.hasLoadedCategories=true;
         },500);
       }
@@ -127,6 +133,12 @@ export class MainComponent {
     });
     this.catPhotoService.getCategoriesPhotos().subscribe((response) => {
       this.photosCategories = response;
+      this.photosCategories.forEach((photoCat: any) => {
+        // console.log('Before replacement - category:', photoCat.category);
+        photoCat.category = photoCat.category.replace(/_/g, ' ');
+        // console.log('After replacement - category:', photoCat.category);
+      });
+      // console.log('After replacement:', this.photosCategories);
     });
     // get categories from restaurantsService
     // this.restaurantsService.getRestaurants()
@@ -143,6 +155,12 @@ export class MainComponent {
         setTimeout(() =>{
           console.log(response);
           this.famousRestaurants =response;
+          this.famousRestaurants.forEach((famousRest: any) => {
+            // console.log('Before replacement - category:', famousRest.category);
+            famousRest.category = famousRest.category.replace(/_/g, ' ');
+            // console.log('After replacement - category:', famousRest.category);
+          });
+          // console.log('After replacement:', this.famousRestaurants);
           this.hasLoadedFamous=true;
         // this.categories2 =response;
         // enonei categories if so allazei sto html kai mpainei categories
