@@ -11,23 +11,23 @@ import { Title } from '@angular/platform-browser';
   styleUrl: './faq.component.css'
 })
 export class FaqComponent {
-  publisherService =inject(PublisherService);
-  isFaqsPage=true;
+  // publisherService =inject(PublisherService);
+  // isFaqsPage=true;
 
   constructor(private titleService: Title,private router: Router) {
     titleService.setTitle("FAQs");
-    this.isFaqsPage=true;
-    this.publisherService.publishData(this.isFaqsPage);
-    this.router.events.subscribe(event=>{
-      if(event instanceof NavigationEnd){
-        if (event.url.includes('faqs')){
-          this.isFaqsPage=true;
-          this.publisherService.publishData(this.isFaqsPage);
-        }else{
-          this.isFaqsPage=false;
-          this.publisherService.publishData(this.isFaqsPage);
-        }
-      }
-    });
+    // this.isFaqsPage=true;
+    // this.publisherService.publishData(this.isFaqsPage);
+    // this.router.events.subscribe(event=>{
+    //   if(event instanceof NavigationEnd){
+    //     if (event.url.includes('faqs')){
+    //       this.isFaqsPage=true;
+    //       this.publisherService.publishData(this.isFaqsPage);
+    //     }else{
+    //       this.isFaqsPage=false;
+    //       this.publisherService.publishData(this.isFaqsPage);
+    //     }
+    //   }
+    // });
   }
 }

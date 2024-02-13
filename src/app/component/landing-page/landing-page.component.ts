@@ -39,8 +39,8 @@ export class LandingPageComponent implements OnInit{
   animateHeading = false;
   animateButton = false;
   animateImage = false;
-  isWelcomePage=true;
-  publisherService =inject(PublisherService);
+  // isWelcomePage=true;
+  // publisherService =inject(PublisherService);
  
   private destroy$ = new Subject<void>();
   orderTexts: string[] = ['Pizza', 'Burger', 'Asian', 'Donut', 'Coffee','Fast Food'];
@@ -55,23 +55,23 @@ export class LandingPageComponent implements OnInit{
 
   constructor(private router: Router,private titleService: Title) {
     titleService.setTitle("Welcome");
-    this.isWelcomePage=true;
-      this.publisherService.publishData(this.isWelcomePage);
-      console.log(this.isWelcomePage);
-      this.router.events.subscribe((event) => console.log(event));
-      this.router.events.subscribe(event=>{
-        if(event instanceof NavigationEnd){
-          if (event.url.includes('welcome')||event.url.includes('')){
-            this.isWelcomePage=true;
-            // this.publisherService.publishData({from: "landing-page", value: this.isWelcomePage});
-            this.publisherService.publishData(this.isWelcomePage);
-          }else{
-            this.isWelcomePage=false;
-            // this.publisherService.publishData({from: "landing-page", value: this.isWelcomePage});
-            this.publisherService.publishData(this.isWelcomePage);
-          }
-        }
-      });
+    // this.isWelcomePage=true;
+    //   this.publisherService.publishData(this.isWelcomePage);
+    //   console.log(this.isWelcomePage);
+    //   this.router.events.subscribe((event) => console.log(event));
+    //   this.router.events.subscribe(event=>{
+    //     if(event instanceof NavigationEnd){
+    //       if (event.url.includes('welcome')||event.url.includes('')){
+    //         this.isWelcomePage=true;
+    //         // this.publisherService.publishData({from: "landing-page", value: this.isWelcomePage});
+    //         this.publisherService.publishData(this.isWelcomePage);
+    //       }else{
+    //         this.isWelcomePage=false;
+    //         // this.publisherService.publishData({from: "landing-page", value: this.isWelcomePage});
+    //         this.publisherService.publishData(this.isWelcomePage);
+    //       }
+    //     }
+    //   });
   }
 
   ngOnInit() {

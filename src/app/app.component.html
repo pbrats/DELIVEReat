@@ -1,12 +1,17 @@
-<ng-template *ngIf="isWelcomePage; then welcomeBlock">
+<!-- <ng-template *ngIf="isWelcomePage; then welcomeBlock">
 </ng-template>
-<ng-template #welcomeBlock>
+<ng-template #welcomeBlock> -->
+   @if(currentRoute == '' || currentRoute == 'welcome' ||  currentRoute == 'sign-up'){
     <app-landing-header/>
-</ng-template>
-<ng-template *ngIf="!isWelcomePage; then notWelcomeBlock">
+}
+@else{
+    <app-header />
+}
+    <!-- </ng-template> -->
+<!-- <ng-template *ngIf="!isWelcomePage; then notWelcomeBlock">
 </ng-template>
 <ng-template #notWelcomeBlock>
     <app-header />
-</ng-template>
+</ng-template> -->
 <router-outlet />
 <app-footer />

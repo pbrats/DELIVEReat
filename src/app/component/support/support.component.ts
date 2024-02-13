@@ -13,8 +13,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './support.component.css'
 })
 export class SupportComponent {
-  publisherService =inject(PublisherService);
-  isSupportPage=true;
+  // publisherService =inject(PublisherService);
+  // isSupportPage=true;
   FormData!: FormGroup;
   showAlertFlag: boolean = false;
   showAlert() {
@@ -26,19 +26,19 @@ export class SupportComponent {
   }
   constructor(private titleService: Title,private router: Router,private builder: FormBuilder) {
     titleService.setTitle("Support");
-    this.isSupportPage=true;
-    this.publisherService.publishData(this.isSupportPage);
-      this.router.events.subscribe(event=>{
-        if(event instanceof NavigationEnd){
-          if (event.url.includes('support')){
-            this.isSupportPage=true;
-            this.publisherService.publishData(this.isSupportPage);
-          }else{
-            this.isSupportPage=false;
-            this.publisherService.publishData(this.isSupportPage);
-          }
-        }
-      });
+    // this.isSupportPage=true;
+    // this.publisherService.publishData(this.isSupportPage);
+    //   this.router.events.subscribe(event=>{
+    //     if(event instanceof NavigationEnd){
+    //       if (event.url.includes('support')){
+    //         this.isSupportPage=true;
+    //         this.publisherService.publishData(this.isSupportPage);
+    //       }else{
+    //         this.isSupportPage=false;
+    //         this.publisherService.publishData(this.isSupportPage);
+    //       }
+    //     }
+    //   });
   }
   ngOnInit() {
     this.setFormValues();

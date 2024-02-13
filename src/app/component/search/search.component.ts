@@ -12,7 +12,6 @@ import { FamousRestaurantsService } from '../../service/famous-restaurants.servi
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
-
   restaurants:any;
   stores:any;
   restaurantsService: RestaurantsService =inject(RestaurantsService);

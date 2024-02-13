@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { LandingHeaderComponent } from './component/landing-header/landing-header.component';
 import { LandingPageComponent } from './component/landing-page/landing-page.component';
 import { PublisherService } from './service/publisher.service';
+import { filter } from 'rxjs';
 
 
 @Component({
@@ -16,18 +17,26 @@ import { PublisherService } from './service/publisher.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'estiatoria';
-  isWelcomePage:boolean | undefined;
+  title = 'DELIVEReat';
+  // isWelcomePage:boolean | undefined;
+  currentRoute: string = '';
   
-  publisherService =inject(PublisherService);
+  // publisherService =inject(PublisherService);
 
   constructor(private router: Router,private route: ActivatedRoute) {
-    this.publisherService.listenForData()
-    .subscribe((data)=>{
-      // if(data.from==="landing-page"||data.from==="sign-up-page"){
-      // if(data.from==="landing-page"){
-      this.isWelcomePage=data;
-      console.log(this.isWelcomePage);
-    })
+    // this.publisherService.listenForData()
+    // .subscribe((data)=>{
+    //   // if(data.from==="landing-page"||data.from==="sign-up-page"){
+    //   // if(data.from==="landing-page"){
+    //   this.isWelcomePage=data;
+    //   console.log(this.isWelcomePage);
+    // })
+  }
+  ngOnInit() {
+    this.router.events
+    .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+    .subscribe((event: NavigationEnd) => {
+      this.currentRoute = event.urlAfterRedirects.split('/')[1];
+    });
   }
 }
