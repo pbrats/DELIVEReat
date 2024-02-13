@@ -20,6 +20,10 @@ export class MenuComponent {
   groupedProducts: { category: string, products: any[] }[] = [];
   $index: any;
   currentUrl: any;
+  buttonAZClicked:boolean=false;
+  buttonZAClicked:boolean=false;
+  buttonHighPrice:boolean=false;
+  buttonLowPrice:boolean=false;
 
   constructor(){
     this.currentUrl = this.router.url;
@@ -66,24 +70,68 @@ export class MenuComponent {
     return groupedProducts;
   }
   sortStoresByPriceDescending(): void {
-    this.groupedProducts.forEach(categoryGroup => {
-      categoryGroup.products.sort((a, b) => b.price - a.price);
-    });
+    // if it is already active it deactivates and presents the original data
+    if(this.buttonHighPrice){
+      this.buttonHighPrice=false;
+      this.groupedProducts = this.groupProductsByCategory(this.productsList);
+        // if it is inactive it activates and sorts the data and deactivates the other sort options
+    }else{
+      this.buttonHighPrice=true;
+      this.buttonAZClicked=false;
+      this.buttonZAClicked=false;
+      this.buttonLowPrice=false;
+      this.groupedProducts.forEach(categoryGroup => {
+        categoryGroup.products.sort((a, b) => b.price - a.price);
+      });
+    }
   }
   sortStoresByPriceAscending():void {
-    this.groupedProducts.forEach(categoryGroup => {
-      categoryGroup.products.sort((a, b) => a.price - b.price);
-    });
+    // if it is already active it deactivates and presents the original data
+    if(this.buttonLowPrice){
+      this.buttonLowPrice=false;
+      this.groupedProducts = this.groupProductsByCategory(this.productsList);
+        // if it is inactive it activates and sorts the data and deactivates the other sort options
+    }else{
+      this.buttonLowPrice=true;
+      this.buttonAZClicked=false;
+      this.buttonZAClicked=false;
+      this.buttonHighPrice=false;
+      this.groupedProducts.forEach(categoryGroup => {
+        categoryGroup.products.sort((a, b) => a.price - b.price);
+      });
+    }
   }
   sortStoresAlphabetically():void {
-    this.groupedProducts.forEach(categoryGroup => {
-      categoryGroup.products.sort((a, b) =>a.name.localeCompare(b.name));
-    });
+    // if it is already active it deactivates and presents the original data
+    if(this.buttonAZClicked){
+      this.buttonAZClicked=false;
+      this.groupedProducts = this.groupProductsByCategory(this.productsList);
+        // if it is inactive it activates and sorts the data and deactivates the other sort options
+    }else{
+      this.buttonAZClicked=true;
+      this.buttonZAClicked=false;
+      this.buttonHighPrice=false;
+      this.buttonLowPrice=false;
+      this.groupedProducts.forEach(categoryGroup => {
+        categoryGroup.products.sort((a, b) =>a.name.localeCompare(b.name));
+      });
+    }
   }
   sortStoresZtoA():void {
-    this.groupedProducts.forEach(categoryGroup => {
-      categoryGroup.products.sort((a, b) =>b.name.localeCompare(a.name));
-    });
+    // if it is already active it deactivates and presents the original data
+    if (this.buttonZAClicked){
+      this.buttonZAClicked=false;
+      this.groupedProducts = this.groupProductsByCategory(this.productsList);
+        // if it is inactive it activates and sorts the data and deactivates the other sort options
+    }else{
+      this.buttonZAClicked=true;
+      this.buttonAZClicked=false;
+      this.buttonHighPrice=false;
+      this.buttonLowPrice=false;
+      this.groupedProducts.forEach(categoryGroup => {
+        categoryGroup.products.sort((a, b) =>b.name.localeCompare(a.name));
+      });
+    }
   }
   // scrollToCategory(categoryGroup: { category: string; products: any[] }) {
   //   const elementId = `scrollspyHeading ${categoryGroup.category}`;

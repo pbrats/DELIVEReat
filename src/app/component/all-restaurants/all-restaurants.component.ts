@@ -20,6 +20,10 @@ export class AllRestaurantsComponent {
   hasLoadedStores : boolean= false;
   router: Router =inject(Router);
   activatedRoute =inject(ActivatedRoute);
+  buttonAZClicked:boolean=false;
+  buttonZAClicked:boolean=false;
+  buttonRatingClicked:boolean=false;
+  buttonDeliveryClicked:boolean=false;
 
   ngOnInit() {
     this.storeInfosService.getStoresInfos().subscribe((response) => {
@@ -55,15 +59,50 @@ export class AllRestaurantsComponent {
     }
   }
   sortStoresByRating(): void {
-    this.restaurants.forEach((restaurant: any) => {
-      const matchingStore = this.storeInfos.find((store: { name: any; }) => store.name === restaurant.name);
-      if (matchingStore) {
-        restaurant.rating = matchingStore.rating;
-      }
-    });
-    this.restaurants.sort((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
+    // if it is already active it deactivates and presents the original data
+    if(this.buttonRatingClicked){
+      this.buttonRatingClicked=false;
+      this.restaurantsService.getRestaurants().subscribe(
+        (data) => {
+          this.restaurants =data;
+          this.restaurants.forEach((restaurant: any) => {
+            restaurant.category = restaurant.category.replace(/_/g, ' ');
+          });
+        }
+      );
+      // if it is inactive it activates and sorts the data and deactivates the other sort options
+    }else{
+      this.buttonRatingClicked=true;
+      this.buttonDeliveryClicked=false;
+      this.buttonZAClicked=false;
+      this.buttonAZClicked=false;
+      this.restaurants.forEach((restaurant: any) => {
+        const matchingStore = this.storeInfos.find((store: { name: any; }) => store.name === restaurant.name);
+        if (matchingStore) {
+          restaurant.rating = matchingStore.rating;
+        }
+      });
+      this.restaurants.sort((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
+    }
   }
   sortStoresByDeliveryTime():void {
+    // if it is already active it deactivates and presents the original data
+    if(this.buttonDeliveryClicked){
+      this.buttonDeliveryClicked=false;
+      this.restaurantsService.getRestaurants().subscribe(
+        (data) => {
+          this.restaurants =data;
+          this.restaurants.forEach((restaurant: any) => {
+            restaurant.category = restaurant.category.replace(/_/g, ' ');
+          });
+        }
+      );
+      // if it is inactive it activates and sorts the data and deactivates the other sort options
+    }else{
+      this.buttonDeliveryClicked=true;
+      this.buttonRatingClicked=false;
+      this.buttonZAClicked=false;
+      this.buttonAZClicked=false;
     this.restaurants.forEach((restaurant: any) => {
       const matchingStore = this.storeInfos.find((store: { name: any; }) => store.name === restaurant.name);
       if (matchingStore) {
@@ -72,11 +111,48 @@ export class AllRestaurantsComponent {
     });
     this.restaurants.sort((a: { delivery_time: number; }, b: { delivery_time: number; }) =>  a.delivery_time - b.delivery_time);
   }
+}
   sortStoresAlphabetically():void {
-    this.restaurants.sort((a: { name: string; }, b: { name: string; }) => a.name.localeCompare(b.name));
+    // if it is already active it deactivates and presents the original data
+    if(this.buttonAZClicked){
+      this.buttonAZClicked=false;
+      this.restaurantsService.getRestaurants().subscribe(
+        (data) => {
+          this.restaurants =data;
+          this.restaurants.forEach((restaurant: any) => {
+            restaurant.category = restaurant.category.replace(/_/g, ' ');
+          });
+        }
+      );
+      // if it is inactive it activates and sorts the data and deactivates the other sort options
+    }else{
+      this.buttonAZClicked=true;
+      this.buttonZAClicked=false;
+      this.buttonRatingClicked=false;
+      this.buttonDeliveryClicked=false;
+      this.restaurants.sort((a: { name: string; }, b: { name: string; }) => a.name.localeCompare(b.name));
+    }
   }
   sortStoresZtoA():void {
-    this.restaurants.sort((a: { name: string; }, b: { name: string; }) => b.name.localeCompare(a.name));
+    // if it is already active it deactivates and presents the original data
+    if (this.buttonZAClicked){
+      this.buttonZAClicked=false;
+      this.restaurantsService.getRestaurants().subscribe(
+        (data) => {
+          this.restaurants =data;
+          this.restaurants.forEach((restaurant: any) => {
+            restaurant.category = restaurant.category.replace(/_/g, ' ');
+          });
+        }
+      );
+      // if it is inactive it activates and sorts the data and deactivates the other sort options
+    }else{
+      this.buttonZAClicked=true;
+      this.buttonAZClicked=false;
+      this.buttonRatingClicked=false;
+      this.buttonDeliveryClicked=false;
+      this.restaurants.sort((a: { name: string; }, b: { name: string; }) => b.name.localeCompare(a.name));
+    }
   }
 }
 

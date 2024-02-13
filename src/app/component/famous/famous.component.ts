@@ -23,6 +23,10 @@ export class FamousComponent {
   activatedRoute =inject(ActivatedRoute);
   restaurants:any;
   restaurantsService: RestaurantsService =inject(RestaurantsService);
+  buttonAZClicked:boolean=false;
+  buttonZAClicked:boolean=false;
+  buttonRatingClicked:boolean=false;
+  buttonDeliveryClicked:boolean=false;
 
   ngOnInit() {
     // this.storeInfosService.getStoresInfos().subscribe((response) => {
@@ -61,16 +65,89 @@ export class FamousComponent {
     }
   }
   sortStoresByRating(): void {
-    this.famousRestaurants.sort((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
+    // if it is already active it deactivates and presents the original data
+    if(this.buttonRatingClicked){
+      this.buttonRatingClicked=false;
+      this.buttonDeliveryClicked=false;
+      this.famousService.getFamousRestaurants().subscribe(
+        (data) => {
+          this.famousRestaurants =data;
+          this.famousRestaurants.forEach((famousRest: any) => {
+            famousRest.category = famousRest.category.replace(/_/g, ' ');
+          });
+        }
+      );
+       // if it is inactive it activates and sorts the data and deactivates the other sort option
+    }else{
+      this.buttonRatingClicked=true;
+      this.buttonDeliveryClicked=false;
+      this.buttonZAClicked=false;
+      this.buttonAZClicked=false;
+      this.famousRestaurants.sort((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
+    }
   }
   sortStoresByDeliveryTime():void {
-    this.famousRestaurants.sort((a: { delivery_time: number; }, b: { delivery_time: number; }) =>  a.delivery_time - b.delivery_time);
+     // if it is already active it deactivates and presents the original data
+     if(this.buttonDeliveryClicked){
+      this.buttonDeliveryClicked=false;
+      this.famousService.getFamousRestaurants().subscribe(
+        (data) => {
+          this.famousRestaurants =data;
+          this.famousRestaurants.forEach((famousRest: any) => {
+            famousRest.category = famousRest.category.replace(/_/g, ' ');
+          });
+        }
+      );
+       // if it is inactive it activates and sorts the data and deactivates the other sort option
+    }else{
+      this.buttonDeliveryClicked=true;
+      this.buttonRatingClicked=false;
+      this.buttonZAClicked=false;
+      this.buttonAZClicked=false;
+      this.famousRestaurants.sort((a: { delivery_time: number; }, b: { delivery_time: number; }) =>  a.delivery_time - b.delivery_time);
+    }
   }
   sortStoresAlphabetically():void {
-    this.famousRestaurants.sort((a: { name: string; }, b: { name: string; }) => a.name.localeCompare(b.name));
+    // if it is already active it deactivates and presents the original data
+    if(this.buttonAZClicked){
+      this.buttonAZClicked=false;
+      this.famousService.getFamousRestaurants().subscribe(
+        (data) => {
+          this.famousRestaurants =data;
+          this.famousRestaurants.forEach((famousRest: any) => {
+            famousRest.category = famousRest.category.replace(/_/g, ' ');
+          });
+        }
+      );
+       // if it is inactive it activates and sorts the data and deactivates the other sort option
+    }else{
+      this.buttonAZClicked=true;
+      this.buttonZAClicked=false;
+      this.buttonRatingClicked=false;
+      this.buttonDeliveryClicked=false;
+      this.famousRestaurants.sort((a: { name: string; }, b: { name: string; }) => a.name.localeCompare(b.name));
+    }
   }
   sortStoresZtoA():void {
-    this.famousRestaurants.sort((a: { name: string; }, b: { name: string; }) => b.name.localeCompare(a.name));
+    // if it is already active it deactivates and presents the original data
+    if (this.buttonZAClicked){
+      this.buttonZAClicked=false;
+      this.famousService.getFamousRestaurants().subscribe(
+        (data) => {
+          this.famousRestaurants =data;
+          this.famousRestaurants.forEach((famousRest: any) => {
+            famousRest.category = famousRest.category.replace(/_/g, ' ');
+          });
+        }
+      );
+       // if it is inactive it activates and sorts the data and deactivates the other sort option
+    }else{
+      this.buttonZAClicked=true;
+      this.buttonAZClicked=false;
+      this.buttonRatingClicked=false;
+      this.buttonDeliveryClicked=false;
+      this.famousRestaurants.sort((a: { name: string; }, b: { name: string; }) => b.name.localeCompare(a.name));
+    }
   }
 }
 

@@ -1,13 +1,13 @@
 <div class="container mt-3 mb-3 pb-5 pt-3">
     <h1 class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-success ">Categories</h1>
-    <div class="text-success text-end ">
+    <div class="text-success text-end " >
         <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#funnel-fill"/></svg> -->
         <i class="bi bi-funnel-fill fs-5 mx-2"></i>
-        <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresAlphabetically()">
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonAZClicked" (click)="sortStoresAlphabetically()">
             <i class="bi bi-sort-alpha-down fs-6"></i>
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#sort-alpha-down"/></svg> -->
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresZtoA()">
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonZAClicked"  (click)="sortStoresZtoA()">
             <i class="bi bi-sort-alpha-down-alt fs-6"></i>
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#sort-alpha-down-alt"/></svg> -->
         </button>

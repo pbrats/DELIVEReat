@@ -3,19 +3,19 @@
     <div class="text-success text-end ">
         <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#funnel-fill"/></svg> -->
         <i class="bi bi-funnel-fill fs-5 mx-2"></i>
-        <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresByRating()">Rating 
+        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonRatingClicked" (click)="sortStoresByRating()">Rating 
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#arrow-down"/></svg> -->
             <i class="bi bi-arrow-down fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresByDeliveryTime()">Delivery time 
+        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonDeliveryClicked"(click)="sortStoresByDeliveryTime()">Delivery time 
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#arrow-up"/></svg> -->
             <i class="bi bi-arrow-up fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresAlphabetically()">
+        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonAZClicked" (click)="sortStoresAlphabetically()">
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#sort-alpha-down"/></svg> -->
             <i class="bi bi-sort-alpha-down fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresZtoA()"><i class="bi bi-sort-alpha-down-alt fs-6 "></i></button>
+        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonZAClicked" (click)="sortStoresZtoA()"><i class="bi bi-sort-alpha-down-alt fs-6 "></i></button>
     </div>
     <ng-template *ngIf="hasLoadedStores; then storesBlock else noStoresBlock"></ng-template>
     <ng-template #storesBlock> 

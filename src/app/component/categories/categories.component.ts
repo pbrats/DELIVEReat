@@ -27,7 +27,9 @@ export class CategoriesComponent implements OnInit{
   catPhotoService: CategoriesPhotoService =inject(CategoriesPhotoService);
   photosCategories: any;
   hasLoadedCategories : boolean= false;
-
+  buttonAZClicked:boolean=false;
+  buttonZAClicked:boolean=false;
+  
   ngOnInit() {
     this.catService.getCategories().subscribe({
       next: data => {
@@ -78,11 +80,43 @@ export class CategoriesComponent implements OnInit{
   }
   constructor(private titleService: Title) {
     titleService.setTitle("Categories");
-  }
+   }
   sortStoresAlphabetically():void {
-    this.fCategories.sort((a: { category: string; }, b: { category: string; }) => a.category.localeCompare(b.category));
+    // if it is already active it deactivates and presents the original data
+    if(this.buttonAZClicked){
+      this.buttonAZClicked=false;
+      this.catService.getCategories().subscribe(
+        (data) => {
+          this.fCategories = data;
+          this.fCategories.forEach((cat: any) => {
+            cat.category = cat.category.replace(/_/g, ' ');
+          });
+        }
+      );
+      // if it is inactive it activates and sorts the data and deactivates the other sort option
+    }else{
+      this.buttonAZClicked=true;
+      this.buttonZAClicked=false;
+      this.fCategories.sort((a: { category: string; }, b: { category: string; }) => a.category.localeCompare(b.category));
+    }
   }
   sortStoresZtoA():void {
-    this.fCategories.sort((a: { category: string; }, b: { category: string; }) => b.category.localeCompare(a.category));
+    // if it is already active it deactivates and presents the original data
+    if (this.buttonZAClicked){
+      this.buttonZAClicked=false;
+      this.catService.getCategories().subscribe(
+        (data) => {
+          this.fCategories = data;
+          this.fCategories.forEach((cat: any) => {
+            cat.category = cat.category.replace(/_/g, ' ');
+          });
+        }
+      );
+      // if it is inactive it activates and sorts the data and deactivates the other sort option
+    }else{
+      this.buttonZAClicked=true;
+      this.buttonAZClicked=false;
+      this.fCategories.sort((a: { category: string; }, b: { category: string; }) => b.category.localeCompare(a.category));
+    }
   }
 }
