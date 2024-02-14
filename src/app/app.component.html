@@ -1,17 +1,34 @@
-<!-- <ng-template *ngIf="isWelcomePage; then welcomeBlock">
-</ng-template>
-<ng-template #welcomeBlock> -->
-   @if(currentRoute == '' || currentRoute == 'welcome' ||  currentRoute == 'sign-up'){
-    <app-landing-header/>
-}
+<!-- @if(currentRoute == '' || currentRoute == 'welcome' || currentRoute == 'sign-up'){
+    <app-landing-header />
+}@else if (currentRoute == 'faqs' || currentRoute == 'about' || currentRoute == 'support' || currentRoute == 'terms-of-use' || currentRoute == '**') {
+    @if(storedUser){
+        <app-header />
+    }@else{
+        <app-landing-header />
+        }
+    }
 @else{
-    <app-header />
+<app-header />
 }
-    <!-- </ng-template> -->
-<!-- <ng-template *ngIf="!isWelcomePage; then notWelcomeBlock">
-</ng-template>
-<ng-template #notWelcomeBlock>
-    <app-header />
-</ng-template> -->
 <router-outlet />
+<app-footer /> -->
+@if(storedUser){
+    @if(currentRoute == '' || currentRoute == 'welcome' || currentRoute == 'sign-up'){
+        <app-landing-header />
+    }@else{
+        <app-header />
+    }
+    <router-outlet />
+}@else {
+    @if(currentRoute == '' || currentRoute == 'welcome' || currentRoute == 'sign-up'|| currentRoute == 'faqs' || currentRoute == 'about' || currentRoute == 'support' || currentRoute == 'terms-of-use' || currentRoute === '/**'){
+        <app-landing-header />
+        <router-outlet />
+    }@else {
+        <app-landing-header />
+        <div class="container text-center m-5">
+            <h1 class="text-danger fst-italic fw-bold">Unauthorized Access</h1>
+            <!-- <app-not-found /> -->
+        </div>
+    }
+}
 <app-footer />

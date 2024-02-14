@@ -11,32 +11,32 @@
             <h6 class="text-success">Contact Form</h6>
             <form [formGroup]="FormData" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label  class="text-success" for="Email">Email</label>
-                    <input type="email" class="form-control" name="Email" aria-describedby="emailHelp" placeholder="Enter email" formControlName="Email" autocomplete="email">
+                    <label  class="text-success" for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" formControlName="email" autocomplete="email">
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    <div *ngIf="FormData.get('Email')?.hasError('required') && FormData.get('Email')?.touched">
+                    <div *ngIf="FormData.get('email')?.hasError('required') && FormData.get('email')?.touched">
                         <span class="text-danger fst-italic">Email is </span><span class="text-danger fw-bold">required.</span>
                     </div>
-                    <div *ngIf="FormData.get('Email')?.hasError('email') && FormData.get('Email')?.touched">
+                    <div *ngIf="FormData.get('email')?.hasError('email') && FormData.get('email')?.touched">
                         <span class="text-danger fst-italic">Invalid </span><span class="text-danger fw-bold">email </span><span class="text-danger fst-italic"> format.</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label  class="text-success" for="fullname">Full Name</label>
-                    <input type="text" class="form-control" name="Fullname" placeholder="Full Name" formControlName="Fullname" autocomplete="name">
-                    <div *ngIf="FormData.get('Fullname')?.hasError('required') && FormData.get('Fullname')?.touched">
+                    <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Full Name" formControlName="fullname" autocomplete="name">
+                    <div *ngIf="FormData.get('fullname')?.hasError('required') && FormData.get('fullname')?.touched">
                         <span class="text-danger fst-italic">Fullname is </span><span class="text-danger fw-bold">required.</span>
                     </div>
-                    <div *ngIf="FormData.get('Fullname')?.hasError('pattern') && FormData.get('Fullname')?.touched">
+                    <div *ngIf="FormData.get('fullname')?.hasError('pattern') && FormData.get('fullname')?.touched">
                         <span class="text-danger fst-italic">Full name must be </span><span class="text-danger fw-bold"> {{
-                            removeSymbols(FormData.get('Fullname')?.errors?.['pattern'].requiredPattern) }} characters.</span>
+                            removeSymbols(FormData.get('fullname')?.errors?.['pattern'].requiredPattern) }} characters.</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label  class="text-success" for="comment">Comment</label>
-                    <textarea class="form-control" formControlName="Comment" name="Comment" autocomplete="off">
+                    <textarea class="form-control" id="comment" formControlName="comment" name="comment" autocomplete="off">
                     </textarea>
-                    <div *ngIf="FormData.get('Comment')?.hasError('required') && FormData.get('Comment')?.touched">
+                    <div *ngIf="FormData.get('comment')?.hasError('required') && FormData.get('comment')?.touched">
                         <span class="text-danger fst-italic">Comment is </span><span class="text-danger fw-bold">required.</span>
                     </div>
                 </div>

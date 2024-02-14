@@ -45,9 +45,9 @@ export class SupportComponent {
   }
   setFormValues(){
     this.FormData= new FormGroup({
-    Fullname: new FormControl('', [Validators.required,Validators.pattern('[a-zA-Z ]*')]),
-    Email: new FormControl('', (Validators.compose([Validators.required, Validators.email]))),
-    Comment: new FormControl('', [Validators.required])
+    fullname: new FormControl('', [Validators.required,Validators.pattern('[a-zA-Z ]*')]),
+    email: new FormControl('', (Validators.compose([Validators.required, Validators.email]))),
+    comment: new FormControl('', [Validators.required])
     })
   }
   onSubmit() {

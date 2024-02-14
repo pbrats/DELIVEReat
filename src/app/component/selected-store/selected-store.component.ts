@@ -36,14 +36,21 @@ export class SelectedStoreComponent {
           console.log(this.selectedStore);
           this.titleService.setTitle(`${this.selectedStore}`);
           this.storesService.getRestaurants().subscribe((data:any) => {
-            this.items = data.filter((item:any) => item.name === this.selectedStore);
-            // console.log('Before replacement:', this.items);
-            this.items.forEach((item: any) => {
-              // console.log('Before replacement - category:', item.category);
-              item.category = item.category.replace(/_/g, ' ');
-              // console.log('After replacement - category:', item.category);
-            });
-            // console.log('After replacement:', this.items);
+            // Check if the selected store exists in the data
+            const storeExists = data.some((store: any) => store.name === this.selectedStore);
+            if (storeExists) {
+              this.items = data.filter((item:any) => item.name === this.selectedStore);
+              // console.log('Before replacement:', this.items);
+              this.items.forEach((item: any) => {
+                // console.log('Before replacement - category:', item.category);
+                item.category = item.category.replace(/_/g, ' ');
+                // console.log('After replacement - category:', item.category);
+              });
+              // console.log('After replacement:', this.items);
+            } else {
+              // Store does not exist, navigate to "menu-not-found"
+              this.router.navigate(["menu-not-found"]);
+            }
             // allos tropos na paei sto not found alla etsi den paei piso gt fortonei prota ti selida tou magaziou meta ti selida not found on loop
             // if(this.items.length==0){
             //   this.router.navigate(["menu-not-found"]);}

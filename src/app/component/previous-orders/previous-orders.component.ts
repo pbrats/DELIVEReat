@@ -32,11 +32,11 @@ export class PreviousOrdersComponent {
     });
    // Retrieve the stored user information from local storage
    const storedUser = localStorage.getItem('User');
-   console.log( storedUser);
+  //  console.log( storedUser);
    if (storedUser) {
      // Parse the stored JSON string back into a JavaScript object
      this.User = JSON.parse(storedUser);
-     console.log(this.User);
+    //  console.log(this.User);
      // Now, this.User contains the information of the authenticated user
    } else {
      // Handle the case when no user information is stored in local storage

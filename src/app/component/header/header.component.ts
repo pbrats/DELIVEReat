@@ -16,7 +16,7 @@ export class HeaderComponent {
   searchQuery: string = '';
   currentRoute: string = '';
   constructor(private route: ActivatedRoute,private router: Router){
-    this.router.events.subscribe((event) => console.log(event));
+    // this.router.events.subscribe((event) => console.log(event));
   }
   ngOnInit(){
     // this.router.events

@@ -15,7 +15,7 @@ import { RestaurantsService } from '../../service/restaurants.service';
 })
 export class SelectedCategoryComponent {
   activatedRoute =inject(ActivatedRoute);
-  selectedCategory: string | undefined ;
+  selectedCategory!: string  ;
   stores: any[]=[];
   router: Router =inject(Router);
   catService: CategoriesService =inject(CategoriesService);
@@ -42,18 +42,29 @@ export class SelectedCategoryComponent {
           this.selectedCategory = params['category'];
           // this.selectedCategory = params.category;
           console.log(this.selectedCategory);
-          this.titleService.setTitle(`${this.selectedCategory}`);
-          this.catService.getCategories().subscribe((data:any) => {
-            this.stores = data.filter((store:any) => store.category.replace(/_/g, ' ') === this.selectedCategory);
-            console.log(this.stores);
-            this.stores.forEach((store: any) => {
-              // console.log('Before replacement - category:', store.category);
-              store.category = store.category.replace(/_/g, ' ');
-              // console.log('After replacement - category:', store.category);
-            });
-            // console.log('After replacement:', this.stores);
-          });
-          this.hasLoadedStores=true;
+          this.selectedCategory=this.selectedCategory.replace(/ /g, '_');
+          // Check if the category exists 
+          this.catService.categoryExists(this.selectedCategory).subscribe(exists => {
+            if (exists) {
+              this.selectedCategory=this.selectedCategory.replace(/_/g, ' ');
+            console.log("category exists")
+            this.titleService.setTitle(`${this.selectedCategory}`);
+            this.catService.getCategories().subscribe((data:any) => {
+              this.stores = data.filter((store:any) => store.category.replace(/_/g, ' ') === this.selectedCategory);
+              console.log(this.stores);
+              this.stores.forEach((store: any) => {
+                // console.log('Before replacement - category:', store.category);
+                store.category = store.category.replace(/_/g, ' ');
+                // console.log('After replacement - category:', store.category);
+                });
+                // console.log('After replacement:', this.stores);
+              });
+            this.hasLoadedStores=true;
+          }else{
+            console.log("Category does not exist")
+            this.router.navigate(["menu-not-found"]);
+          }
+        });
           },500);
       }
     });
