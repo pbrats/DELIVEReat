@@ -1,0 +1,9 @@
+.offcanvas { 
+    position: fixed; 
+    margin-top: 6%; 
+ 
+    max-width: 40%; 
+    /* max-height: 85%; */
+    height: 85vh;
+    transition: transform 1s ease-in-out; 
+} 

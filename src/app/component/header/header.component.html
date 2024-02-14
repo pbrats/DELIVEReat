@@ -39,11 +39,17 @@
                 </button>
               </li>
             <li>
+              <div>
+              <!--  -->
               <!-- <button routerLink="cart" routerLinkActive="active"  class="btn {{ currentRoute === 'cart' ? 'btn-outline-success text-white active' : 'btn-outline text-white' }}"> -->
-              <button href="#" class="btn btn-outline text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="#cart"/></svg>
-                My cart
+              <button class="btn {{ cartOpen ? 'btn-outline text-white active' : 'btn-outline text-white' }}" data-bs-toggle="offcanvas" data-bs-target="#cart" aria-controls="cart" (click)="changeCartStatus()">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="#cartI"/></svg>
+                My cart 
+                <span class="position-absolute top-50 translate-middle-y start-80 badge rounded-pill bg-success">+99 <span class="visually-hidden">items</span></span>
               </button>
+              <app-cart [cartOpen]="true" />
+              <!-- <app-cart /> -->
+            </div>
             </li>
 
           </ul>
@@ -72,7 +78,7 @@
         <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zm3 0a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zm3 0a1 1 0 1 1 2 0v2a1 1 0 0 1-2 0z"/>
         <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.623l-1.844 6.456a.75.75 0 0 1-.722.544H3.69a.75.75 0 0 1-.722-.544L1.123 8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.163 8l1.714 6h8.246l1.714-6H2.163z"/>
     </symbol> -->
-    <symbol id="cart" viewBox="0 0 16 16">
+    <symbol id="cartI" viewBox="0 0 16 16">
         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
     </symbol>
 

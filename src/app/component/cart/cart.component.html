@@ -1,0 +1,15 @@
+<div *ngIf="cartOpen" #cart>
+    <div class="">
+        <!-- position-fixed top-50 end-0 -->
+        <!-- {{ currentRoute === 'stores' ||cartOpen ? 'show' : ''}}  -->
+    <div class="offcanvas  {{ currentRoute === 'stores' ? 'show' : ''}} offcanvas-end text-bg-dark" data-bs-scroll="true" tabindex="-1" id="cart" aria-labelledby="cart" #offcanvas>
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="cart">My Cart</h5>
+        <button type="button" class="{{ currentRoute !== 'stores' ? 'btn-close btn-close-white' : ''}}" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <p>Your Cart is empty!</p>
+    </div>
+    </div>
+</div>
+</div>

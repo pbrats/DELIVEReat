@@ -7,8 +7,6 @@ import { MenuComponent } from '../menu/menu.component';
 import { StoresInfosService } from '../../service/stores-infos.service';
 import { RatingsComponent } from '../ratings/ratings.component';
 
-
-
 @Component({
     selector: 'app-selected-store',
     standalone: true,
@@ -20,13 +18,12 @@ export class SelectedStoreComponent {
   activatedRoute =inject(ActivatedRoute);
   selectedStore: string | undefined ;
   items: any[]=[];
-  router: Router =inject(Router);
   storesService: RestaurantsService =inject(RestaurantsService);
   storeInfosService: StoresInfosService =inject(StoresInfosService);
   storeInfos:any;
-  
-  constructor(private titleService: Title) {}
-  ngOnInit(): void {    
+   
+  constructor(private titleService: Title,private router: Router) {}
+  ngOnInit(): void {   
     this.storeInfosService.getStoresInfos().subscribe((response) => {
       this.storeInfos = response;
     });

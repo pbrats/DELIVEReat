@@ -2,13 +2,14 @@ import { Component, Input, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductsPhotosService } from '../../service/products-photos.service';
+import { CartComponent } from '../cart/cart.component';
 
 @Component({
     selector: 'app-menu',
     standalone: true,
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.css',
-    imports: [CommonModule]
+    imports: [CommonModule,CartComponent]
 })
 export class MenuComponent {
   @Input() productsList:any;
@@ -27,7 +28,7 @@ export class MenuComponent {
 
   constructor(){
     this.currentUrl = this.router.url;
-    console.log(this.currentUrl)
+    console.log(this.currentUrl);
   }
   ngOnInit() {
     this.productPhotoService.getProdusctsPhotos().subscribe((response) => {

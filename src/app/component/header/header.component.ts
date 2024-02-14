@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
+import { CartComponent } from '../cart/cart.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink,RouterLinkActive,CommonModule,ReactiveFormsModule,FormsModule],
+  imports: [RouterLink,RouterLinkActive,CommonModule,ReactiveFormsModule,FormsModule,CartComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -15,6 +16,7 @@ export class HeaderComponent {
   form!: FormGroup;
   searchQuery: string = '';
   currentRoute: string = '';
+  cartOpen?:boolean;
   constructor(private route: ActivatedRoute,private router: Router){
     // this.router.events.subscribe((event) => console.log(event));
   }
@@ -41,5 +43,14 @@ export class HeaderComponent {
     this.searchQuery=this.form.get("searchData")?.value;
     console.log( this.searchQuery);
     this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });
+  }
+  changeCartStatus(){
+    if(this.cartOpen){
+      this.cartOpen=false;
+      // EventEmitter
+    }else{
+      this.cartOpen=true;
+      // emit cartopen sto cart
+    }
   }
 }
