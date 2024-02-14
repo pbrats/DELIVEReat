@@ -1,52 +1,61 @@
-<div class="m-5 p-5 border rounded rounded-2 text-bg-dark bg-gradient">
-    <h1 class="text-success text-center mb-5">Sign up here:</h1>
-    <form class="container mx-5" (submit)="onSubmit()" [formGroup]="signUpForm">
-        <div class="form-group row my-3">
-            <label class="col-sm-3 col-form-label mb-2" for="name">First name: <span
-                    class="text-danger">*</span></label>
-            <div class="col-sm-6">
-                <input type="text" name="name" id="name" formControlName="name" class="form-control"
-                    placeholder="e.g. Jane" autocomplete="given-name" />
-                <div *ngIf="signUpForm.get('name')?.hasError('required') &&
+<div class="container mt-5">
+    <h1 class="text-success mb-5">Welcome!</h1>
+    <div class="row m-5 p-5 border rounded rounded-2 text-bg-dark bg-gradient" style="width:90%">
+        <h1 class="text-success mx-5 mb-5 mt-2">Sign up here:</h1>
+        <div class="row" style="display: flex; flex-direction: column; align-items:center">
+            <form class="container mx-5" (submit)="onSubmit()" [formGroup]="signUpForm">
+                <div class="form-group row my-3">
+                    <label class="col-sm-3 col-form-label mb-2" for="name">First name: <span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                        <input type="text" name="name" id="name" formControlName="name" class="form-control"
+                            placeholder="e.g. Jane" autocomplete="given-name" />
+                        <div *ngIf="signUpForm.get('name')?.hasError('required') &&
                 signUpForm.get('name')?.touched">
-                    <span class="text-danger fst-italic">First name is </span><span
-                        class="text-danger fw-bold">required.</span>
+                            <span class="text-danger fst-italic">First name is </span><span
+                                class="text-danger fw-bold">required.</span>
+                        </div>
+                        <div *ngIf="signUpForm.get('name')?.hasError('pattern') && signUpForm.get('name')?.touched">
+                            <span class="text-danger fst-italic">First name must be </span><span
+                                class="text-danger fw-bold"> {{
+                                removeSymbols(signUpForm.get('name')?.errors?.['pattern'].requiredPattern) }}
+                                characters.</span>
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf="signUpForm.get('name')?.hasError('pattern') && signUpForm.get('name')?.touched">
-                    <span class="text-danger fst-italic">First name must be </span><span class="text-danger fw-bold"> {{
-                        removeSymbols(signUpForm.get('name')?.errors?.['pattern'].requiredPattern) }} characters.</span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row my-3">
-            <label class="col-sm-3 col-form-label mb-2" for="lastname">Last name: <span
-                    class="text-danger">*</span></label>
-            <div class="col-sm-6">
-                <input type="text" name="lastname" id="lastname" formControlName="lastname" class="form-control"
-                    placeholder="e.g. Doe" autocomplete="family-name" />
-                <div *ngIf="signUpForm.get('lastname')?.hasError('required') &&
+                <div class="form-group row my-3">
+                    <label class="col-sm-3 col-form-label mb-2" for="lastname">Last name: <span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                        <input type="text" name="lastname" id="lastname" formControlName="lastname" class="form-control"
+                            placeholder="e.g. Doe" autocomplete="family-name" />
+                        <div *ngIf="signUpForm.get('lastname')?.hasError('required') &&
                 signUpForm.get('lastname')?.touched">
-                    <span class="text-danger fst-italic">Last name is </span><span
-                        class="text-danger fw-bold">required.</span>
+                            <span class="text-danger fst-italic">Last name is </span><span
+                                class="text-danger fw-bold">required.</span>
+                        </div>
+                        <div
+                            *ngIf="signUpForm.get('lastname')?.hasError('pattern') && signUpForm.get('lastname')?.touched">
+                            <span class="text-danger fst-italic">Last name must be </span><span
+                                class="text-danger fw-bold"> {{
+                                removeSymbols(signUpForm.get('lastname')?.errors?.['pattern'].requiredPattern) }}
+                                characters.</span>
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf="signUpForm.get('lastname')?.hasError('pattern') && signUpForm.get('lastname')?.touched">
-                    <span class="text-danger fst-italic">Last name must be </span><span class="text-danger fw-bold"> {{
-                        removeSymbols(signUpForm.get('lastname')?.errors?.['pattern'].requiredPattern) }}
-                        characters.</span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row my-3">
-            <label class="col-sm-3 col-form-label mb-2" for="telephone">Phone number: <span
-                    class="text-danger">*</span></label>
-            <div class="col-sm-6">
-                <input type="tel" name="telephone" id="telephone" formControlName="telephone" class="form-control"
-                    placeholder="69xxxxxxxx" autocomplete="tel" />
-                <div *ngIf="signUpForm.get('telephone')?.hasError('required') && signUpForm.get('telephone')?.touched">
-                    <span class="text-danger fst-italic">Phone number is</span><span class="text-danger fw-bold">
-                        required.</span>
-                </div>
-                <!-- <div *ngIf="signUpForm.get('telephone')?.hasError('minlength') && signUpForm.get('telephone')?.touched">
+                <div class="form-group row my-3">
+                    <label class="col-sm-3 col-form-label mb-2" for="telephone">Phone number: <span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                        <input type="tel" name="telephone" id="telephone" formControlName="telephone"
+                            class="form-control" placeholder="69xxxxxxxx" autocomplete="tel" />
+                        <div
+                            *ngIf="signUpForm.get('telephone')?.hasError('required') && signUpForm.get('telephone')?.touched">
+                            <span class="text-danger fst-italic">Phone number is</span><span
+                                class="text-danger fw-bold">
+                                required.</span>
+                        </div>
+                        <!-- <div *ngIf="signUpForm.get('telephone')?.hasError('minlength') && signUpForm.get('telephone')?.touched">
                     <span class="text-danger fst-italic">Phone number has </span><span class="text-danger fw-bold">minimum {{
                         signUpForm.get('telephone')?.errors?.['minlength'].requiredLength }} digits.</span>
                 </div>
@@ -54,45 +63,48 @@
                     <span class="text-danger fst-italic">Phone number has </span><span class="text-danger fw-bold">maximum {{
                         signUpForm.get('telephone')?.errors?.['maxlength'].requiredLength }} digits.</span>
                 </div> -->
-                <div *ngIf="signUpForm.get('telephone')?.hasError('pattern') && signUpForm.get('telephone')?.touched">
-                    <span class="text-danger fst-italic">Phone number must be </span><span class="text-danger fw-bold">
-                        numeric {{
-                        processString(signUpForm.get('telephone')?.errors?.['pattern'].requiredPattern) }}
-                        digits.</span>
+                        <div
+                            *ngIf="signUpForm.get('telephone')?.hasError('pattern') && signUpForm.get('telephone')?.touched">
+                            <span class="text-danger fst-italic">Phone number must be </span><span
+                                class="text-danger fw-bold">
+                                numeric {{
+                                processString(signUpForm.get('telephone')?.errors?.['pattern'].requiredPattern) }}
+                                digits.</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="form-group row my-3">
-            <label class="col-sm-3 col-form-label mb-2" for="email">Email: <span class="text-danger">*</span></label>
-            <div class="col-sm-6">
-                <input type="text" id="email" name="email" class="form-control" formControlName="email"
-                    placeholder="mail@mail.com" aria-label="email" autocomplete="email" />
-                <small id="emailHelp" class="form-text text-white-50">We'll never share your email with anyone
-                    else.</small>
-                <div *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched">
-                    <span class="text-danger fst-italic">Email is</span><span class="text-danger fw-bold">
-                        required.</span>
+                <div class="form-group row my-3">
+                    <label class="col-sm-3 col-form-label mb-2" for="email">Email: <span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                        <input type="text" id="email" name="email" class="form-control" formControlName="email"
+                            placeholder="mail@mail.com" aria-label="email" autocomplete="email" />
+                        <small id="emailHelp" class="form-text text-white-50">We'll never share your email with anyone
+                            else.</small>
+                        <div *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched">
+                            <span class="text-danger fst-italic">Email is</span><span class="text-danger fw-bold">
+                                required.</span>
+                        </div>
+                        <div *ngIf="signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched">
+                            <span class="text-danger fst-italic">Invalid </span><span class="text-danger fw-bold">email
+                            </span><span class="text-danger fst-italic"> format.</span>
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf="signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched">
-                    <span class="text-danger fst-italic">Invalid </span><span class="text-danger fw-bold">email
-                    </span><span class="text-danger fst-italic"> format.</span>
+                <div class="form-group row my-3">
+                    <label class="col-sm-3 col-form-label mb-2" for="address">Address:</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="address" id="address" class="form-control" formControlName="address"
+                            placeholder="Athinas 1" autocomplete="street-address" />
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="form-group row my-3">
-            <label class="col-sm-3 col-form-label mb-2" for="address">Address:</label>
-            <div class="col-sm-6">
-                <input type="text" name="address" id="address" class="form-control" formControlName="address"
-                    placeholder="Athinas 1" autocomplete="street-address" />
-            </div>
-        </div>
-        <div class="form-group row my-3">
+                <div class="form-group row my-3">
 
-            <label class="col-sm-3 col-form-label mb-2" for="postalCode">Postal Code:</label>
-            <div class="col-sm-6">
-                <input type="text" name="postalCode" id="postalCode" class="form-control" formControlName="postalCode"
-                    placeholder="10000" autocomplete="postal-code" />
-                <!-- <div *ngIf="signUpForm.get('postalCode')?.hasError('minlength') && signUpForm.get('postalCode')?.touched">
+                    <label class="col-sm-3 col-form-label mb-2" for="postalCode">Postal Code:</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="postalCode" id="postalCode" class="form-control"
+                            formControlName="postalCode" placeholder="10000" autocomplete="postal-code" />
+                        <!-- <div *ngIf="signUpForm.get('postalCode')?.hasError('minlength') && signUpForm.get('postalCode')?.touched">
                     <span class="text-danger fst-italic">Postal Code must be </span><span class="text-danger fw-bold">at least {{
                         signUpForm.get('postalCode')?.errors?.['minlength'].requiredLength }} digits.</span>
                 </div>
@@ -100,26 +112,28 @@
                     <span class="text-danger fst-italic">Postal Code must be </span><span class="text-danger fw-bold">maximum {{
                         signUpForm.get('postalCode')?.errors?.['maxlength'].requiredLength }} digits.</span>
                 </div> -->
-                <div *ngIf="signUpForm.get('postalCode')?.hasError('pattern') && signUpForm.get('postalCode')?.touched">
-                    <span class="text-danger fst-italic">Postal Code must be </span><span
-                        class="text-danger fw-bold">numeric {{ processString(
-                        signUpForm.get('postalCode')?.errors?.['pattern'].requiredPattern) }} digits.</span>
+                        <div
+                            *ngIf="signUpForm.get('postalCode')?.hasError('pattern') && signUpForm.get('postalCode')?.touched">
+                            <span class="text-danger fst-italic">Postal Code must be </span><span
+                                class="text-danger fw-bold">numeric {{ processString(
+                                signUpForm.get('postalCode')?.errors?.['pattern'].requiredPattern) }} digits.</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="form-group row my-3">
-            <label class="col-sm-3 col-form-label mb-2" for="password">Password: <span
-                    class="text-danger">*</span></label>
-            <div class="col-sm-6">
-                <input type="password" id="password" name="password" class="form-control" formControlName="password"
-                    placeholder="******" autocomplete="new-password" />
-                <small id="passwordHelp" class="form-text text-white-50">Your password must be 6-12 characters
-                    long.</small>
-                <div *ngIf="signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">
-                    <span class="text-danger fst-italic">Password is </span><span class="text-danger fw-bold">
-                        required.</span>
-                </div>
-                <!-- <div *ngIf="signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched">
+                <div class="form-group row my-3">
+                    <label class="col-sm-3 col-form-label mb-2" for="password">Password: <span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                        <input type="password" id="password" name="password" class="form-control"
+                            formControlName="password" placeholder="******" autocomplete="new-password" />
+                        <small id="passwordHelp" class="form-text text-white-50">Your password must be 6-12 characters
+                            long.</small>
+                        <div
+                            *ngIf="signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">
+                            <span class="text-danger fst-italic">Password is </span><span class="text-danger fw-bold">
+                                required.</span>
+                        </div>
+                        <!-- <div *ngIf="signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched">
                     <span class="text-danger fst-italic">Password must be </span><span class="text-danger fw-bold">at least {{
                         signUpForm.get('password')?.errors?.['minlength'].requiredLength }} characters.</span>
                 </div>
@@ -127,41 +141,52 @@
                     <span class="text-danger fst-italic">Password must be </span><span class="text-danger fw-bold">maximum {{
                         signUpForm.get('password')?.errors?.['maxlength'].requiredLength }} characters.</span>
                 </div> -->
-                <!-- <div *ngIf="signUpForm.get('password')?.errors && signUpForm.get('password')?.errors?.['invalidPassword']"> -->
-                <div
-                    *ngIf="signUpForm.get('password')?.hasError('invalidPassword') && signUpForm.get('password')?.touched">
-                    <span class="text-danger fst-italic">Password must have </span><span class="text-danger fw-bold">at
-                        least one uppercase, one lowercase, one special character</span><span
-                        class="text-danger fst-italic">, and be between 6 to 12 characters long.</span>
-                    <!-- {{signUpForm.get('password')?.errors?.['invalidPassword']}}   -->
+                        <!-- <div *ngIf="signUpForm.get('password')?.errors && signUpForm.get('password')?.errors?.['invalidPassword']"> -->
+                        <div
+                            *ngIf="signUpForm.get('password')?.hasError('invalidPassword') && signUpForm.get('password')?.touched">
+                            <span class="text-danger fst-italic">Password must have </span><span
+                                class="text-danger fw-bold">at
+                                least one uppercase, one lowercase, one special character</span><span
+                                class="text-danger fst-italic">, and be between 6 to 12 characters long.</span>
+                            <!-- {{signUpForm.get('password')?.errors?.['invalidPassword']}}   -->
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="form-group row my-3">
-            <label class="col-sm-3 col-form-label mb-2" for="confirmPassword">Confirm Password: <span
-                    class="text-danger">*</span></label>
-            <div class="col-sm-6">
-                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
-                    formControlName="confirmPassword" placeholder="******" autocomplete="new-password" />
-                <div *ngIf="signUpForm.get('confirmPassword')?.hasError('required') && signUpForm.get('confirmPassword')?.touched">
-                    <span class="text-danger fst-italic">Confirm Password is </span><span class="text-danger fw-bold">
-                        required.</span>
+                <div class="form-group row my-3">
+                    <label class="col-sm-3 col-form-label mb-2" for="confirmPassword">Confirm Password: <span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+                            formControlName="confirmPassword" placeholder="******" autocomplete="new-password" />
+                        <div
+                            *ngIf="signUpForm.get('confirmPassword')?.hasError('required') && signUpForm.get('confirmPassword')?.touched">
+                            <span class="text-danger fst-italic">Confirm Password is </span><span
+                                class="text-danger fw-bold">
+                                required.</span>
+                        </div>
+                        <div *ngIf="signUpForm.get('confirmPassword')?.hasError('passwordsNotMatch')">
+                            <span class="text-danger fst-italic">Passwords </span><span class="text-danger fw-bold">do
+                                not
+                                match.</span>
+                            <!-- {{signUpForm.get('confirmPassword')?.errors?.['passwordsNotMatch']}}  -->
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf="signUpForm.get('confirmPassword')?.hasError('passwordsNotMatch')">
-                    <span class="text-danger fst-italic">Passwords </span><span class="text-danger fw-bold">do not
-                        match.</span>
-                    <!-- {{signUpForm.get('confirmPassword')?.errors?.['passwordsNotMatch']}}  -->
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-success col-12 text-center mt-5 mb-2"
+                            [disabled]="!signUpForm.valid">
+                            Let's order
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-                <button type="submit" class="btn btn-success col-12 text-center mt-5 mb-2"
-                    [disabled]="!signUpForm.valid">
-                    Let's order
-                </button>
-            </div>
+        <div class="row mt-4">
+            <button class=" btn btn-link link-success link-offset-1 link-offset-3-hover link-underline-opacity-75 link-underline-opacity-100-hover mx-5" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                Do you already have an account ?
+            </button>
         </div>
-    </form>
+    </div>
 </div>

@@ -15,14 +15,20 @@ export class HeaderComponent {
   form!: FormGroup;
   searchQuery: string = '';
   currentRoute: string = '';
-  constructor(private route: ActivatedRoute,private router: Router){}
+  constructor(private route: ActivatedRoute,private router: Router){
+    this.router.events.subscribe((event) => console.log(event));
+  }
   ngOnInit(){
-    this.router.events
-    .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-    .subscribe((event: NavigationEnd) => {
-      this.currentRoute = event.urlAfterRedirects.split('/')[1];
+    // this.router.events
+    // .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+    // .subscribe((event: NavigationEnd) => {
+    //   this.currentRoute = event.urlAfterRedirects.split('/')[1];
+    // });
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = event.urlAfterRedirects.split('/')[1];
+      }
     });
-
     this.setFormValues();
   }
   setFormValues(){
