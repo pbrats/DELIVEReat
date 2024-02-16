@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
@@ -25,6 +25,7 @@ export class HeaderComponent {
     // this.router.events.subscribe((event) => console.log(event));
   }
   ngOnInit(){
+    this.cartItems = this.cartService.getCartItems();
     // this.cartOpen=this.cartService.cartOpen;
     // this.cartOpen=false;
     // this.cartService.cartOpen=this.cartOpen;

@@ -45,7 +45,9 @@
               <button class="btn {{ cartOpen ? 'btn-outline text-white active' : 'btn-outline text-white' }}" data-bs-toggle="offcanvas" data-bs-target="#cart" aria-controls="cart" (click)="changeCartStatus()">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="#cartI"/></svg>
                 My cart 
-                <span class="position-absolute top-50 translate-middle-y start-80 badge rounded-pill bg-success">+99 <span class="visually-hidden">items</span></span>
+                @if(cartItems.length>0){
+                <span class="position-absolute top-50 translate-middle-y start-80 badge rounded-pill bg-success">{{ cartItems.length }} <span class="visually-hidden">products</span></span>
+                }
               </button>
               <app-cart [cartOpen]="true" />
               <!-- <app-cart /> -->
