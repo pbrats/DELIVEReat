@@ -15,14 +15,13 @@ import { RatingsComponent } from '../ratings/ratings.component';
     imports: [CommonModule, MenuComponent, RatingsComponent]
 })
 export class SelectedStoreComponent {
-  activatedRoute =inject(ActivatedRoute);
   selectedStore: string | undefined ;
   items: any[]=[];
   storesService: RestaurantsService =inject(RestaurantsService);
   storeInfosService: StoresInfosService =inject(StoresInfosService);
   storeInfos:any;
    
-  constructor(private titleService: Title,private router: Router) {}
+  constructor(private titleService: Title,private router: Router,private activatedRoute:ActivatedRoute) {}
   ngOnInit(): void {   
     this.storeInfosService.getStoresInfos().subscribe((response) => {
       this.storeInfos = response;

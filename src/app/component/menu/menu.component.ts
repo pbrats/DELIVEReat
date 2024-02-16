@@ -1,8 +1,9 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductsPhotosService } from '../../service/products-photos.service';
 import { CartComponent } from '../cart/cart.component';
+import { CartService } from '../../service/cart.service';
 
 @Component({
     selector: 'app-menu',
@@ -13,8 +14,7 @@ import { CartComponent } from '../cart/cart.component';
 })
 export class MenuComponent {
   @Input() productsList:any;
-  router: Router =inject(Router);
-  activatedRoute =inject(ActivatedRoute);
+  // @Output() actionEventEmitter =new EventEmitter();
   productPhotos: any;
   productPhotoService:  ProductsPhotosService=inject(ProductsPhotosService);
   productCategoryList: string[] = [];
@@ -26,11 +26,12 @@ export class MenuComponent {
   buttonHighPrice:boolean=false;
   buttonLowPrice:boolean=false;
 
-  constructor(){
+  constructor(private cartService: CartService, private router:Router, private activatedRoute:ActivatedRoute){
     this.currentUrl = this.router.url;
     console.log(this.currentUrl);
   }
   ngOnInit() {
+    
     this.productPhotoService.getProdusctsPhotos().subscribe((response) => {
       this.productPhotos = response;
     });   
@@ -133,6 +134,14 @@ export class MenuComponent {
         categoryGroup.products.sort((a, b) =>b.name.localeCompare(a.name));
       });
     }
+  }
+  addToCart(item:any) {
+    console.log("cart item:",item);
+    this.cartService.addToCart(item);
+    console.log(this.cartService.getCartItems());
+    console.log(this.cartService.getTotal());
+    // Set cartOpen to true to keep the offcanvas cart open
+    this.cartService.cartOpen = true;
   }
   // scrollToCategory(categoryGroup: { category: string; products: any[] }) {
   //   const elementId = `scrollspyHeading ${categoryGroup.category}`;

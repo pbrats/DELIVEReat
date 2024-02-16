@@ -4,6 +4,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
 import { CartComponent } from '../cart/cart.component';
+import { CartService } from '../../service/cart.service';
+import { CartItem } from '../../cart-item';
 
 @Component({
   selector: 'app-header',
@@ -16,11 +18,17 @@ export class HeaderComponent {
   form!: FormGroup;
   searchQuery: string = '';
   currentRoute: string = '';
-  cartOpen?:boolean;
-  constructor(private route: ActivatedRoute,private router: Router){
+  cartOpen:boolean=false;
+  // cartOpen?:boolean;
+  cartItems: CartItem[] = [];
+  constructor(private route: ActivatedRoute,private router: Router,private cartService: CartService){
     // this.router.events.subscribe((event) => console.log(event));
   }
   ngOnInit(){
+    // this.cartOpen=this.cartService.cartOpen;
+    // this.cartOpen=false;
+    // this.cartService.cartOpen=this.cartOpen;
+    // this.cartItems = this.cartService.getCartItems();
     // this.router.events
     // .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
     // .subscribe((event: NavigationEnd) => {
@@ -47,10 +55,28 @@ export class HeaderComponent {
   changeCartStatus(){
     if(this.cartOpen){
       this.cartOpen=false;
-      // EventEmitter
     }else{
       this.cartOpen=true;
-      // emit cartopen sto cart
     }
+    console.log("before",this.cartService.getCartItems());
+    this.cartItems = this.cartService.getCartItems();
+    console.log("after",this.cartService.getCartItems());
+    console.log(this.cartService.getTotal());
+    // Set cartOpen to true to keep the offcanvas cart open
+    // this.cartService.cartOpen = true;
+    // if (this.cartService.cartOpen){
+    //   this.cartService.cartOpen=false;
+    // }else{
+    //   this.cartService.cartOpen=true;
+    // }
+    // if(this.cartOpen){
+    //   this.cartService.cartOpen = false;
+    //   this.cartOpen=this.cartService.cartOpen;
+    //   // EventEmitter
+    // }else{
+    //   this.cartService.cartOpen = true;
+    //   this.cartOpen=this.cartService.cartOpen;
+    //   // emit cartopen sto cart
+    // }
   }
 }

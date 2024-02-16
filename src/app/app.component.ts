@@ -23,8 +23,7 @@ export class AppComponent {
 
   constructor(private router: Router,private route: ActivatedRoute) {
     this.storedUser =localStorage.getItem('User');
-    console.log("ayto pou thelo");
-    console.log(this.storedUser);
+    console.log("User:",this.storedUser);
     // this.publisherService.listenForData()
     // .subscribe((data)=>{
     //   // if(data.from==="landing-page"||data.from==="sign-up-page"){
@@ -42,7 +41,7 @@ export class AppComponent {
       if(this.currentRoute == 'faqs' || this.currentRoute == 'about' || this.currentRoute == 'support' || this.currentRoute == 'terms-of-use' || this.currentRoute == 'discovery'){
         // this.currentRoute == '**'
         this.storedUser =localStorage.getItem('User');
-        console.log(this.storedUser);
+        console.log("User:",this.storedUser);
         }
     });
     
