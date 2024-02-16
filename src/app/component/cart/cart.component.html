@@ -18,10 +18,11 @@
             </div>
             <div class="offcanvas-body">
                 @if(cartItems.length>0){
-                    <ul>
-                        <li *ngFor="let item of cartItems">
-                            {{ item.name }} - Price: {{ item.price| number:'1.2-2' }} &euro; - Quantity: {{ item.quantity }}
-                            <button class="btn btn-warning" (click)="removeFromCart(item.id)">Remove</button>
+                    <ul class="list-group">
+                        <li *ngFor="let item of cartItems" class="list-group-item border-dark bg-light">
+                            <span class="m-3 ">{{ item.quantity }} x {{ item.name }} : {{ item.price| number:'1.2-2' }} &euro;</span>
+                            @if(item.quantity>1){<button class="btn btn-secondary mx-2" (click)="decreaseCart(item.id)"><i class="bi bi-dash-lg"></i></button>}
+                            <button class="btn btn-warning" (click)="removeFromCart(item.id)"><i class="bi bi-trash3-fill"></i></button>
                         </li>
                     </ul>
                     <p>Total: {{ getTotal()| number:'1.2-2'}} &euro;</p>

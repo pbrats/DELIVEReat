@@ -21,6 +21,12 @@ export class CartService {
     this.cartItems = this.cartItems.filter(item => item.id !== itemId);
     return this.cartItems;
   }
+  decreaseCart(itemId: number){
+    let decreaseItem = this.cartItems.find(item => item.id === itemId);
+    if(decreaseItem){
+      decreaseItem.quantity -= 1; 
+    }
+  }
   getCartItems(): CartItem[] {
     return this.cartItems;
   }

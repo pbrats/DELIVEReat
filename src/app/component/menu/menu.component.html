@@ -44,7 +44,7 @@
                                 <h6 class="card-subtitle mb-2 text-muted"> {{categoryGroup.category}}</h6>
                                 <span class="card-text border border-2 border-secondary rounded rounded-3 bg-secondary text-white p-1"> {{item.price| number:'1.2-2' }} &euro;</span>
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3 mt-n2"> 
-                                    <button class="btn btn-success px-auto" (click)="addToCart(item)" >+</button>
+                                    <button class="btn btn-success px-auto" (click)="addToCart(item)"><i class="bi bi-plus-lg"></i></button>
                                     <!-- data-bs-toggle="offcanvas" data-bs-target="#cart" aria-controls="cart" -->
                                     <!-- <app-cart [cartOpen]="true" /> -->
                                     <app-cart />

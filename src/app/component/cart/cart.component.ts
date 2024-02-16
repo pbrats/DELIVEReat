@@ -51,7 +51,11 @@ export class CartComponent {
     this.cartItems = this.cartService.getCartItems(); // Refresh cart items after removal
     return this.cartItems;
   }
-
+  decreaseCart(itemId: number){
+    this.cartService.decreaseCart(itemId);
+    this.cartItems = this.cartService.getCartItems(); // Refresh cart items after decrease quantity
+    return this.cartItems;
+  }
   clearCart() {
     this.cartService.clearCart();
     this.cartItems = this.cartService.getCartItems(); // Refresh cart items after clear
