@@ -1,9 +1,8 @@
 .offcanvas { 
     position: fixed; 
-    margin-top: 6%; 
- 
-    max-width: 40%; 
-    /* max-height: 85%; */
-    height: 85vh;
+    margin-top:82px;
+    max-width:550px; 
+    min-width: 250px;
+    width:fit-content;
     transition: transform 1s ease-in-out; 
 } 

@@ -18,6 +18,7 @@ export class HeaderComponent {
   form!: FormGroup;
   searchQuery: string = '';
   currentRoute: string = '';
+  exception?:string;
   cartOpen:boolean=false;
   // cartOpen?:boolean;
   cartItems: CartItem[] = [];
@@ -38,6 +39,18 @@ export class HeaderComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.urlAfterRedirects.split('/')[1];
+        const parts = event.urlAfterRedirects.split('/');
+        // console.log("currentRoute:", this.currentRoute);
+        if (parts.length>2){
+          // console.log("part>2 route:", this.currentRoute);
+          if(event.urlAfterRedirects.split('/')[1]=='stores'){
+            this.exception = event.urlAfterRedirects.split('/')[1];
+            // console.log("exception url/stores/storeName:", this.exception);
+          }
+        }else{
+          this.exception='';
+          // console.log("exception url/something:", this.exception);
+        }
       }
     });
     this.setFormValues();
@@ -54,11 +67,12 @@ export class HeaderComponent {
     this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });
   }
   changeCartStatus(){
-    if(this.cartOpen){
-      this.cartOpen=false;
-    }else{
-      this.cartOpen=true;
-    }
+    // if(this.cartOpen){
+    //   this.cartOpen=false;
+    // }else{
+    //   this.cartOpen=true;
+    // }
+    this.cartOpen=!this.cartOpen;
     console.log("before",this.cartService.getCartItems());
     this.cartItems = this.cartService.getCartItems();
     console.log("after",this.cartService.getCartItems());
@@ -79,5 +93,9 @@ export class HeaderComponent {
     //   this.cartOpen=this.cartService.cartOpen;
     //   // emit cartopen sto cart
     // }
+  }
+  change(event:any){
+    this.cartOpen=event;
+    // console.log("event",event);
   }
 }

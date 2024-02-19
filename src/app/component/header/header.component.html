@@ -42,14 +42,14 @@
               <div>
               <!--  -->
               <!-- <button routerLink="cart" routerLinkActive="active"  class="btn {{ currentRoute === 'cart' ? 'btn-outline-success text-white active' : 'btn-outline text-white' }}"> -->
-              <button class="btn {{ cartOpen ? 'btn-outline text-white active' : 'btn-outline text-white' }}" data-bs-toggle="offcanvas" data-bs-target="#cart" aria-controls="cart" (click)="changeCartStatus()">
+              <button class="btn {{ cartOpen||(currentRoute == exception && exception !== '')? 'btn-outline text-white active' : 'btn-outline text-white' }}" [attr.data-bs-toggle]="currentRoute!=exception ?  'offcanvas' :''" [attr.data-bs-target]="currentRoute!=exception ? '#cart' :'' "  [attr.aria-controls]="currentRoute!=exception ? 'cart' :'' " (click)="changeCartStatus()">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24" fill="currentColor"><use xlink:href="#cartI"/></svg>
                 My cart 
                 @if(cartItems.length>0){
                 <span class="position-absolute top-50 translate-middle-y start-80 badge rounded-pill bg-success">{{ cartItems.length }} <span class="visually-hidden">products</span></span>
                 }
               </button>
-              <app-cart [cartOpen]="true" />
+              <app-cart [cartOpen]="true" (actionEventEmitter)="change($event)" />
               <!-- <app-cart /> -->
             </div>
             </li>

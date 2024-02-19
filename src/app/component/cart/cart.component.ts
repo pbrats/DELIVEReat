@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { CartService } from '../../service/cart.service';
@@ -14,6 +14,8 @@ import { CartItem } from '../../cart-item';
 })
 export class CartComponent {
   @Input()cartOpen?:boolean;
+  @Output() actionEventEmitter =new EventEmitter();
+
   currentRoute: string = '';
   cartItems: CartItem[] = [];
   // cartOpen?:boolean;
@@ -60,5 +62,11 @@ export class CartComponent {
     this.cartService.clearCart();
     this.cartItems = this.cartService.getCartItems(); // Refresh cart items after clear
     return this.cartItems;
+  }
+  change(status:boolean){
+    // if(this.cartOpen){
+      this.actionEventEmitter.emit(status);
+      // this.cartOpen=false;
+    // }
   }
 }
