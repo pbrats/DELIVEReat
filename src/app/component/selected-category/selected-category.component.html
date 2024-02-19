@@ -3,39 +3,41 @@
     <div class="text-success text-end ">
         <i class="bi bi-funnel-fill fs-5 mx-2"></i>
         <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#funnel-fill"/></svg> -->
-        <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresByRating()">Rating 
+        <button class="btn btn-sm btn-outline-success m-1" (click)="sortStoresByRating()">Rating
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#arrow-down"/></svg> -->
             <i class="bi bi-arrow-down fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresByDeliveryTime()">Delivery time 
+        <button class="btn btn-sm btn-outline-success m-1" (click)="sortStoresByDeliveryTime()">Delivery time
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#arrow-up"/></svg> -->
             <i class="bi bi-arrow-up fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresAlphabetically()">
+        <button class="btn btn-sm btn-outline-success m-1" (click)="sortStoresAlphabetically()">
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#alpha-down"/></svg> -->
             <i class="bi bi-sort-alpha-down fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" (click)="sortStoresZtoA()">
+        <button class="btn btn-sm btn-outline-success m-1" (click)="sortStoresZtoA()">
             <i class="bi bi-sort-alpha-down-alt fs-6"></i>
         </button>
     </div>
     <ng-template *ngIf="hasLoadedStores; then storesBlock else noStoresBlock"></ng-template>
-    <ng-template #storesBlock> 
+    <ng-template #storesBlock>
         <div class="row row-cols-4 ">
             <div class="m-4 " *ngFor="let store of stores">
                 <div class="col-sm-4 mx-4 p-0">
                     <div class="card border border-success mx-3 my-0" style="width: 350%; height:340px">
-                        <div class="card-body text-center shadow" (click)="onStoreClick(store.name)" title="click for details">
+                        <div class="card-body text-center shadow" (click)="onStoreClick(store.name)"
+                            title="click for details">
                             <div *ngFor="let info of storeInfos">
                                 <div *ngIf="info.name==store.name">
-                                    <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo" style="width: 50%; height:10%">
+                                    <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo"
+                                        style="width: 50%; height:10%">
                                 </div>
                             </div>
                             <h5 class="card-title">{{store.name}}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted"> {{store.category}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted"> {{store.category}}</h6>
                             <div *ngFor="let info of storeInfos" class="m-3">
                                 <div *ngIf="info.name==store.name">
-                                    <div >
+                                    <div>
                                         <span class="card-text text-success mx-2">
                                             <i class="bi bi-star-fill"></i>
                                             <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->

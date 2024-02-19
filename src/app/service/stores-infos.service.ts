@@ -5,11 +5,11 @@ import { Injectable, inject } from '@angular/core';
   providedIn: 'root'
 })
 export class StoresInfosService {
-  
-  private http=inject(HttpClient);
-  private endpointUrl="assets/sample-data/most_famous_stores_in_general.json";
-  
- getStoresInfos(){
+
+  private http = inject(HttpClient);
+  private endpointUrl = "assets/sample-data/most_famous_stores_in_general.json";
+
+  getStoresInfos() {
     return this.http.get(this.endpointUrl);
   }
 }

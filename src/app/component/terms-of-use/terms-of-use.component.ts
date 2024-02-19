@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { PublisherService } from '../../service/publisher.service';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -11,23 +10,8 @@ import { Title } from '@angular/platform-browser';
   styleUrl: './terms-of-use.component.css'
 })
 export class TermsOfUseComponent {
-  // publisherService =inject(PublisherService);
-  // isTermsPage=true;
 
-  constructor(private titleService: Title,private router: Router) {
+  constructor(private titleService: Title, private router: Router) {
     titleService.setTitle("Terms of use");
-    // this.isTermsPage=true;
-    // this.publisherService.publishData(this.isTermsPage);
-    //   this.router.events.subscribe(event=>{
-    //     if(event instanceof NavigationEnd){
-    //       if (event.url.includes('terms-of-use')){
-    //         this.isTermsPage=true;
-    //         this.publisherService.publishData(this.isTermsPage);
-    //       }else{
-    //         this.isTermsPage=false;
-    //         this.publisherService.publishData(this.isTermsPage);
-    //       }
-    //     }
-    //   });
   }
 }

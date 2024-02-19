@@ -13,30 +13,31 @@
 <router-outlet />
 <app-footer /> -->
 @if(storedUser){
-    @if(currentRoute == '' || currentRoute == 'welcome' || currentRoute == 'sign-up'){
-        <app-landing-header />
-    }@else{
-        <app-header />
-    }
-    <router-outlet />
+@if(currentRoute == '' || currentRoute == 'welcome' || currentRoute == 'sign-up'){
+<app-landing-header />
+}@else{
+<app-header />
+}
+<router-outlet />
 }@else {
-    @if(currentRoute == '' || currentRoute == 'welcome' || currentRoute == 'sign-up'|| currentRoute == 'faqs' || currentRoute == 'about' || currentRoute == 'support' || currentRoute == 'terms-of-use' || currentRoute === '/**'){
-        <app-landing-header />
-        <router-outlet />
-    }@else {
-        <app-landing-header />
-        <!-- <div class="container text-center m-5">
+@if(currentRoute == '' || currentRoute == 'welcome' || currentRoute == 'sign-up'|| currentRoute == 'faqs' ||
+currentRoute == 'about' || currentRoute == 'support' || currentRoute == 'terms-of-use' || currentRoute === '/**'){
+<app-landing-header />
+<router-outlet />
+}@else {
+<app-landing-header />
+<!-- <div class="container text-center m-5">
             <h1 class="text-danger fst-italic fw-bold">Unauthorized Access</h1>
         </div> -->
-        <div class="container m-5">
-            <div class="row">
-              <div class="col-md-12 text-center m-5">
-                <h3 class="animate-character mb-5">Unauthorized Access</h3>
-                <h4 class="animate-character animate-character2 mt-4">Please Login or Sign up</h4> <br>
-                <h5 class="animate-character animate-character3 m-2">Thank you</h5>
-              </div>
-            </div>
-          </div>
-    }
+<div class="container m-5">
+    <div class="row">
+        <div class="col-md-12 text-center m-5">
+            <h3 class="animate-character mb-5">Unauthorized Access</h3>
+            <h4 class="animate-character animate-character2 mt-4">Please Login or Sign up</h4> <br>
+            <h5 class="animate-character animate-character3 m-2">Thank you</h5>
+        </div>
+    </div>
+</div>
+}
 }
 <app-footer />

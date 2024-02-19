@@ -5,14 +5,14 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class PublisherService {
-  
-  private publisher = new Subject<any>(); 
- 
+
+  private publisher = new Subject<any>();
+
   publishData(data: any) {
-  this.publisher.next(data);
+    this.publisher.next(data);
   }
-  
+
   listenForData() {
-  return this.publisher.asObservable();
+    return this.publisher.asObservable();
   }
 }

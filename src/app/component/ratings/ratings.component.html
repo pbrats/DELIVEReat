@@ -1,20 +1,16 @@
 <div class="container">
     @for(rate of wantedRatings;track $index){
-        <div class="card border-success mb-3" style="max-width: 540px;">
-            <div class="card-header text-success"> {{rate.user}}</div>
-            <div class="card-body ">
+    <div class="card border-success mb-3" style="max-width: 540px;">
+        <div class="card-header text-success"> {{rate.user}}</div>
+        <div class="card-body ">
             <h5 class="card-title fst-italic fw-normal">{{rate.comment}}</h5>
             <p class="card-text text-end">{{rate.stars}} <span class="text-success">
-                <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
-                <i class="bi bi-star-fill"></i>
-            </span></p>
+                    <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
+                    <i class="bi bi-star-fill"></i>
+                </span></p>
             <p class="card-text text-success fw-light "> {{rate.date}}</p>
-            </div>
         </div>
-    <!-- <p class="card-text fw-light ">User: {{rate.user}}</p>
-    <p class="card-text fw-light ">comment: {{rate.comment}}</p>
-    <p class="card-text fw-light "> {{rate.stars}} <span class="text-success"style="font-size:150%">&starf;</span></p>
-    <p class="card-text fw-light "> {{rate.date}}</p> -->
+    </div>
     }
 </div>
 <!-- <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">

@@ -7,18 +7,18 @@ import { filter } from 'rxjs';
 @Component({
   selector: 'app-landing-header',
   standalone: true,
-  imports: [RouterLink,RouterLinkActive,CommonModule,LoginComponent],
+  imports: [RouterLink, RouterLinkActive, CommonModule, LoginComponent],
   templateUrl: './landing-header.component.html',
   styleUrl: './landing-header.component.css'
 })
 export class LandingHeaderComponent {
   currentRoute: string = '';
-  constructor(private router: Router) {}
-  ngOnInit(){
+  constructor(private router: Router) { }
+  ngOnInit() {
     this.router.events
-    .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-    .subscribe((event: NavigationEnd) => {
-      this.currentRoute = event.urlAfterRedirects.split('/')[1];
-    });
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentRoute = event.urlAfterRedirects.split('/')[1];
+      });
   }
 }

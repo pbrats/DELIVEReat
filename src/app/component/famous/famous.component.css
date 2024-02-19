@@ -5,9 +5,10 @@
     }
 }
 
-.card-group.card-group-scroll > .card {
+.card-group.card-group-scroll>.card {
     flex-basis: 35%;
 }
+
 /* .scrolling-wrapper {
     &::-webkit-scrollbar {
       display:none;

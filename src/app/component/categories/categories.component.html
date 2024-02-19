@@ -1,30 +1,33 @@
 <div class="container mt-3 mb-3 pb-5 pt-3">
     <h1 class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-success ">Categories</h1>
-    <div class="text-success text-end " >
+    <div class="text-success text-end ">
         <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#funnel-fill"/></svg> -->
         <i class="bi bi-funnel-fill fs-5 mx-2"></i>
-        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonAZClicked" (click)="sortStoresAlphabetically()">
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonAZClicked"
+            (click)="sortStoresAlphabetically()">
             <i class="bi bi-sort-alpha-down fs-6"></i>
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#sort-alpha-down"/></svg> -->
         </button>
-        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonZAClicked"  (click)="sortStoresZtoA()">
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonZAClicked" (click)="sortStoresZtoA()">
             <i class="bi bi-sort-alpha-down-alt fs-6"></i>
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#sort-alpha-down-alt"/></svg> -->
         </button>
     </div>
     <ng-template *ngIf="hasLoadedCategories; then categoriesBlock else noCategoriesBlock"></ng-template>
-    <ng-template #categoriesBlock> 
+    <ng-template #categoriesBlock>
         <div class="row row-cols-4 ">
-            <div class="m-3" *ngFor="let cat of fCategories | uniqueCategory" >
+            <div class="m-3" *ngFor="let cat of fCategories | uniqueCategory">
                 <div class="col-sm-4 px-2 m-3">
-                    <div class="card border border-success m-5 my-1" style="width: 380%; height:200% " (click)="onCategoryClick(cat.category)" title="click for details">
+                    <div class="card border border-success m-5 my-1" style="width: 380%; height:200% "
+                        (click)="onCategoryClick(cat.category)" title="click for details">
                         <div class="card-body text-center shadow">
                             <div *ngFor="let photo of photosCategories">
                                 <div *ngIf="photo.category==cat.category">
-                                    <img [src]="photo.background_image" class="card-img-top" alt="{{photo.category}}category photo" style="width: 5rem;height:5rem">
+                                    <img [src]="photo.background_image" class="card-img-top"
+                                        alt="{{photo.category}}category photo" style="width: 5rem;height:5rem">
                                 </div>
                             </div>
-                                <h5 class="card-title text-success fw-bold mt-3">{{cat.category}}</h5>
+                            <h5 class="card-title text-success fw-bold mt-3">{{cat.category}}</h5>
                             <!-- <a class="btn btn-success" >{{cat.category}}</a> -->
                         </div>
                     </div>

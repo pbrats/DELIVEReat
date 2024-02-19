@@ -4,50 +4,48 @@ import { CommonModule } from '@angular/common';
 import { ProductsPhotosService } from '../../service/products-photos.service';
 import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../../service/cart.service';
+import { CartItem } from '../../cart-item';
 
 @Component({
-    selector: 'app-menu',
-    standalone: true,
-    templateUrl: './menu.component.html',
-    styleUrl: './menu.component.css',
-    imports: [CommonModule,CartComponent]
+  selector: 'app-menu',
+  standalone: true,
+  templateUrl: './menu.component.html',
+  styleUrl: './menu.component.css',
+  imports: [CommonModule, CartComponent]
 })
 export class MenuComponent {
-  @Input() productsList:any;
-  // @Output() actionEventEmitter =new EventEmitter();
+  @Input() productsList: any;
   productPhotos: any;
-  productPhotoService:  ProductsPhotosService=inject(ProductsPhotosService);
+  productPhotoService: ProductsPhotosService = inject(ProductsPhotosService);
   productCategoryList: string[] = [];
   groupedProducts: { category: string, products: any[] }[] = [];
   $index: any;
   currentUrl: any;
-  buttonAZClicked:boolean=false;
-  buttonZAClicked:boolean=false;
-  buttonHighPrice:boolean=false;
-  buttonLowPrice:boolean=false;
+  storeName: string = '';
+  cartItems: CartItem[] = [];
+  buttonAZClicked: boolean = false;
+  buttonZAClicked: boolean = false;
+  buttonHighPrice: boolean = false;
+  buttonLowPrice: boolean = false;
+  cartItemsSubscription: any;
 
-  constructor(private cartService: CartService, private router:Router, private activatedRoute:ActivatedRoute){
+  constructor(private cartService: CartService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.currentUrl = this.router.url;
-    console.log(this.currentUrl);
+    // console.log("current url:",this.currentUrl);
+    this.storeName = this.currentUrl.split('/')[2];
+    // console.log("store name:",this.storeName);
   }
   ngOnInit() {
-    
     this.productPhotoService.getProdusctsPhotos().subscribe((response) => {
       this.productPhotos = response;
-    });   
-    console.log(this.productsList);
-    this.productCategoryList= this.getUniqueProductCategories(this.productsList);
-    console.log(this.productCategoryList);
+    });
+    // console.log(this.productsList);
+    this.productCategoryList = this.getUniqueProductCategories(this.productsList);
+    // console.log(this.productCategoryList);
     this.productCategoryList = this.productCategoryList.map(category => category.replace(/_/g, ' '));
-    console.log(this.productCategoryList);
+    // console.log(this.productCategoryList);
     this.groupedProducts = this.groupProductsByCategory(this.productsList);
-    console.log(this.groupedProducts);
-    // console.log(this.groupedProducts.length)
-    // if (this.groupedProducts.length > 0) {
-    //   this.activeCategory = this.groupedProducts[0].category;
-    //   console.log(1)
-    //   console.log(this.groupedProducts[0].category)
-    // }
+    // console.log(this.groupedProducts);
   }
   getUniqueProductCategories(originalArray: any[]): string[] {
     const uniqueProductCategories: string[] = [];
@@ -73,80 +71,77 @@ export class MenuComponent {
   }
   sortStoresByPriceDescending(): void {
     // if it is already active it deactivates and presents the original data
-    if(this.buttonHighPrice){
-      this.buttonHighPrice=false;
+    if (this.buttonHighPrice) {
+      this.buttonHighPrice = false;
       this.groupedProducts = this.groupProductsByCategory(this.productsList);
-        // if it is inactive it activates and sorts the data and deactivates the other sort options
-    }else{
-      this.buttonHighPrice=true;
-      this.buttonAZClicked=false;
-      this.buttonZAClicked=false;
-      this.buttonLowPrice=false;
+      // if it is inactive it activates and sorts the data and deactivates the other sort options
+    } else {
+      this.buttonHighPrice = true;
+      this.buttonAZClicked = false;
+      this.buttonZAClicked = false;
+      this.buttonLowPrice = false;
       this.groupedProducts.forEach(categoryGroup => {
         categoryGroup.products.sort((a, b) => b.price - a.price);
       });
     }
   }
-  sortStoresByPriceAscending():void {
+  sortStoresByPriceAscending(): void {
     // if it is already active it deactivates and presents the original data
-    if(this.buttonLowPrice){
-      this.buttonLowPrice=false;
+    if (this.buttonLowPrice) {
+      this.buttonLowPrice = false;
       this.groupedProducts = this.groupProductsByCategory(this.productsList);
-        // if it is inactive it activates and sorts the data and deactivates the other sort options
-    }else{
-      this.buttonLowPrice=true;
-      this.buttonAZClicked=false;
-      this.buttonZAClicked=false;
-      this.buttonHighPrice=false;
+      // if it is inactive it activates and sorts the data and deactivates the other sort options
+    } else {
+      this.buttonLowPrice = true;
+      this.buttonAZClicked = false;
+      this.buttonZAClicked = false;
+      this.buttonHighPrice = false;
       this.groupedProducts.forEach(categoryGroup => {
         categoryGroup.products.sort((a, b) => a.price - b.price);
       });
     }
   }
-  sortStoresAlphabetically():void {
+  sortStoresAlphabetically(): void {
     // if it is already active it deactivates and presents the original data
-    if(this.buttonAZClicked){
-      this.buttonAZClicked=false;
+    if (this.buttonAZClicked) {
+      this.buttonAZClicked = false;
       this.groupedProducts = this.groupProductsByCategory(this.productsList);
-        // if it is inactive it activates and sorts the data and deactivates the other sort options
-    }else{
-      this.buttonAZClicked=true;
-      this.buttonZAClicked=false;
-      this.buttonHighPrice=false;
-      this.buttonLowPrice=false;
+      // if it is inactive it activates and sorts the data and deactivates the other sort options
+    } else {
+      this.buttonAZClicked = true;
+      this.buttonZAClicked = false;
+      this.buttonHighPrice = false;
+      this.buttonLowPrice = false;
       this.groupedProducts.forEach(categoryGroup => {
-        categoryGroup.products.sort((a, b) =>a.name.localeCompare(b.name));
+        categoryGroup.products.sort((a, b) => a.name.localeCompare(b.name));
       });
     }
   }
-  sortStoresZtoA():void {
+  sortStoresZtoA(): void {
     // if it is already active it deactivates and presents the original data
-    if (this.buttonZAClicked){
-      this.buttonZAClicked=false;
+    if (this.buttonZAClicked) {
+      this.buttonZAClicked = false;
       this.groupedProducts = this.groupProductsByCategory(this.productsList);
-        // if it is inactive it activates and sorts the data and deactivates the other sort options
-    }else{
-      this.buttonZAClicked=true;
-      this.buttonAZClicked=false;
-      this.buttonHighPrice=false;
-      this.buttonLowPrice=false;
+      // if it is inactive it activates and sorts the data and deactivates the other sort options
+    } else {
+      this.buttonZAClicked = true;
+      this.buttonAZClicked = false;
+      this.buttonHighPrice = false;
+      this.buttonLowPrice = false;
       this.groupedProducts.forEach(categoryGroup => {
-        categoryGroup.products.sort((a, b) =>b.name.localeCompare(a.name));
+        categoryGroup.products.sort((a, b) => b.name.localeCompare(a.name));
       });
     }
   }
-  addToCart(item:any) {
-    console.log("cart item:",item);
-    this.cartService.addToCart(item);
-    console.log(this.cartService.getCartItems());
-    console.log(this.cartService.getTotal());
-    // Set cartOpen to true to keep the offcanvas cart open
+  addToCart(item: CartItem) {
+    // console.log("cart item:",item);
+    this.cartService.addToCart(item, this.storeName);
+    this.cartItemsSubscription = this.cartService.cartItemsUpdated.subscribe(cartItems => {
+      this.cartItems = cartItems[this.storeName] || [];
+      // console.log("cart menu:",this.cartItems);
+    });
+    // this.cartItems = this.cartService.getCartItems(this.storeName);
+    // console.log(this.cartService.getTotal(this.storeName));
     this.cartService.cartOpen = true;
   }
-  // scrollToCategory(categoryGroup: { category: string; products: any[] }) {
-  //   const elementId = `scrollspyHeading ${categoryGroup.category}`;
-  //   const currentName = this.activatedRoute.snapshot.paramMap.get('name');
-  //   this.router.navigate(['stores', currentName], { fragment: elementId });
-  //   // this.activeCategory = categoryGroup.category;
-  // }
 }

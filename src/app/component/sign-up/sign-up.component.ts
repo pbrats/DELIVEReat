@@ -40,13 +40,13 @@ export class SignUpComponent {
 
   onSubmit() {
     if (this.signUpForm.valid) {
-      localStorage.setItem('lastVisit',JSON.stringify(this.currentTime));
+      localStorage.setItem('lastVisit', JSON.stringify(this.currentTime));
       localStorage.setItem('alertShown', 'no');
       localStorage.setItem('User', JSON.stringify(this.signUpForm.value));
       // sessionStorage.setItem("User",JSON.stringify(this.signUpForm.value));
       this.signUpValues = this.signUpForm.value;
-      console.log(this.signUpValues);
-      console.log(this.signUpForm.value);
+      // console.log(this.signUpValues);
+      // console.log(this.signUpForm.value);
       this.router.navigate(["discovery"]);
       this.signUpForm.reset();
     } else {
@@ -56,14 +56,14 @@ export class SignUpComponent {
         if (control.errors) {
           Object.keys(control.errors).forEach(errorType => {
             if (errorType === 'pattern') {
-              console.log(control);
-              console.log(`${controlName} pattern required.`);
+              // console.log(control);
+              // console.log(`${controlName} pattern required.`);
               // console.log(this.signUpForm.get('telephone')?.errors?.['pattern'])
             }
           });
         }
         if (control.errors?.['pattern']) {
-          console.log(control.errors?.['pattern']);
+          // console.log(control.errors?.['pattern']);
         }
       });
     }

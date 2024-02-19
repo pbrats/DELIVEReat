@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
     (trigger('moveHeading', [
       transition(':enter', [
         style({ transform: 'translateY(-100%)' }),
-        animate('1000ms ease-in', style({ transform: 'translateY(0%)'})),
+        animate('1000ms ease-in', style({ transform: 'translateY(0%)' })),
       ]),
     ])),
     (trigger('moveImage', [
@@ -32,10 +32,10 @@ export class NotFoundComponent {
   triggerAnimation() {
     this.animateHeading = true;
   }
-  constructor(private router: Router,private titleService: Title) {
+  constructor(private router: Router, private titleService: Title) {
     titleService.setTitle("404 Page not found");
   }
   ngOnInit() {
-    this. triggerAnimation();
+    this.triggerAnimation();
   }
 }

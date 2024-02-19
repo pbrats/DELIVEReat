@@ -12,14 +12,14 @@ import { FamousRestaurantsService } from '../../service/famous-restaurants.servi
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
-  restaurants:any;
-  stores:any;
-  restaurantsService: RestaurantsService =inject(RestaurantsService);
-  famousService: FamousRestaurantsService =inject(FamousRestaurantsService);
-  searchResult: any[]=[];
+  restaurants: any;
+  stores: any;
+  restaurantsService: RestaurantsService = inject(RestaurantsService);
+  famousService: FamousRestaurantsService = inject(FamousRestaurantsService);
+  searchResult: any[] = [];
   query: string = '';
 
-  constructor(private router: Router,private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) { }
   ngOnInit() {
     this.restaurantsService.getRestaurants().subscribe((response) => {
       this.restaurants = response;
@@ -31,8 +31,8 @@ export class SearchComponent {
       if (this.query) {
         this.famousService.getFamousRestaurants().subscribe((response) => {
           this.stores = response;
-          this.searchResult = this.stores.filter((store: { name: string , category:string}) =>
-           store.name.toLowerCase().includes(this.query.toLowerCase())
+          this.searchResult = this.stores.filter((store: { name: string, category: string }) =>
+            store.name.toLowerCase().includes(this.query.toLowerCase())
             ||
             store.category.toLowerCase().includes(this.query.toLowerCase())
           );
@@ -49,10 +49,10 @@ export class SearchComponent {
   }
   onStoreClick(clickName: string) {
     const foundStore = this.restaurants.find((store: any) => store.name === clickName);
-    console.log(foundStore);
-    if (foundStore){
-      this.router.navigate(["stores",clickName]);
-    }else{
+    // console.log(foundStore);
+    if (foundStore) {
+      this.router.navigate(["stores", clickName]);
+    } else {
       this.router.navigate(["menu-not-found"]);
     }
   }

@@ -1,48 +1,52 @@
 <!-- login/signup alert -->
 <div *ngIf="showAlertFlag" class="alert alert-success alert-dismissible mt-3" role="alert">
-    <div><i class="bi bi-person-fill-check m-2" style="width:40px; height:40px"></i>Welcome <span class="text-success">{{User.name}} {{User.lastname}}</span>!</div>
+    <div><i class="bi bi-person-fill-check m-2" style="width:40px; height:40px"></i>Welcome <span
+            class="text-success">{{User.name}} {{User.lastname}}</span>!</div>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 <!-- categories container -->
-<div class="container mt-5 mb-5"> 
-    <div class="container " >  
+<div class="container mt-5 mb-5">
+    <div class="container ">
         <div class="text-end">
-            <button class="btn btn-sm btn-outline-success" (click)="viewCategories()" > Show All Categories</button>
+            <button class="btn btn-sm btn-outline-success" (click)="viewCategories()"> Show All Categories</button>
         </div>
         <!-- <app-categories /> -->
         <div class="container mt-n3 mb-3">
             <h1 class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-success ">Categories</h1>
             <ng-template *ngIf="hasLoadedCategories; then categoriesBlock else noCategoriesBlock"></ng-template>
-            <ng-template #categoriesBlock> 
+            <ng-template #categoriesBlock>
                 <div class="card-group card-group-scroll mt-3">
                     @for (cat of fCategories| uniqueCategory; track $index){
-                        <div class="card border border-success rounded rounded-3 m-1" (click)="onCategoryClick(cat.category)" title="click for details">
-                            <div class="card-body text-center shadow ">
-                                <div *ngFor="let photo of photosCategories">
-                                    <div *ngIf="photo.category==cat.category">
-                                        <img [src]="photo.background_image" class="card-img-top" alt="{{photo.category}}category photo" style="width: 5rem;height:5rem">
-                                    </div>
+                    <div class="card border border-success rounded rounded-3 m-1"
+                        (click)="onCategoryClick(cat.category)" title="click for details">
+                        <div class="card-body text-center shadow ">
+                            <div *ngFor="let photo of photosCategories">
+                                <div *ngIf="photo.category==cat.category">
+                                    <img [src]="photo.background_image" class="card-img-top"
+                                        alt="{{photo.category}}category photo" style="width: 5rem;height:5rem">
                                 </div>
-                                <!-- <ng-template *ngIf="cat.category==='FAST_FOOD';then content else other_content"></ng-template> 
+                            </div>
+                            <!-- <ng-template *ngIf="cat.category==='FAST_FOOD';then content else other_content"></ng-template> 
                                 <ng-template #content>
                                     <h5 class="card-title m-3 fw-bold text-success">FAST FOOD</h5> -->
-                                    <!-- <a class="btn btn-success">FAST FOOD</a> -->
-                                <!-- </ng-template>
+                            <!-- <a class="btn btn-success">FAST FOOD</a> -->
+                            <!-- </ng-template>
                                 <ng-template #other_content>
                                     <h5 class="card-title m-3 fw-bold text-success">{{cat.category}}</h5> -->
-                                    <!-- <a class="btn btn-success">{{cat.category}}</a> -->
-                                <!-- </ng-template> -->
-                                <h5 class="card-title m-3 fw-bold text-success">{{cat.category}}</h5>
-                            </div>
+                            <!-- <a class="btn btn-success">{{cat.category}}</a> -->
+                            <!-- </ng-template> -->
+                            <h5 class="card-title m-3 fw-bold text-success">{{cat.category}}</h5>
                         </div>
+                    </div>
                     }
-                </div>  
+                </div>
             </ng-template>
             <ng-template #noCategoriesBlock>
                 <h1 class="text-success text-center fs-3 fst-italic fw-normal">Loading Categories ..</h1>
                 <br>
                 <div class="d-flex justify-content-center">
-                    <div class="spinner-border text-success align-center"  style="width: 3rem; height: 3rem;" role="status">
+                    <div class="spinner-border text-success align-center" style="width: 3rem; height: 3rem;"
+                        role="status">
                         <span class="visually-hidden ">Loading...</span>
                     </div>
                     <!--<div class="spinner-border text-success align-center"  role="status">
@@ -54,43 +58,46 @@
                 </div>
             </ng-template>
         </div>
-    </div>  
+    </div>
 </div>
 <!-- famous stores container -->
-<div class="container mt-5 mb-5"> 
-    <div class="container" >
+<div class="container mt-5 mb-5">
+    <div class="container">
         <div class="text-end">
-            <button class="btn btn-sm btn-outline-success" (click)="viewFamousRestaurants()" > Show All Famous Stores</button>
+            <button class="btn btn-sm btn-outline-success" (click)="viewFamousRestaurants()"> Show All Famous
+                Stores</button>
         </div>
         <!-- <app-famous /> -->
         <div class="container mt-n3 mb-3">
             <h1 class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-success ">Famous Stores</h1>
             <ng-template *ngIf="hasLoadedFamous; then famousBlock else noFamousBlock"></ng-template>
-            <ng-template #famousBlock> 
-                <div class="card-group card-group-scroll mt-3" >
+            <ng-template #famousBlock>
+                <div class="card-group card-group-scroll mt-3">
                     @for (famousRest of famousRestaurants; track $index){
-                        <div class="card border border-success rounded rounded-2 m-1" (click)="onStoreClick(famousRest.name)" title="click for details">
-                            <div class="card-body text-center text-end shadow ">
-                                <img [src]="famousRest.logo" class="card-img-top" alt="{{famousRest.name}} store photo" style="width: 40%">
-                                <h5 class="card-title">{{famousRest.name}}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"> {{famousRest.category}}</h6>
-                                <div class=" mb-3">
-                                    <span class="card-text text-success mx-2">
-                                        <i class="bi bi-star-fill"></i>
-                                        <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
-                                    </span><span> {{famousRest.rating}} </span>
-                                    <span class="card-text text-success mx-2">
-                                        <i class="bi bi-send-fill"></i>
-                                        <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#send-fill"/></svg> -->
-                                    </span><span> {{famousRest.delivery_cost}}&euro; </span>
-                                    <span class="card-text text-success mx-2">
-                                        <i class="bi bi-clock-fill"></i>
-                                        <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#clock-fill"/></svg> -->
-                                    </span><span> {{famousRest.delivery_time}}'</span>
-                                </div>
-                                <a class="btn btn-success text-wrap">{{famousRest.name}}</a>
+                    <div class="card border border-success rounded rounded-2 m-1"
+                        (click)="onStoreClick(famousRest.name)" title="click for details">
+                        <div class="card-body text-center text-end shadow ">
+                            <img [src]="famousRest.logo" class="card-img-top" alt="{{famousRest.name}} store photo"
+                                style="width: 40%">
+                            <h5 class="card-title">{{famousRest.name}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted"> {{famousRest.category}}</h6>
+                            <div class=" mb-3">
+                                <span class="card-text text-success mx-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
+                                </span><span> {{famousRest.rating}} </span>
+                                <span class="card-text text-success mx-2">
+                                    <i class="bi bi-send-fill"></i>
+                                    <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#send-fill"/></svg> -->
+                                </span><span> {{famousRest.delivery_cost}}&euro; </span>
+                                <span class="card-text text-success mx-2">
+                                    <i class="bi bi-clock-fill"></i>
+                                    <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#clock-fill"/></svg> -->
+                                </span><span> {{famousRest.delivery_time}}'</span>
                             </div>
+                            <a class="btn btn-success text-wrap">{{famousRest.name}}</a>
                         </div>
+                    </div>
                     }
                 </div>
             </ng-template>
@@ -107,17 +114,17 @@
     </div>
 </div>
 <!-- all stores container -->
-<div class="container mt-5 mb-5"> 
-    <div class="container" >
+<div class="container mt-5 mb-5">
+    <div class="container">
         <div class="text-end">
-            <button class="btn btn-sm btn-outline-success" (click)="viewRestaurants()" > Show All Stores</button>
+            <button class="btn btn-sm btn-outline-success" (click)="viewRestaurants()"> Show All Stores</button>
         </div>
         <div class="mt-n4">
             <app-all-restaurants />
-        <div></div>
-    </div>     
-</div>
-<!-- <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <div></div>
+        </div>
+    </div>
+    <!-- <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="send-fill"  viewBox="0 0 16 16">
         <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
     </symbol>

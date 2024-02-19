@@ -3,53 +3,58 @@
     <div class="text-success text-end ">
         <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#funnel-fill"/></svg> -->
         <i class="bi bi-funnel-fill fs-5 mx-2"></i>
-        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonRatingClicked" (click)="sortStoresByRating()">Rating 
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonRatingClicked"
+            (click)="sortStoresByRating()">Rating
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#arrow-down"/></svg> -->
             <i class="bi bi-arrow-down fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonDeliveryClicked" (click)="sortStoresByDeliveryTime()">Delivery time 
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonDeliveryClicked"
+            (click)="sortStoresByDeliveryTime()">Delivery time
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#arrow-up"/></svg> -->
             <i class="bi bi-arrow-up fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonAZClicked" (click)="sortStoresAlphabetically()">
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonAZClicked"
+            (click)="sortStoresAlphabetically()">
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#sort-alpha-down"/></svg> -->
             <i class="bi bi-sort-alpha-down fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonZAClicked" (click)="sortStoresZtoA()">
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonZAClicked" (click)="sortStoresZtoA()">
             <i class="bi bi-sort-alpha-down-alt fs-6"></i>
         </button>
     </div>
     <ng-template *ngIf="hasLoadedFamous; then famousBlock else noFamousBlock"></ng-template>
-    <ng-template #famousBlock> 
+    <ng-template #famousBlock>
         <div class="row row-cols-4">
             @for (famousRest of famousRestaurants; track $index){
-                <div class="col-sm-4 my-2">
-                            <div class="card border border-success m-3" style="width: 90%; height: 100%" (click)="onStoreClick(famousRest.name)" title="click for details">
-                                <div class="card-body text-center shadow">
-                                    <img [src]="famousRest.logo" class="card-img-top" alt="{{famousRest.name}} store photo" style="width: 40%">
-                                    <h5 class="card-title">{{famousRest.name}}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"> {{famousRest.category}}</h6>
-                                    <p class="card-text">Address: {{famousRest.address}}</p>
-                                    <div >
-                                        <span class="card-text text-success mx-2">
-                                            <i class="bi bi-star-fill"></i>
-                                            <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
-                                        </span><span>{{famousRest.rating}} </span>
-                                        <span class="card-text text-success mx-2">
-                                            <i class="bi bi-send-fill"></i>
-                                            <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#send-fill"/></svg> -->
-                                        </span><span>{{famousRest.delivery_cost}}&euro; </span>
-                                        <span class="card-text text-success mx-2">
-                                            <i class="bi bi-clock-fill"></i>
-                                            <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#clock-fill"/></svg> -->
-                                        </span><span> {{famousRest.delivery_time}}'</span>
-                                    </div>
-                                    <a class="btn btn-success text-wrap mt-3"> {{famousRest.name}}</a>
-                                </div>
-                            </div>
-                        <!-- </ng-template>
-                    } -->
+            <div class="col-sm-4 my-2">
+                <div class="card border border-success m-3" style="width: 90%; height: 100%"
+                    (click)="onStoreClick(famousRest.name)" title="click for details">
+                    <div class="card-body text-center shadow">
+                        <img [src]="famousRest.logo" class="card-img-top" alt="{{famousRest.name}} store photo"
+                            style="width: 40%">
+                        <h5 class="card-title">{{famousRest.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"> {{famousRest.category}}</h6>
+                        <p class="card-text">Address: {{famousRest.address}}</p>
+                        <div>
+                            <span class="card-text text-success mx-2">
+                                <i class="bi bi-star-fill"></i>
+                                <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
+                            </span><span>{{famousRest.rating}} </span>
+                            <span class="card-text text-success mx-2">
+                                <i class="bi bi-send-fill"></i>
+                                <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#send-fill"/></svg> -->
+                            </span><span>{{famousRest.delivery_cost}}&euro; </span>
+                            <span class="card-text text-success mx-2">
+                                <i class="bi bi-clock-fill"></i>
+                                <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#clock-fill"/></svg> -->
+                            </span><span> {{famousRest.delivery_time}}'</span>
+                        </div>
+                        <a class="btn btn-success text-wrap mt-3"> {{famousRest.name}}</a>
+                    </div>
                 </div>
+                <!-- </ng-template>
+                    } -->
+            </div>
             }
         </div>
     </ng-template>

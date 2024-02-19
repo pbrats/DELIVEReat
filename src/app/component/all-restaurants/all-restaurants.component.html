@@ -3,56 +3,62 @@
     <div class="text-success text-end ">
         <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#funnel-fill"/></svg> -->
         <i class="bi bi-funnel-fill fs-5 mx-2"></i>
-        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonRatingClicked" (click)="sortStoresByRating()">Rating 
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonRatingClicked"
+            (click)="sortStoresByRating()">Rating
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#arrow-down"/></svg> -->
             <i class="bi bi-arrow-down fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonDeliveryClicked"(click)="sortStoresByDeliveryTime()">Delivery time 
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonDeliveryClicked"
+            (click)="sortStoresByDeliveryTime()">Delivery time
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#arrow-up"/></svg> -->
             <i class="bi bi-arrow-up fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonAZClicked" (click)="sortStoresAlphabetically()">
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonAZClicked"
+            (click)="sortStoresAlphabetically()">
             <!-- <svg class="bi" width="24" height="24" fill="currentColor"><use xlink:href="#sort-alpha-down"/></svg> -->
             <i class="bi bi-sort-alpha-down fs-6"></i>
         </button>
-        <button  class="btn btn-sm btn-outline-success m-1" [class.active]="buttonZAClicked" (click)="sortStoresZtoA()"><i class="bi bi-sort-alpha-down-alt fs-6 "></i></button>
+        <button class="btn btn-sm btn-outline-success m-1" [class.active]="buttonZAClicked"
+            (click)="sortStoresZtoA()"><i class="bi bi-sort-alpha-down-alt fs-6 "></i></button>
     </div>
     <ng-template *ngIf="hasLoadedStores; then storesBlock else noStoresBlock"></ng-template>
-    <ng-template #storesBlock> 
+    <ng-template #storesBlock>
         <div class="row row-cols-4">
             @for (restaurant of restaurants; track $index){
-                <div class="col-sm-4 my-2">
-                    <div class="card border border-success m-3" style="width: 90%; height: 100%" (click)="onStoreClick(restaurant.name)" title="click for details">
-                        <div class="card-body text-center shadow">
-                            <div *ngFor="let info of storeInfos">
-                                <div *ngIf="info.name==restaurant.name">
-                                    <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo" style="width: 30%; height:10%">
+            <div class="col-sm-4 my-2">
+                <div class="card border border-success m-3" style="width: 90%; height: 100%"
+                    (click)="onStoreClick(restaurant.name)" title="click for details">
+                    <div class="card-body text-center shadow">
+                        <div *ngFor="let info of storeInfos">
+                            <div *ngIf="info.name==restaurant.name">
+                                <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo"
+                                    style="width: 30%; height:10%">
+                            </div>
+                        </div>
+                        <h5 class="card-title">{{restaurant.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"> {{restaurant.category}}</h6>
+                        <div *ngFor="let info of storeInfos" class="m-3">
+                            <div *ngIf="info.name==restaurant.name">
+                                <div>
+                                    <span class="card-text text-success mx-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
+                                    </span><span> {{info.rating}} </span>
+                                    <span class="card-text text-success mx-2">
+                                        <i class="bi bi-send-fill"></i>
+                                        <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#send-fill"/></svg>  -->
+                                    </span><span>{{info.delivery_cost}}&euro; </span>
+                                    <span class="card-text text-success mx-2">
+                                        <i class="bi bi-clock-fill"></i>
+                                        <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#clock-fill"/></svg>  -->
+                                    </span><span>{{info.delivery_time}}'</span>
                                 </div>
                             </div>
-                            <h5 class="card-title">{{restaurant.name}}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted"> {{restaurant.category}}</h6>
-                            <div *ngFor="let info of storeInfos" class="m-3">
-                                <div *ngIf="info.name==restaurant.name">
-                                    <div>
-                                        <span class="card-text text-success mx-2">
-                                            <i class="bi bi-star-fill"></i>
-                                            <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
-                                        </span><span> {{info.rating}} </span>
-                                        <span class="card-text text-success mx-2">
-                                            <i class="bi bi-send-fill"></i>
-                                            <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#send-fill"/></svg>  -->
-                                        </span><span>{{info.delivery_cost}}&euro; </span>
-                                        <span class="card-text text-success mx-2">
-                                            <i class="bi bi-clock-fill"></i>
-                                            <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#clock-fill"/></svg>  -->
-                                        </span><span>{{info.delivery_time}}'</span>
-                                    </div>
-                                </div>
-                              </div>
-                            <a class="btn btn-success text-wrap">{{restaurant.name}}</a>
                         </div>
+                        <a class="btn btn-success text-wrap">{{restaurant.name}}</a>
                     </div>
                 </div>
+            </div>
             }
         </div>
     </ng-template>

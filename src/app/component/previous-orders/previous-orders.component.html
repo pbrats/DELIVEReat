@@ -1,52 +1,57 @@
 <div class="container m-5">
     <h1 class="text-success ">Previous Orders</h1>
-    <ng-template *ngIf="User.previous_orders && User.previous_orders.length>0 ; then foundBlock else noFoundBlock"></ng-template>
-    <ng-template #foundBlock> 
+    <ng-template
+        *ngIf="User.previous_orders && User.previous_orders.length>0 ; then foundBlock else noFoundBlock"></ng-template>
+    <ng-template #foundBlock>
         <table class="table table-striped table-hover m-5">
-            <thead >
-            <tr>
-                <th class="text-success fw-bold text-decoration-underline fs-5" scope="col">#</th>
-                <th class="text-success fw-bold text-decoration-underline fs-5" scope="col">Store Name</th>
-                <th class="text-success fw-bold text-decoration-underline fs-5" scope="col">Date</th>
-                <th class="text-success fw-bold text-decoration-underline fs-5" scope="col">Total</th>
-                <th class="text-success fw-bold text-decoration-underline fs-5" scope="col">Rating</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th class="text-success fw-bold text-decoration-underline fs-5" scope="col">#</th>
+                    <th class="text-success fw-bold text-decoration-underline fs-5" scope="col">Store Name</th>
+                    <th class="text-success fw-bold text-decoration-underline fs-5" scope="col">Date</th>
+                    <th class="text-success fw-bold text-decoration-underline fs-5" scope="col">Total</th>
+                    <th class="text-success fw-bold text-decoration-underline fs-5" scope="col">Rating</th>
+                </tr>
             </thead>
-            <tbody >
+            <tbody>
                 @for( order of User.previous_orders; track $index;let i=$index ){
-            <tr>
-                <th scope="row"class="text-center border">{{i+1}}</th>
-                <td class="text-start border">
-                    {{order.store_name}}
-                    <div class="text-end" *ngFor="let info of storesInfos">
-                        <div *ngIf="info.name==order.store_name"  (click)="onStoreClick(info.name)" title="click for details">
-                            <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo" style="width: 100px; height:10%">
-                            <button class="btn btn-link link-success link-offset-1 link-offset-2-hover link-underline-opacity-75 link-underline-opacity-100-hover mx-5">View store</button>
+                <tr>
+                    <th scope="row" class="text-center border">{{i+1}}</th>
+                    <td class="text-start border">
+                        {{order.store_name}}
+                        <div class="text-end" *ngFor="let info of storesInfos">
+                            <div *ngIf="info.name==order.store_name" (click)="onStoreClick(info.name)"
+                                title="click for details">
+                                <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo"
+                                    style="width: 100px; height:10%">
+                                <button
+                                    class="btn btn-link link-success link-offset-1 link-offset-2-hover link-underline-opacity-75 link-underline-opacity-100-hover mx-5">View
+                                    store</button>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td class="border">{{order.date}}</td>
-                <td class="border">{{order.total}} &euro;</td>
-                <td class="border">
-                    <div class="rate">
-                    <input type="radio" id="star5_{{i}}" name="rate{{i}}" value="5"/>
-                    <label for="star5_{{i}}" title="text">5 stars</label>
-                    <input type="radio" id="star4_{{i}}" name="rate{{i}}" value="4"/>
-                    <label for="star4_{{i}}" title="text">4 stars</label>
-                    <input type="radio" id="star3_{{i}}" name="rate{{i}}" value="3"/>
-                    <label for="star3_{{i}}" title="text">3 stars</label>
-                    <input type="radio" id="star2_{{i}}" name="rate{{i}}" value="2"/>
-                    <label for="star2_{{i}}" title="text">2 stars</label>
-                    <input type="radio" id="star1_{{i}}" name="rate{{i}}" value="1"/>
-                    <label for="star1_{{i}}" title="text">1 star</label>
-                  </div>
-                </td>
-            </tr>
-        }
+                    </td>
+                    <td class="border">{{order.date}}</td>
+                    <td class="border">{{order.total}} &euro;</td>
+                    <td class="border">
+                        <div class="rate">
+                            <input type="radio" id="star5_{{i}}" name="rate{{i}}" value="5" />
+                            <label for="star5_{{i}}" title="text">5 stars</label>
+                            <input type="radio" id="star4_{{i}}" name="rate{{i}}" value="4" />
+                            <label for="star4_{{i}}" title="text">4 stars</label>
+                            <input type="radio" id="star3_{{i}}" name="rate{{i}}" value="3" />
+                            <label for="star3_{{i}}" title="text">3 stars</label>
+                            <input type="radio" id="star2_{{i}}" name="rate{{i}}" value="2" />
+                            <label for="star2_{{i}}" title="text">2 stars</label>
+                            <input type="radio" id="star1_{{i}}" name="rate{{i}}" value="1" />
+                            <label for="star1_{{i}}" title="text">1 star</label>
+                        </div>
+                    </td>
+                </tr>
+                }
             </tbody>
         </table>
     </ng-template>
-    <ng-template #noFoundBlock> 
+    <ng-template #noFoundBlock>
         <h2 class="container m-5 text-success text-center fst-italic fw-normal">No previous orders found</h2>
     </ng-template>
 </div>

@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './ratings.component.css'
 })
 export class RatingsComponent {
-@Input() wantedRatings:any;
+  @Input() wantedRatings: any;
 }

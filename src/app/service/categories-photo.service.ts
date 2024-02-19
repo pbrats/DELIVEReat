@@ -6,10 +6,10 @@ import { Injectable, inject } from '@angular/core';
 })
 export class CategoriesPhotoService {
 
-  private http=inject(HttpClient);
-  private endpointUrl="assets/sample-data/categ-photos.json";
+  private http = inject(HttpClient);
+  private endpointUrl = "assets/sample-data/categ-photos.json";
 
- getCategoriesPhotos(){
+  getCategoriesPhotos() {
     return this.http.get(this.endpointUrl);
   }
 }

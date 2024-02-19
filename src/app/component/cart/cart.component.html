@@ -1,41 +1,37 @@
 <div *ngIf="cartOpen" #cart>
-    <div class="">
-        <!-- {{ currentRoute === 'stores' ||cartOpen ? 'show' : ''}}  -->
-        <!-- <div class="offcanvas  {{ currentRoute === 'stores'|| cartOpen ? 'show' : ''}} offcanvas-end text-bg-dark"
-            data-bs-scroll="true" tabindex="-1" id="cart" aria-labelledby="cart" #offcanvas> -->
-            <div class="offcanvas  {{ currentRoute === 'stores' ? 'show' : ''}} offcanvas-end text-bg-dark"
+    <div>
+        <div class="offcanvas  {{ currentRoute === 'stores' ? 'show' : ''}} offcanvas-end text-bg-dark"
             data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="cart" aria-labelledby="cart" #offcanvas>
-            <!-- <div *ngIf="cartOpen" class="offcanvas offcanvas-end text-bg-dark show" data-bs-scroll="true" tabindex="-1"
-    id="cart" aria-labelledby="cart" #offcanvas> -->
-    <!-- <div *ngIf="cartOpen" class="offcanvas {{ currentRoute === 'stores' ? 'show' : ''}} offcanvas-end text-bg-dark" data-bs-scroll="true" tabindex="-1"
-    id="cart" aria-labelledby="cart" #offcanvas> -->
             <div class="offcanvas-header">
                 <h4 class="offcanvas-title fw-bold" id="cart">My Cart</h4>
                 <div *ngIf="currentRoute != 'stores'">
-                    <button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="offcanvas" aria-label="Close" (click)="change(false)"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close" (click)="change(false)"></button>
                 </div>
             </div>
             <div class="offcanvas-body">
                 @if(cartItems.length>0){
-                    <ul class="list-group">
-                        <li *ngFor="let item of cartItems" class="list-group-item border-dark bg-light">
-                            <div class="text-start">
-                            <span class="m-3 "><span class="fw-bold">{{ item.quantity }} x</span> {{ item.name }} : {{ item.price| number:'1.2-2' }} &euro;</span>
-                            </div>
-                            <div class="text-end">
-                                @if(item.quantity>1){<button class="btn btn-secondary mx-2" (click)="decreaseCart(item.id)"><i class="bi bi-dash-lg"></i></button>}
-                                <button class="btn btn-warning" (click)="removeFromCart(item.id)"><i class="bi bi-trash3-fill"></i></button>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="mt-3">
-                        <p class="fs-5 fw-bold">Total: {{ getTotal()| number:'1.2-2'}} &euro;</p>
-                        <button class="btn btn-danger" (click)="clearCart()">Clear Cart</button>
-                        <button class="btn btn-success mx-3" >Checkout</button>
-                    </div>
+                <ul class="list-group">
+                    <li *ngFor="let item of cartItems" class="list-group-item border-dark bg-light">
+                        <div class="text-start">
+                            <span class="m-3 "><span class="fw-bold">{{ item.quantity }} x</span> {{ item.name }} : {{
+                                item.price| number:'1.2-2' }} &euro;</span>
+                        </div>
+                        <div class="text-end">
+                            @if(item.quantity>1){<button class="btn btn-secondary mx-2"
+                                (click)="decreaseCart(item.id)"><i class="bi bi-dash-lg"></i></button>}
+                            <button class="btn btn-warning" (click)="removeFromCart(item.id)"><i
+                                    class="bi bi-trash3-fill"></i></button>
+                        </div>
+                    </li>
+                </ul>
+                <div class="mt-3">
+                    <p class="fs-5 fw-bold">Total: {{ getTotal()| number:'1.2-2'}} &euro;</p>
+                    <button class="btn btn-danger" (click)="clearCart()">Clear Cart</button>
+                    <button class="btn btn-success mx-3">Checkout</button>
+                </div>
                 }@else if(cartItems.length === 0){
-                    <p>Your Cart is empty!</p>
+                <p>Your Cart is empty!</p>
                 }
             </div>
         </div>
