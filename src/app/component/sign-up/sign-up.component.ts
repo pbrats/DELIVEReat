@@ -23,13 +23,13 @@ export class SignUpComponent {
   }
   setFormValues() {
     this.signUpForm = new FormGroup({
-      name: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
-      lastname: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
+      name: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z]*')]),
+      lastname: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z]*')]),
       // telephone: new FormControl("", [Validators.required, Validators.minLength(10),Validators.maxLength(10)]),
-      telephone: new FormControl("", [Validators.required, Validators.pattern("[0-9 ]{10}")]),
+      telephone: new FormControl("", [Validators.required, Validators.pattern("[0-9]{10}")]),
       email: new FormControl("", [Validators.required, Validators.email]),
       // postalCode : new FormControl("",[Validators.minLength(4),Validators.maxLength(4)]),
-      postalCode: new FormControl("", Validators.pattern("[0-9 ]{5}")),
+      postalCode: new FormControl("", Validators.pattern("[0-9]{5}")),
       address: new FormControl(""),
       // password: new FormControl("", [Validators.required, Validators.minLength(8),Validators.maxLength(12)]),
       password: new FormControl("", [Validators.required, passwordValidator()]),

@@ -94,9 +94,9 @@ export class CheckoutComponent {
     }
     // console.log(this.User.name);
     this.checkoutForm = this.formBuilder.group({
-      name: new FormControl(this.User['name'] || '', [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
-      lastname: new FormControl(this.User['lastname'] || '', [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
-      telephone: new FormControl(this.User['telephone'] || '', [Validators.required, Validators.pattern("[0-9 ]{10}")]),
+      name: new FormControl(this.User['name'] || '', [Validators.required, Validators.pattern('[a-zA-Z]*')]),
+      lastname: new FormControl(this.User['lastname'] || '', [Validators.required, Validators.pattern('[a-zA-Z]*')]),
+      telephone: new FormControl(this.User['telephone'] || '', [Validators.required, Validators.pattern("[0-9]{10}")]),
       email: new FormControl(this.User['email'] || '', [Validators.required, Validators.email]),
       address: new FormControl(this.User['address'] || ''),
       paymentMethod: new FormControl("", Validators.required),
@@ -123,10 +123,10 @@ export class CheckoutComponent {
     //   paymentMethod:new FormControl("",Validators.required)
     // });
     this.cardForm = new FormGroup({
-      cardNumber: new FormControl("", [Validators.required, Validators.pattern('[0-9 ]{4} [0-9 ]{4} [0-9 ]{4} [0-9 ]{4}')]),
-      cardHolderName: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
+      cardNumber: new FormControl("", [Validators.required, Validators.pattern('[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}')]),
+      cardHolderName: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z]*')]),
       expireDate: new FormControl("", Validators.required),
-      CVV: new FormControl("", [Validators.required, Validators.pattern("[0-9 ]{3}")]),
+      CVV: new FormControl("", [Validators.required, Validators.pattern("[0-9]{3}")]),
     });
   }
   onSubmit() {

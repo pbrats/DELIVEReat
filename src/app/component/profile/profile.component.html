@@ -1,30 +1,89 @@
 <div class="container mt-5">
   <h1 class="text-success mb-5">Profile</h1>
   <div class="row" style="display: flex; flex-direction: column; align-items:center;">
-    <div class="card bg-dark bg-gradient text-bg-dark mb-5" style="width:60%">
+    <div class="card bg-dark bg-gradient text-bg-dark mb-5" style="width:50%">
       <div class="card-header text-center">
         <h3>{{ User.name }} {{ User.lastname }}</h3>
       </div>
       <div class="card-body text-center mt-2 mb-2">
         <img [src]="User.photo" onerror="this.src='../assets/users/blank-profile.png';" class="card-img-top"
           alt="{{ User.name }} {{ User.lastname }} user's photo" style="width: 300px" />
-        <div class="m-5" style="display: flex; flex-direction: column; align-items:center;">
-          <div class="m-2 row col-sm-12 text-bg-light border rounded-2">
-            <h4 class="col-sm-6">Phone number:</h4>
-            <p class="col-sm-6">{{ User.telephone }}</p>
-          </div>
-          <div class="m-2 row col-sm-12 text-bg-light border rounded-2">
-            <h4 class="col-sm-6">Email:</h4>
-            <p class="col-sm-6">{{ User.email }}</p>
-          </div>
-          <div class="m-2 row col-sm-12 text-bg-light border rounded-2">
-            <h4 class="col-sm-6">Address:</h4>
-            <p class="col-sm-6">{{ User.address }}</p>
-          </div>
-          <div class="m-2 row col-sm-12 text-bg-light border rounded-2">
-            <h4 class="col-sm-6">Postal Code:</h4>
-            <p class="col-sm-6">{{ User.postalCode }}</p>
-          </div>
+        <div class="m-5" style="display: flex; flex-direction: column; align-items:flex-end;">
+          <form class="me-3" [formGroup]="profileForm" (submit)="onSubmit()">
+            <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+              <label class="form-label mb-2 text-start" for="telephone">Phone number: <span
+                  class="text-danger">*</span></label>
+              <input type="tel" name="telephone" id="telephone" formControlName="telephone" class="form-control"
+                autocomplete="tel">
+              <div *ngIf="profileForm.get('telephone')?.hasError('required') && profileForm.get('telephone')?.touched">
+                <span class="text-danger fst-italic">Phone number is</span><span class="text-danger fw-bold">
+                  required.</span>
+              </div>
+              <div *ngIf="profileForm.get('telephone')?.hasError('pattern') && profileForm.get('telephone')?.touched">
+                <span class="text-danger fst-italic">Phone number must be </span><span class="text-danger fw-bold">
+                  numeric {{
+                  processString(profileForm.get('telephone')?.errors?.['pattern'].requiredPattern) }}
+                  digits.</span>
+              </div>
+              <!-- <h4 class="col-sm-6">Phone number:</h4>
+            <p class="col-sm-6">{{ User.telephone }}</p> -->
+            </div>
+            <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+              <label class="form-label mb-2 text-start" for="email">Email: <span class="text-danger">*</span></label>
+              <input type="email" id="email" name="email" class="form-control" formControlName="email"
+                autocomplete="email">
+              <div *ngIf="profileForm.get('email')?.hasError('required') && profileForm.get('email')?.touched">
+                <span class="text-danger fst-italic">Email is</span><span class="text-danger fw-bold">
+                  required.</span>
+              </div>
+              <div *ngIf="profileForm.get('email')?.hasError('email') && profileForm.get('email')?.touched">
+                <span class="text-danger fst-italic">Invalid </span><span class="text-danger fw-bold">email
+                </span><span class="text-danger fst-italic"> format.</span>
+              </div>
+              <!-- <h4 class="col-sm-6">Email:</h4>
+            <p class="col-sm-6">{{ User.email }}</p> -->
+            </div>
+            <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+              <label class="form-label mb-2 text-start" for="address">Address:</label>
+              <input type="text" name="address" id="address" class="form-control" formControlName="address"
+                autocomplete="street-address">
+              <div *ngIf="profileForm.get('address')?.hasError('required') &&
+                profileForm.get('address')?.touched">
+                <span class="text-danger fst-italic">Address is </span><span
+                  class="text-danger fw-bold">required.</span>
+              </div>
+              <!-- <h4 class="col-sm-6">Address:</h4>
+            <p class="col-sm-6">{{ User.address }}</p> -->
+            </div>
+            <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+              <label class="form-label mb-2 text-start" for="postalCode">Postal Code:</label>
+              <input type="text" name="postalCode" id="postalCode" class="form-control" formControlName="postalCode"
+                placeholder="10000" autocomplete="postal-code">
+              <div *ngIf="profileForm.get('postalCode')?.hasError('pattern') && profileForm.get('postalCode')?.touched">
+                <span class="text-danger fst-italic">Postal Code must be </span><span
+                  class="text-danger fw-bold">numeric {{ processString(
+                  profileForm.get('postalCode')?.errors?.['pattern'].requiredPattern) }} digits.</span>
+              </div>
+              <!-- <h4 class="col-sm-6">Postal Code:</h4>
+            <p class="col-sm-6">{{ User.postalCode }}</p> -->
+            </div>
+            <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+              <label class="form-label mb-2 text-start" for="password">Password:</label>
+              <input type="password" name="password" id="password" class="form-control" formControlName="password"
+                autocomplete="current-password">
+              <div *ngIf="profileForm.get('password')?.hasError('pattern') && profileForm.get('password')?.touched">
+                <span class="text-danger fst-italic">Password must be </span><span class="text-danger fw-bold"> {{
+                  processString(
+                  profileForm.get('password')?.errors?.['pattern'].requiredPattern) }} characters.</span>
+              </div>
+              <!-- <h4 class="col-sm-6">Password:</h4>
+            <p class="col-sm-6">{{ User.password }}</p> -->
+            </div>
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn btn-info my-3" [disabled]="!profileForm.valid">Update
+                Profile</button>
+            </div>
+          </form>
         </div>
         <div class="row my-5">
           <h6 class="text-start text-white-50">Date of last visit: {{lastVisit}} </h6>

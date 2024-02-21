@@ -29,13 +29,26 @@
             <div class="col-sm-4 my-2">
                 <div class="card border border-success m-3" style="width: 90%; height: 100%"
                     (click)="onStoreClick(famousRest.name)" title="click for details">
-                    <div class="card-body text-center shadow">
-                        <img [src]="famousRest.logo" class="card-img-top" alt="{{famousRest.name}} store photo"
-                            style="width: 40%">
-                        <h5 class="card-title">{{famousRest.name}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted"> {{famousRest.category}}</h6>
-                        <p class="card-text">Address: {{famousRest.address}}</p>
+                    <div class="card-body text-center shadow"  style="display: flex; flex-direction: column; justify-content:space-around;" >
+                        <div >
+                            <img [src]="famousRest.cover" class="card-img-top"
+                                alt="{{famousRest.name}} cover store photo" style="height: 100px; object-fit: cover;">
+                        </div>
                         <div>
+                            <div class="col-md-4 pb-4"style="height:10px">
+                                <img [src]="famousRest.logo" class="card-img-top" alt="{{famousRest.name}} store photo"
+                                style="width:80%">
+                            </div>
+                            <div class="row mt-5">
+                                <h5 class="card-title">{{famousRest.name}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted"> {{famousRest.category}}</h6>
+                                <p class="card-text"><span class="text-success">Address:</span> {{famousRest.address}}</p>
+                            </div>
+                           <div class="row mb-0">
+                            <a class="btn btn-success text-wrap mt-3"> {{famousRest.name}}</a>
+                        </div>
+                        </div>
+                        <div class="border-top mb-0">
                             <span class="card-text text-success mx-2">
                                 <i class="bi bi-star-fill"></i>
                                 <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
@@ -49,7 +62,6 @@
                                 <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#clock-fill"/></svg> -->
                             </span><span> {{famousRest.delivery_time}}'</span>
                         </div>
-                        <a class="btn btn-success text-wrap mt-3"> {{famousRest.name}}</a>
                     </div>
                 </div>
                 <!-- </ng-template>
