@@ -102,6 +102,16 @@ export class CheckoutComponent {
       paymentMethod: new FormControl("", Validators.required),
       comments:new FormControl("")
     });
+    this.cardForm.get('cardNumber')?.valueChanges.subscribe(value => {
+      if (value) {
+        // Remove any existing spaces
+        let formattedValue = value.replace(/\s/g, '');
+        // Insert a space after every 4 characters
+        formattedValue = formattedValue.replace(/(.{4})/g, '$1 ').trim();
+        // Update the value in the form control
+        this.cardForm.get('cardNumber')?.setValue(formattedValue, { emitEvent: false });
+      }
+    });
   }
   ngOnDestroy(): void {
     if (this.timerSubscription) {
