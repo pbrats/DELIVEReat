@@ -48,4 +48,13 @@ export class CartService {
     this.cartItems[storeName] = [];
     this.cartItemsUpdated.emit(this.cartItems);
   }
+  clearAllCarts() {
+    // Clear all carts
+    for (const storeName in this.cartItems) {
+      if (this.cartItems.hasOwnProperty(storeName)) {
+        this.cartItems[storeName] = [];
+      }
+    }
+    this.cartItemsUpdated.emit(this.cartItems);
+  }
 }

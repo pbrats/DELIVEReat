@@ -13,7 +13,7 @@
               class="list-group-item border-secondary text-white {{ disableButton ? 'bg-danger':'bg-success'}}">
               <div class="text-start">
                 <span class="m-3 "><span class="fw-bold">{{ item.quantity }} x</span> {{ item.name }} : {{
-                  item.price| number:'1.2-2' }} &euro;</span>
+                  item.price | number:'1.2-2' }} &euro;</span>
               </div>
             </li>
           </ul>
@@ -24,8 +24,10 @@
             | number:'1.2-2'}} &euro;</h6>
           <h5 class="text-end mt-2 me-5 {{ disableButton ? 'text-danger':''}}">Total: {{total + storeInfos.delivery_cost
             | number:'1.2-2'}} &euro;</h5>
-          @if(total + storeInfos.delivery_cost<storeInfos.minimum_order){ <p class="text-danger fw-bold fst-1">Your
-            total order amount is less than the minimum order amount.</p>
+          @if(total + storeInfos.delivery_cost<storeInfos.minimum_order){ <h4 class="text-danger fw-bold">
+            Your total order amount is <span class="fw-bolder"> {{ storeInfos.minimum_order - (total +
+              storeInfos.delivery_cost) | number:'1.2-2' }} &euro;</span> less
+            than the minimum order amount.</h4>
             }
             }
         </div>
@@ -190,10 +192,33 @@
             <textarea name="comments" id="comments" rows="3"></textarea>
           </div>
           <div class="d-grid gap-2 col-8 mx-auto my-3">
-            <button [disabled]="disableButton" type="submit" class="btn btn-success">
+            <!-- Button submit and trigger modal -->
+            <button [disabled]="disableButton" type="submit" class="btn btn-success" data-bs-toggle="modal"
+              data-bs-target="#checkoutmodal">
               Complete Purchase
             </button>
-            <!-- [disabled]="!signUpForm.valid" -->
+            <!-- Modal -->
+            <div class="modal fade bg-dark" id="checkoutmodal" data-bs-backdrop="static" tabindex="-1"
+              aria-labelledby="checkoutmodal" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-success" id="checkoutmodal">Checkout Complete!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <h4 class="text-success">Congratulations <span class="fw-bold"> {{User.name}}</span>!</h4>
+                    <h5 class="text-success">Your order is on the way!</h5>
+                    @if(storeInfos){
+                    <h5 class="text-success">E.T.A.: <span class="fw-bold">{{storeInfos.delivery_time}}'</span></h5>
+                    }
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" routerLink="/user" routerLinkActive="active" (click)="emptyCart()">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>

@@ -22,7 +22,6 @@ export class CheckoutComponent {
   cartItems: CartItem[] = [];
   total: number = 0;
   storeName: string = '';
-  cartItemsSubscription: any;
   storeInfos: any;
   disableButton: boolean = false;
   delivery_cost: number = 0;
@@ -44,6 +43,8 @@ export class CheckoutComponent {
     // console.log("store name decodeURI:",this.storeName);
     this.infoService.getStoresInfos().subscribe((response: any) => {
       // console.log("all stores info", response);
+      // this.storeInfos = response.filter((store: any) => store.name === this.storeName);
+      // console.log("store info filtered by store name", this.storeInfos);
       response.forEach((store: any) => {
         if (store.name === this.storeName) {
           this.storeInfos = store;
@@ -159,5 +160,11 @@ export class CheckoutComponent {
     let stringWithHyphen = inputString.replace(/[^0-9\-{}]/g, '');
     // Add comma before numbers inside curly braces while keeping the curly braces
     return stringWithHyphen.replace(/{(\d+)}/g, ' {$1} ');
+  }
+  emptyCart(){
+    // empties only if this cart haas items
+    // this.cartItems=[];
+    // console.log("empty cart on checkout",this.cartItems);
+    this.cartService.clearAllCarts();
   }
 }
