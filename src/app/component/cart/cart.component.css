@@ -1,7 +1,7 @@
 .offcanvas {
     position: fixed;
     margin-top: 82px;
-    max-width: 500px;
+    max-width: 470px;
     min-width: 250px;
     width: fit-content;
     transition: transform 1s ease-in-out;

@@ -28,18 +28,31 @@
             <div class="col-sm-4 my-2">
                 <div class="card border border-success m-3" style="width: 90%; height: 100%"
                     (click)="onStoreClick(restaurant.name)" title="click for details">
-                    <div class="card-body text-center shadow">
+                    <div class="card-body text-center shadow"
+                        style="display: flex; flex-direction: column; justify-content:space-around;">
                         <div *ngFor="let info of storeInfos">
                             <div *ngIf="info.name==restaurant.name">
-                                <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo"
-                                    style="width: 30%; height:10%">
-                            </div>
-                        </div>
-                        <h5 class="card-title">{{restaurant.name}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted"> {{restaurant.category}}</h6>
-                        <div *ngFor="let info of storeInfos" class="m-3">
-                            <div *ngIf="info.name==restaurant.name">
                                 <div>
+                                    <img [src]="info.cover" class="card-img-top" alt="{{info.name}} cover store photo"
+                                        style="height: 100px; object-fit: cover;">
+                                </div>
+                                <div class="mt-1">
+                                    <div class="col-md-4 pb-4" style="height:10px">
+                                        <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo"
+                                            style="width:80%">
+                                    </div>
+                                    <div class="row mt-5 mb-2">
+                                        <h5 class="card-title">{{restaurant.name}}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted"> {{restaurant.category}}</h6>
+                                        <p class="card-text"><span class="text-success">Address:</span>
+                                            {{restaurant.address}}
+                                        </p>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <a class="btn btn-success text-wrap">{{restaurant.name}}</a>
+                                    </div>
+                                </div>
+                                <div class="border-top">
                                     <span class="card-text text-success mx-2">
                                         <i class="bi bi-star-fill"></i>
                                         <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
@@ -55,7 +68,6 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-success text-wrap">{{restaurant.name}}</a>
                     </div>
                 </div>
             </div>

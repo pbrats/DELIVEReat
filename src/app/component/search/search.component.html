@@ -4,17 +4,33 @@
 <ng-template #foundBlock>
     <h1 class="text-success m-5">Search Results for: <span class="fst-italic fw-bold text-dark fs-2"> "{{query}}"</span>
     </h1>
-    <div class="row row-cols-5 mx-5">
-        <div class="mx-5 mb-5" *ngFor="let store of searchResult">
-            <div class="col-sm-4 mx-5">
-                <div class="card border border-success" style="width: 350%; height:330px">
-                    <div class="card-body text-center shadow" (click)="onStoreClick(store.name)"
-                        title="click for details">
-                        <img [src]="store.logo" class="card-img-top" alt="{{store.name}} store photo"
-                            style="width: 55%; height:23%">
-                        <h5 class="card-title">{{store.name}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted"> {{store.category}}</h6>
-                        <div class="mb-3">
+    <div class="row row-cols-4 mx-5 mb-5">
+        <div class="mx-5 mb-1" *ngFor="let store of searchResult">
+            <div class="col-sm-4 my-2">
+                <div class="card border border-success m-3" style="width: 300%; height: 100%"
+                    (click)="onStoreClick(store.name)" title="click for details">
+                    <div class="card-body text-center shadow"
+                        style="display: flex; flex-direction: column; justify-content:space-around;">
+                        <div>
+                            <img [src]="store.cover" class="card-img-top" alt="{{store.name}} cover store photo"
+                                style="height: 100px; object-fit: cover;">
+                        </div>
+                        <div class="mt-1">
+                            <div class="col-md-4 pb-4" style="height:10px">
+                                <img [src]="store.logo" class="card-img-top" alt="{{store.name}} store photo"
+                                    style="width:80%">
+                            </div>
+                            <div class="row mt-5 mb-2">
+                                <h5 class="card-title">{{store.name}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted"> {{store.category}}</h6>
+                                <p class="card-text"><span class="text-success">Address:</span> {{store.address}}
+                                </p>
+                            </div>
+                            <div class="row mb-3">
+                                <a class="btn btn-success text-wrap">{{store.name}}</a>
+                            </div>
+                        </div>
+                        <div class="border-top">
                             <span class="card-text text-success mx-2">
                                 <i class="bi bi-star-fill"></i>
                                 <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
@@ -28,7 +44,7 @@
                                 <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#clock-fill"/></svg> -->
                             </span><span> {{store.delivery_time}}'</span>
                         </div>
-                        <a class="btn btn-success text-wrap">{{store.name}}</a>
+
                     </div>
                 </div>
             </div>

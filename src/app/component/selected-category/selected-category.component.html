@@ -21,23 +21,37 @@
     </div>
     <ng-template *ngIf="hasLoadedStores; then storesBlock else noStoresBlock"></ng-template>
     <ng-template #storesBlock>
-        <div class="row row-cols-4 ">
-            <div class="m-4 " *ngFor="let store of stores">
-                <div class="col-sm-4 mx-4 p-0">
-                    <div class="card border border-success mx-3 my-0" style="width: 350%; height:340px">
-                        <div class="card-body text-center shadow" (click)="onStoreClick(store.name)"
-                            title="click for details">
+        <div class="row row-cols-4">
+            <div class="m-4" *ngFor="let store of stores">
+                <div class="col-sm-4 mx-4">
+                    <div class="card border border-success m-3" style="width: 300%; height: 100%"
+                        (click)="onStoreClick(store.name)" title="click for details">
+                        <div class="card-body text-center shadow"
+                            style="display: flex; flex-direction: column; justify-content:space-around;">
                             <div *ngFor="let info of storeInfos">
                                 <div *ngIf="info.name==store.name">
-                                    <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo"
-                                        style="width: 50%; height:10%">
-                                </div>
-                            </div>
-                            <h5 class="card-title">{{store.name}}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted"> {{store.category}}</h6>
-                            <div *ngFor="let info of storeInfos" class="m-3">
-                                <div *ngIf="info.name==store.name">
                                     <div>
+                                        <img [src]="info.cover" class="card-img-top"
+                                            alt="{{info.name}} cover store photo"
+                                            style="height: 100px; object-fit: cover;">
+                                    </div>
+                                    <div class="mt-1">
+                                        <div class="col-md-4 pb-4" style="height:10px">
+                                            <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo"
+                                                style="width:80%">
+                                        </div>
+                                        <div class="row mt-5 mb-2">
+                                            <h5 class="card-title">{{store.name}}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted"> {{store.category}}</h6>
+                                            <p class="card-text"><span class="text-success">Address:</span>
+                                                {{store.address}}
+                                            </p>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <a class="btn btn-success text-wrap">{{store.name}}</a>
+                                        </div>
+                                    </div>
+                                    <div class="border-top">
                                         <span class="card-text text-success mx-2">
                                             <i class="bi bi-star-fill"></i>
                                             <!-- <svg class="bi" width="16" height="16" fill="currentColor"><use xlink:href="#star-fill"/></svg> -->
@@ -53,7 +67,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <a class="btn btn-success text-wrap">{{store.name}}</a>
                         </div>
                     </div>
                 </div>

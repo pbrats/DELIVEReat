@@ -1,11 +1,19 @@
 <div class="container mb-3 pb-5 pt-3">
     <!-- <h1 class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-success ">{{selectedStore}}</h1> -->
     <div class="m-3" *ngFor="let item of items">
-        <div class="card mb-3 pt-2">
+        <div class="card mb-3" style="width:70%">
             <div *ngFor="let info of storeInfos">
                 <div *ngIf="info.name==item.name">
-                    <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo"
-                        style="width: 20%; height:5%">
+                    <div>
+                        <img [src]="info.cover" class="card-img-top" alt="{{info.name}} cover store photo"
+                            style="height: 300px; object-fit:cover;">
+                    </div>
+                    <div class="mt-2">
+                        <div class="col-md-4 pb-4" style="height:10px">
+                            <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo"
+                                style="width:40%">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="text-end">
@@ -55,18 +63,27 @@
                                         </p>
                                         <h6 class="text-success">Working hours : </h6>
                                         <div class="text-center">
-                                            <p>Monday : <span class="fst-italic"> {{info.working_hours}}</span></p>
-                                            <p>Tuesday : <span class="fst-italic"> {{info.working_hours}}</span></p>
-                                            <p>Wednesday : <span class="fst-italic"> {{info.working_hours}}</span></p>
-                                            <p>Thursday : <span class="fst-italic"> {{info.working_hours}}</span></p>
-                                            <p>Friday : <span class="fst-italic"> {{info.working_hours}}</span></p>
-                                            <p>Saturday : <span class="fst-italic"> {{info.working_hours}}</span></p>
-                                            <p>Sunday : <span class="fst-italic"> {{info.working_hours}}</span></p>
+                                            <p>Monday : <span class="fst-italic"> {{info.working_hours}}</span>
+                                            </p>
+                                            <p>Tuesday : <span class="fst-italic"> {{info.working_hours}}</span>
+                                            </p>
+                                            <p>Wednesday : <span class="fst-italic">
+                                                    {{info.working_hours}}</span></p>
+                                            <p>Thursday : <span class="fst-italic">
+                                                    {{info.working_hours}}</span></p>
+                                            <p>Friday : <span class="fst-italic"> {{info.working_hours}}</span>
+                                            </p>
+                                            <p>Saturday : <span class="fst-italic">
+                                                    {{info.working_hours}}</span></p>
+                                            <p>Sunday : <span class="fst-italic"> {{info.working_hours}}</span>
+                                            </p>
                                         </div>
                                         <h6 class="text-success">Delivery cost : </h6>
-                                        <p class="text-center mt-n2 fst-italic"> {{info.delivery_cost}} &euro;</p>
+                                        <p class="text-center mt-n2 fst-italic"> {{info.delivery_cost}} &euro;
+                                        </p>
                                         <h6 class="text-success">Minimum order : </h6>
-                                        <p class="text-center mt-n2 fst-italic"> {{info.minimum_order}} &euro;</p>
+                                        <p class="text-center mt-n2 fst-italic"> {{info.minimum_order}} &euro;
+                                        </p>
                                         <h6 class="text-success">Distance limit : </h6>
                                         <p class="text-center mt-n2 fst-italic"> {{info.distance_limit}} km</p>
                                         <h6 class="text-success">Delivery time : </h6>
