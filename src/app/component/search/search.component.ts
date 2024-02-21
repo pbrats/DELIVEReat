@@ -25,9 +25,9 @@ export class SearchComponent {
       this.restaurants = response;
     });
     this.route.queryParams.subscribe(params => {
-      // console.log(params)
+      // console.log(params);
       this.query = params['query'];
-      // console.log(this.query)
+      // console.log(this.query);
       if (this.query) {
         this.famousService.getFamousRestaurants().subscribe((response) => {
           this.stores = response;

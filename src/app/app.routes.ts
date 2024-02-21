@@ -15,6 +15,7 @@ import { SearchComponent } from './component/search/search.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { PreviousOrdersComponent } from './component/previous-orders/previous-orders.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
+import { CheckoutComponent } from './component/checkout/checkout.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "welcome", pathMatch: "full" },
@@ -34,5 +35,6 @@ export const routes: Routes = [
     { path: "user", component: ProfileComponent },
     { path: "previous-orders", component: PreviousOrdersComponent },
     { path: "sign-up", component: SignUpComponent },
+    { path: "checkout", component: CheckoutComponent },
     { path: "**", component: NotFoundComponent }
 ];

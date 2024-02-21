@@ -47,7 +47,7 @@ export class SelectedCategoryComponent {
           this.catService.categoryExists(this.selectedCategory).subscribe(exists => {
             if (exists) {
               this.selectedCategory = this.selectedCategory.replace(/_/g, ' ');
-              // console.log("category exists");
+              console.log("category exists");
               this.titleService.setTitle(`${this.selectedCategory}`);
               this.catService.getCategories().subscribe((data: any) => {
                 this.stores = data.filter((store: any) => store.category.replace(/_/g, ' ') === this.selectedCategory);
@@ -61,7 +61,7 @@ export class SelectedCategoryComponent {
               });
               this.hasLoadedStores = true;
             } else {
-              // console.log("Category does not exist");
+              console.log("Category does not exist");
               this.router.navigate(["menu-not-found"]);
             }
           });

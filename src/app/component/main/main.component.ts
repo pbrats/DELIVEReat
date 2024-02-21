@@ -96,7 +96,7 @@ export class MainComponent {
       }
     } else {
       // Handle the case when no user information is stored in local storage
-      // console.log('No user information found in local storage');
+      console.log('No user information found in local storage');
       this.showAlertFlag = false;
     }
     // });

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
 import { CartService } from '../../service/cart.service';
 import { CartItem } from '../../cart-item';
@@ -8,7 +8,7 @@ import { CartItem } from '../../cart-item';
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
@@ -88,5 +88,9 @@ export class CartComponent {
     if (this.cartItemsSubscription) {
       this.cartItemsSubscription.unsubscribe();
     }
+  }
+  checkout() {
+    // console.log("cart store name",this.currentstoreName);
+    this.router.navigate(["checkout"], { state: { storeName: this.currentstoreName } });
   }
 }

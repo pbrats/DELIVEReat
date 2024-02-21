@@ -28,6 +28,7 @@ export class MenuComponent {
   buttonHighPrice: boolean = false;
   buttonLowPrice: boolean = false;
   cartItemsSubscription: any;
+  // cartOpen?: boolean;
 
   constructor(private cartService: CartService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.currentUrl = this.router.url;
@@ -143,5 +144,6 @@ export class MenuComponent {
     // this.cartItems = this.cartService.getCartItems(this.storeName);
     // console.log(this.cartService.getTotal(this.storeName));
     this.cartService.cartOpen = true;
+    // this.cartOpen=true;
   }
 }

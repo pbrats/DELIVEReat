@@ -1,0 +1,202 @@
+<div class="container mt-5">
+  <h1 class="text-success mb-5">Checkout</h1>
+  <div class="row" style="display: flex; flex-direction: column; align-items:center;">
+    <div class="card bg-dark bg-gradient text-bg-dark mb-5" style="width:70%">
+      <div class="card-header text-center">
+        <h3> Order Details</h3>
+      </div>
+      <div class="card-body text-center mt-2 mb-2">
+        <div class="border border-secondary rounded-2 my-3 px-1">
+          <h5 class="text-start mt-2 ms-2 {{ disableButton ? 'text-danger':''}}">Product list:</h5>
+          <ul class="list-group">
+            <li *ngFor="let item of cartItems"
+              class="list-group-item border-secondary text-white {{ disableButton ? 'bg-danger':'bg-success'}}">
+              <div class="text-start">
+                <span class="m-3 "><span class="fw-bold">{{ item.quantity }} x</span> {{ item.name }} : {{
+                  item.price| number:'1.2-2' }} &euro;</span>
+              </div>
+            </li>
+          </ul>
+          <h6 class="text-end mt-2 me-5 {{ disableButton ? 'text-danger':''}}">Products total: {{ total |
+            number:'1.2-2'}} &euro;</h6>
+          @if(storeInfos){
+          <h6 class="text-end mt-2 me-5 {{ disableButton ? 'text-danger':''}}">Delivery cost: {{storeInfos.delivery_cost
+            | number:'1.2-2'}} &euro;</h6>
+          <h5 class="text-end mt-2 me-5 {{ disableButton ? 'text-danger':''}}">Total: {{total + storeInfos.delivery_cost
+            | number:'1.2-2'}} &euro;</h5>
+          @if(total + storeInfos.delivery_cost<storeInfos.minimum_order){ <p class="text-danger fw-bold fst-1">Your
+            total order amount is less than the minimum order amount.</p>
+            }
+            }
+        </div>
+        <form (submit)="onSubmit()" [formGroup]="checkoutForm">
+          <div class="form-group m-1 row col-sm-6 text-bg-light border rounded-2">
+            <label class="form-label mb-2" for="paymentMethod">Payment Method: <span
+                class="text-danger">*</span></label>
+            <select class="form-select col-sm-6 my-2 " formControlName="paymentMethod" aria-label="Payment Method"
+              name="paymentMethod" id="paymentMethod" placeholder="Payment Method">
+              <option selected disabled>Payment Method</option>
+              <option value="Cash">Cash</option>
+              <option value="Card">Card</option>
+              <option value="Paypal">Paypal</option>
+            </select>
+            <div *ngIf="checkoutForm.get('paymentMethod')!.value === 'Card'"
+              style="display: flex; flex-direction: column; align-items:center;">
+              <!-- Card info form -->
+              <form class="me-3 " [formGroup]="cardForm" (submit)="onSubmit()">
+                <div class="form-group m-2 mb-3 row col-sm-12 text-bg-light border rounded-2">
+                  <label class="form-label mb-2 text-start" for="cardNumber">Card Number: <span
+                      class="text-danger">*</span></label>
+                  <input type="text" name="cardNumber" id="cardNumber" formControlName="cardNumber"
+                    class="form-control">
+                  <div *ngIf="cardForm.get('cardNumber')?.hasError('required') &&
+      cardForm.get('cardNumber')?.touched">
+                    <span class="text-danger fst-italic">Card Number is </span><span
+                      class="text-danger fw-bold">required.</span>
+                  </div>
+                  <div *ngIf="cardForm.get('cardNumber')?.hasError('pattern') && cardForm.get('cardNumber')?.touched">
+                    <span class="text-danger fst-italic">Card Number must be in this </span><span
+                      class="text-danger fw-bold">
+                      {{
+                      processString(cardForm.get('cardNumber')?.errors?.['pattern'].requiredPattern) }}
+                      format.</span>
+                  </div>
+                </div>
+                <div class="form-group m-2 mb-3 row col-sm-12 text-bg-light border rounded-2">
+                  <label class="form-label mb-2 text-start" for="cardHolderName">Card Holder's Name: <span
+                      class="text-danger">*</span></label>
+                  <input type="text" name="cardHolderName" id="cardHolderName" formControlName="cardHolderName"
+                    class="form-control">
+                  <div *ngIf="cardForm.get('cardHolderName')?.hasError('required') &&
+      cardForm.get('cardHolderName')?.touched">
+                    <span class="text-danger fst-italic">Card Holder's Name is </span><span
+                      class="text-danger fw-bold">required.</span>
+                  </div>
+                  <div
+                    *ngIf="cardForm.get('cardHolderName')?.hasError('pattern') && cardForm.get('cardHolderName')?.touched">
+                    <span class="text-danger fst-italic">Card Holder's Name must be </span><span
+                      class="text-danger fw-bold"> {{
+                      removeSymbols(cardForm.get('cardHolderName')?.errors?.['pattern'].requiredPattern) }}
+                      characters.</span>
+                  </div>
+                </div>
+                <div class="form-group m-2 mb-3 row col-sm-12 text-bg-light border rounded-2">
+                  <label class="form-label mb-2 text-start" for="expireDate">Expire Date: <span
+                      class="text-danger">*</span></label>
+                  <input type="date" name="expireDate" id="expireDate" formControlName="expireDate"
+                    class="form-control">
+                  <div *ngIf="cardForm.get('expireDate')?.hasError('required') &&
+                cardForm.get('expireDate')?.touched">
+                    <span class="text-danger fst-italic">Expire Date is </span><span
+                      class="text-danger fw-bold">required.</span>
+                  </div>
+                </div>
+                <div class="form-group m-2 mb-3 row col-sm-12 text-bg-light border rounded-2">
+                  <label class="form-label mb-2 text-start" for="CVV">CVV: <span class="text-danger">*</span></label>
+                  <input type="text" name="CVV" id="CVV" formControlName="CVV" class="form-control">
+                  <div *ngIf="cardForm.get('CVV')?.hasError('required') &&
+                cardForm.get('CVV')?.touched">
+                    <span class="text-danger fst-italic">CVV is </span><span
+                      class="text-danger fw-bold">required.</span>
+                  </div>
+                  <div *ngIf="cardForm.get('CVV')?.hasError('pattern') && cardForm.get('CVV')?.touched">
+                    <span class="text-danger fst-italic">CVV must be in this </span><span class="text-danger fw-bold">
+                      {{
+                      processString(cardForm.get('CVV')?.errors?.['pattern'].requiredPattern) }}
+                      format.</span>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-sm btn-success mb-3" [disabled]="!cardForm.valid">Save</button>
+              </form>
+            </div>
+          </div>
+          <div class="border border-secondary rounded-2 my-3 px-1">
+            <h5 class="text-start mt-3">Delivery Infos:</h5>
+            <div class="m-1 me-3 mt-3" style="display: flex; flex-direction: column; align-items:center;">
+              <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+                <label class="form-label mb-2" for="name">First name: <span class="text-danger">*</span></label>
+                <input type="text" name="name" id="name" formControlName="name" class="form-control"
+                  autocomplete="given-name">
+                <div *ngIf="checkoutForm.get('name')?.hasError('required') &&
+      checkoutForm.get('name')?.touched">
+                  <span class="text-danger fst-italic">First name is </span><span
+                    class="text-danger fw-bold">required.</span>
+                </div>
+                <div *ngIf="checkoutForm.get('name')?.hasError('pattern') && checkoutForm.get('name')?.touched">
+                  <span class="text-danger fst-italic">First name must be </span><span class="text-danger fw-bold"> {{
+                    removeSymbols(checkoutForm.get('name')?.errors?.['pattern'].requiredPattern) }}
+                    characters.</span>
+                </div>
+              </div>
+              <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+                <label class="form-label mb-2" for="lastname">Last name: <span class="text-danger">*</span></label>
+                <input type="text" name="lastname" id="lastname" formControlName="lastname" class="form-control"
+                  autocomplete="family-name">
+                <div *ngIf="checkoutForm.get('lastname')?.hasError('required') &&
+                checkoutForm.get('lastname')?.touched">
+                  <span class="text-danger fst-italic">Last name is </span><span
+                    class="text-danger fw-bold">required.</span>
+                </div>
+                <div *ngIf="checkoutForm.get('lastname')?.hasError('pattern') && checkoutForm.get('lastname')?.touched">
+                  <span class="text-danger fst-italic">Last name must be </span><span class="text-danger fw-bold"> {{
+                    removeSymbols(checkoutForm.get('lastname')?.errors?.['pattern'].requiredPattern) }}
+                    characters.</span>
+                </div>
+              </div>
+              <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+                <label class="form-label mb-2" for="address">Address:</label>
+                <input type="text" name="address" id="address" class="form-control" formControlName="address"
+                  autocomplete="street-address">
+                <div *ngIf="checkoutForm.get('address')?.hasError('required') &&
+                checkoutForm.get('address')?.touched">
+                  <span class="text-danger fst-italic">Address is </span><span
+                    class="text-danger fw-bold">required.</span>
+                </div>
+              </div>
+              <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+                <label class="form-label mb-2" for="email">Email: <span class="text-danger">*</span></label>
+                <input type="email" id="email" name="email" class="form-control" formControlName="email"
+                  autocomplete="email">
+                <div *ngIf="checkoutForm.get('email')?.hasError('required') && checkoutForm.get('email')?.touched">
+                  <span class="text-danger fst-italic">Email is</span><span class="text-danger fw-bold">
+                    required.</span>
+                </div>
+                <div *ngIf="checkoutForm.get('email')?.hasError('email') && checkoutForm.get('email')?.touched">
+                  <span class="text-danger fst-italic">Invalid </span><span class="text-danger fw-bold">email
+                  </span><span class="text-danger fst-italic"> format.</span>
+                </div>
+              </div>
+              <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+                <label class="form-label mb-2" for="telephone">Phone number: <span class="text-danger">*</span></label>
+                <input type="tel" name="telephone" id="telephone" formControlName="telephone" class="form-control"
+                  autocomplete="tel">
+                <div
+                  *ngIf="checkoutForm.get('telephone')?.hasError('required') && checkoutForm.get('telephone')?.touched">
+                  <span class="text-danger fst-italic">Phone number is</span><span class="text-danger fw-bold">
+                    required.</span>
+                </div>
+                <div
+                  *ngIf="checkoutForm.get('telephone')?.hasError('pattern') && checkoutForm.get('telephone')?.touched">
+                  <span class="text-danger fst-italic">Phone number must be </span><span class="text-danger fw-bold">
+                    numeric {{
+                    processString(checkoutForm.get('telephone')?.errors?.['pattern'].requiredPattern) }}
+                    digits.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-5 border border-secondary rounded-2 mx-3">
+            <label for="comments" class="text-start text-white-50">Comments </label>
+            <textarea name="comments" id="comments" rows="3"></textarea>
+          </div>
+          <div class="d-grid gap-2 col-8 mx-auto my-3">
+            <button [disabled]="disableButton" type="submit" class="btn btn-success">
+              Complete Purchase
+            </button>
+            <!-- [disabled]="!signUpForm.valid" -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

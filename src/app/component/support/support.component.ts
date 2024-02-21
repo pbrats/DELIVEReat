@@ -35,7 +35,8 @@ export class SupportComponent {
     })
   }
   onSubmit() {
-    console.log(this.FormData.value)
+    // console.log(this.FormData.value);
+    console.log("form submited");
     this.FormData.reset();
     // alert("your form was submitted");
   }

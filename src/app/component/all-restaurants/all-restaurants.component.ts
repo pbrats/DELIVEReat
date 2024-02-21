@@ -33,7 +33,7 @@ export class AllRestaurantsComponent {
       .subscribe({
         next: response => {
           setTimeout(() => {
-            console.log(response);
+            // console.log(response);
             this.restaurants = response;
             this.restaurants.forEach((restaurant: any) => {
               // console.log('Before replacement - category:', restaurant.category);
@@ -51,7 +51,7 @@ export class AllRestaurantsComponent {
   }
   onStoreClick(clickName: string) {
     const foundStore = this.restaurants.find((store: any) => store.name === clickName);
-    console.log(foundStore);
+    // console.log(foundStore);
     if (foundStore) {
       this.router.navigate(["stores", clickName]);
     } else {

@@ -55,6 +55,9 @@
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3 mt-n2">
                                 <button class="btn btn-success px-auto" (click)="addToCart(item)"><i
                                         class="bi bi-plus-lg"></i></button>
+                                <!-- [attr.data-bs-toggle]="cartOpen ?  '':'offcanvas' "
+                                [attr.data-bs-target]="cartOpen ? '':'#cart'  "
+                                [attr.aria-controls]="cartOpen ? '' :'cart'  "   -->
                                 <!-- data-bs-toggle="offcanvas" data-bs-target="#cart" aria-controls="cart" -->
                                 <app-cart [storeName]="storeName" />
                             </div>

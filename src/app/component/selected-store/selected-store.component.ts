@@ -35,6 +35,7 @@ export class SelectedStoreComponent {
         // Check if the selected store exists in the data
         const storeExists = data.some((store: any) => store.name === this.selectedStore);
         if (storeExists) {
+          console.log("store name exists");
           this.items = data.filter((item: any) => item.name === this.selectedStore);
           // console.log('Before replacement:', this.items);
           this.items.forEach((item: any) => {
@@ -45,6 +46,7 @@ export class SelectedStoreComponent {
           // console.log('After replacement:', this.items);
         } else {
           // Store does not exist, navigate to "menu-not-found"
+          console.log("store name doesn't exist");
           this.router.navigate(["menu-not-found"]);
         }
       });

@@ -45,7 +45,7 @@ export class PreviousOrdersComponent {
   }
   onStoreClick(clickName: string) {
     const foundStore = this.restaurants.find((store: any) => store.name === clickName);
-    console.log(foundStore);
+    // console.log(foundStore);
     if (foundStore) {
       this.router.navigate(["stores", clickName]);
     } else {
