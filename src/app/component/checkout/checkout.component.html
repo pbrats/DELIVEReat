@@ -207,14 +207,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
+                    @if(!showAlert){
                     <h4 class="text-success">Congratulations <span class="fw-bold"> {{User.name}}</span>!</h4>
                     <h5 class="text-success">Your order is on the way!</h5>
+                    }
                     @if(storeInfos){
                     <!-- <h5 class="text-success">E.T.A.: <span class="fw-bold">{{storeInfos.delivery_time}}'</span></h5> -->
                     <h5 class="text-success">E.T.A.: <span class="fw-bold">{{ formatTime(counter) }}</span></h5>
                     }
                     @if(showAlert){
-                      <div class="containeran m-2">
+                      <div class="containeran m-2" style="height:150px">
                         <h2 class="titlean">
                           <span class="title-word title-word-1">Your </span>
                           <span class="title-word title-word-2"> order </span>
