@@ -58,7 +58,7 @@ export class CheckoutComponent {
           // this.counter=this.counter*60;
           // console.log("delivery time in seconds", this.counter);
           // counter in order to see going to 00:00
-          this.counter=10;
+          this.counter=60;
           this.delivery_cost = this.storeInfos.delivery_cost;
           // console.log("delivery",this.delivery_cost);
           this.minimum_cost = this.storeInfos.minimum_order;

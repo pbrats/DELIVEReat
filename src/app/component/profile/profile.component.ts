@@ -14,6 +14,7 @@ export class ProfileComponent {
   User: any = {};
   lastVisit: any;
   profileForm!: FormGroup;
+  updated: boolean=false;
 
   constructor(private titleService: Title, private formBuilder: FormBuilder) {
     titleService.setTitle("Profile");
@@ -53,8 +54,10 @@ export class ProfileComponent {
         // Parse the stored JSON string back into an object
         this.User = JSON.parse(storedUser);
         // console.log("updated user:",this.User);
+        console.log("form valid, profile updated");
+        this.updated=true;
       }
-      console.log("form valid, profile updated");
+     
     } else {
       console.log("form invalid");
       Object.keys(this.profileForm.controls).forEach(controlName => {

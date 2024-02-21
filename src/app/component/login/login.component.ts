@@ -58,6 +58,7 @@ export class LoginComponent {
         this.showErrorAlert = false;
         localStorage.setItem('lastVisit', JSON.stringify(this.currentTime));
         localStorage.setItem('alertShown', 'no');
+        localStorage.setItem('reload', 'no');
         localStorage.setItem('User', JSON.stringify(authenticatedUser));
         // sessionStorage.setItem('User', JSON.stringify(authenticatedUser));
 

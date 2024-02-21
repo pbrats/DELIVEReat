@@ -61,6 +61,12 @@ export class MainComponent {
   }
   ngOnInit() {
     this.titleService.setTitle("Discovery");
+    const reload = localStorage.getItem('reload');
+    if (reload === 'no') {
+      localStorage.setItem('reload', 'yes');
+      // A WAY TO FIX THE PROBLEMATIC LOAD
+      window.location.reload();
+    }
     // this.route.queryParams.subscribe(params => {
     //   console.log(params)
     //   this.showAlertFlag = params['loginSuccess'];
@@ -82,15 +88,11 @@ export class MainComponent {
       // Now, this.User contains the information of the authenticated user
       const hasAlertBeenShown = localStorage.getItem('alertShown');
       // console.log(hasAlertBeenShown);
-      if (this.User && hasAlertBeenShown === 'no') {
+      if (this.User && hasAlertBeenShown === 'no' && reload==='yes' ) {
         this.showAlertFlag = true;
         setTimeout(() => {
           this.showAlertFlag = false;
-
-          // A WAY TO FIX THE PROBLEMATIC LOAD
-          window.location.reload();
-
-        }, 3000);
+        }, 5000);
         // Set the flag in local storage to indicate that the alert has been shown
         localStorage.setItem('alertShown', 'yes');
       }
