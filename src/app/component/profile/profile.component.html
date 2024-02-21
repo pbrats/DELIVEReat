@@ -9,8 +9,8 @@
         <img [src]="User.photo" onerror="this.src='../assets/users/blank-profile.png';" class="card-img-top"
           alt="{{ User.name }} {{ User.lastname }} user's photo" style="width: 300px" />
         <div class="m-5" style="display: flex; flex-direction: column; align-items:flex-end;">
-          <form class="me-3" [formGroup]="profileForm" (submit)="onSubmit()">
-            <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+          <form class="me-0" [formGroup]="profileForm" (submit)="onSubmit()">
+            <div class="form-group m-2 row col-sm-10 text-bg-light border rounded-2">
               <label class="form-label mb-2 text-start" for="telephone">Phone number: <span
                   class="text-danger">*</span></label>
               <input type="tel" name="telephone" id="telephone" formControlName="telephone" class="form-control"
@@ -28,7 +28,7 @@
               <!-- <h4 class="col-sm-6">Phone number:</h4>
             <p class="col-sm-6">{{ User.telephone }}</p> -->
             </div>
-            <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+            <div class="form-group m-2 row col-sm-10 text-bg-light border rounded-2">
               <label class="form-label mb-2 text-start" for="email">Email: <span class="text-danger">*</span></label>
               <input type="email" id="email" name="email" class="form-control" formControlName="email"
                 autocomplete="email">
@@ -43,7 +43,7 @@
               <!-- <h4 class="col-sm-6">Email:</h4>
             <p class="col-sm-6">{{ User.email }}</p> -->
             </div>
-            <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+            <div class="form-group m-2 row col-sm-10 text-bg-light border rounded-2">
               <label class="form-label mb-2 text-start" for="address">Address:</label>
               <input type="text" name="address" id="address" class="form-control" formControlName="address"
                 autocomplete="street-address">
@@ -55,7 +55,7 @@
               <!-- <h4 class="col-sm-6">Address:</h4>
             <p class="col-sm-6">{{ User.address }}</p> -->
             </div>
-            <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+            <div class="form-group m-2 row col-sm-10 text-bg-light border rounded-2">
               <label class="form-label mb-2 text-start" for="postalCode">Postal Code:</label>
               <input type="text" name="postalCode" id="postalCode" class="form-control" formControlName="postalCode"
                 placeholder="10000" autocomplete="postal-code">
@@ -67,7 +67,7 @@
               <!-- <h4 class="col-sm-6">Postal Code:</h4>
             <p class="col-sm-6">{{ User.postalCode }}</p> -->
             </div>
-            <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
+            <div class="form-group m-2 row col-sm-10 text-bg-light border rounded-2">
               <label class="form-label mb-2 text-start" for="password">Password:</label>
               <input type="password" name="password" id="password" class="form-control" formControlName="password"
                 autocomplete="current-password">
@@ -83,8 +83,8 @@
               <div><i class="bi bi-check-circle-fill mx-2"></i>Your profile has been successfully<span class="fw-bold"> updated!</span></div>
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div class="col-sm-12">
-              <button type="submit" class="btn btn btn-info my-3" [disabled]="!profileForm.valid">Update
+            <div class="col-sm-12 ms-5">
+              <button type="submit" class="btn btn btn-outline-success my-3" [disabled]="!profileForm.valid">Update
                 Profile</button>
             </div>
           </form>
