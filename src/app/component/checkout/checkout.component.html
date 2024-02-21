@@ -210,7 +210,18 @@
                     <h4 class="text-success">Congratulations <span class="fw-bold"> {{User.name}}</span>!</h4>
                     <h5 class="text-success">Your order is on the way!</h5>
                     @if(storeInfos){
-                    <h5 class="text-success">E.T.A.: <span class="fw-bold">{{storeInfos.delivery_time}}'</span></h5>
+                    <!-- <h5 class="text-success">E.T.A.: <span class="fw-bold">{{storeInfos.delivery_time}}'</span></h5> -->
+                    <h5 class="text-success">E.T.A.: <span class="fw-bold">{{ formatTime(counter) }}</span></h5>
+                    }
+                    @if(showAlert){
+                      <div class="containeran m-2">
+                        <h2 class="titlean">
+                          <span class="title-word title-word-1">Your </span>
+                          <span class="title-word title-word-2"> order </span>
+                          <span class="title-word title-word-3"> is </span>
+                          <span class="title-word title-word-4"> here!</span>
+                        </h2>
+                      </div>
                     }
                   </div>
                   <div class="modal-footer">

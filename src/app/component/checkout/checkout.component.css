@@ -11,3 +11,56 @@ ng-valid,
 .ng-valid:not(form) {
     border-left: 6px solid #42A948;
 }
+.title-word {
+    animation: color-animation 2s linear infinite;
+  }
+  
+  .title-word-1 {
+    --color-1: #be2256;
+    --color-2: #22be8a;
+    --color-3: #be3c22;
+  }
+  
+  .title-word-2 {
+    --color-1: #22a4be;
+    --color-2: #7d1638;
+    --color-3: #167d5b;
+  }
+  
+  .title-word-3 {
+    --color-1: #166c7d;
+    --color-2: #7d1639;
+    --color-3: #22be8a;
+  }
+  
+  .title-word-4 {
+    --color-1: #38dba5;
+    --color-2: #d42660;
+    --color-3: #38c0db;
+  }
+  
+  @keyframes color-animation {
+    0%    {color: var(--color-1)}
+    32%   {color: var(--color-1)}
+    33%   {color: var(--color-2)}
+    65%   {color: var(--color-2)}
+    66%   {color: var(--color-3)}
+    99%   {color: var(--color-3)}
+    100%  {color: var(--color-1)}
+  }
+  
+  /* Here are just some visual styles. 🖌 */
+  
+  .containeran {
+    display: grid;
+    place-items: center;  
+    text-align: center;
+    height: 10vh
+  }
+  
+  .titlean {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 4vw;
+    text-transform: uppercase;
+  }

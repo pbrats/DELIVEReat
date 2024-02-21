@@ -6,6 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CartService } from '../../service/cart.service';
 import { CartItem } from '../../cart-item';
 import { StoresInfosService } from '../../service/stores-infos.service';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -26,6 +27,9 @@ export class CheckoutComponent {
   disableButton: boolean = false;
   delivery_cost: number = 0;
   minimum_cost: number = 0;
+  counter: number = 0;
+  private timerSubscription: Subscription | undefined;
+  showAlert: boolean=false;
   constructor(private titleService: Title, private router: Router, private formBuilder: FormBuilder, private cartService: CartService, private infoService: StoresInfosService) {
     titleService.setTitle("Checkout");
     const navigation = this.router.getCurrentNavigation();
@@ -49,6 +53,12 @@ export class CheckoutComponent {
         if (store.name === this.storeName) {
           this.storeInfos = store;
           // console.log("stores info with store name", this.storeInfos);
+          // this.counter = this.storeInfos.delivery_time;
+          // console.log("delivery time", this.counter);
+          // this.counter=this.counter*60;
+          // console.log("delivery time in seconds", this.counter);
+          // counter in order to see going to 00:00
+          this.counter=10;
           this.delivery_cost = this.storeInfos.delivery_cost;
           // console.log("delivery",this.delivery_cost);
           this.minimum_cost = this.storeInfos.minimum_order;
@@ -66,6 +76,13 @@ export class CheckoutComponent {
       });
     });
     this.setFormValues();
+    this.timerSubscription = interval(1000).subscribe(() => {
+      if (this.counter > 0) {
+        this.counter--;
+      } else {
+        this.showAlert=true;
+      }
+    });
     const storedUser = localStorage.getItem('User');
     if (storedUser) {
       // Parse the stored JSON string back into an object
@@ -84,6 +101,16 @@ export class CheckoutComponent {
       address: new FormControl(this.User['address'] || ''),
       paymentMethod: new FormControl("", Validators.required)
     });
+  }
+  ngOnDestroy(): void {
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
+  }
+  formatTime(seconds: number): string {
+    const minutes: number = Math.floor(seconds / 60);
+    const remainingSeconds: number = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   }
   setFormValues() {
     // this.checkoutForm = new FormGroup({
