@@ -99,7 +99,8 @@ export class CheckoutComponent {
       telephone: new FormControl(this.User['telephone'] || '', [Validators.required, Validators.pattern("[0-9 ]{10}")]),
       email: new FormControl(this.User['email'] || '', [Validators.required, Validators.email]),
       address: new FormControl(this.User['address'] || ''),
-      paymentMethod: new FormControl("", Validators.required)
+      paymentMethod: new FormControl("", Validators.required),
+      comments:new FormControl("")
     });
   }
   ngOnDestroy(): void {

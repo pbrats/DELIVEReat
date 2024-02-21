@@ -45,7 +45,7 @@
             <div *ngIf="checkoutForm.get('paymentMethod')!.value === 'Card'"
               style="display: flex; flex-direction: column; align-items:center;">
               <!-- Card info form -->
-              <form class="me-3 " [formGroup]="cardForm" (submit)="onSubmit()">
+              <form class="me-3" [formGroup]="cardForm" (submit)="onSubmit()">
                 <div class="form-group m-2 mb-3 row col-sm-12 text-bg-light border rounded-2">
                   <label class="form-label mb-2 text-start" for="cardNumber">Card Number: <span
                       class="text-danger">*</span></label>
@@ -112,11 +112,11 @@
               </form>
             </div>
           </div>
-          <div class="border border-secondary rounded-2 my-3 px-1">
+          <div class="row col-sm-10 text-center border border-secondary rounded-2 my-3 mx-auto px-1">
             <h5 class="text-start mt-3">Delivery Infos:</h5>
             <div class="m-1 me-3 mt-3" style="display: flex; flex-direction: column; align-items:center;">
               <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
-                <label class="form-label mb-2" for="name">First name: <span class="text-danger">*</span></label>
+                <label class="form-label mb-2 text-start" for="name">First name: <span class="text-danger">*</span></label>
                 <input type="text" name="name" id="name" formControlName="name" class="form-control"
                   autocomplete="given-name">
                 <div *ngIf="checkoutForm.get('name')?.hasError('required') &&
@@ -131,7 +131,7 @@
                 </div>
               </div>
               <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
-                <label class="form-label mb-2" for="lastname">Last name: <span class="text-danger">*</span></label>
+                <label class="form-label mb-2 text-start" for="lastname">Last name: <span class="text-danger">*</span></label>
                 <input type="text" name="lastname" id="lastname" formControlName="lastname" class="form-control"
                   autocomplete="family-name">
                 <div *ngIf="checkoutForm.get('lastname')?.hasError('required') &&
@@ -146,7 +146,7 @@
                 </div>
               </div>
               <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
-                <label class="form-label mb-2" for="address">Address:</label>
+                <label class="form-label mb-2 text-start" for="address">Address:</label>
                 <input type="text" name="address" id="address" class="form-control" formControlName="address"
                   autocomplete="street-address">
                 <div *ngIf="checkoutForm.get('address')?.hasError('required') &&
@@ -156,7 +156,7 @@
                 </div>
               </div>
               <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
-                <label class="form-label mb-2" for="email">Email: <span class="text-danger">*</span></label>
+                <label class="form-label mb-2 text-start" for="email">Email: <span class="text-danger">*</span></label>
                 <input type="email" id="email" name="email" class="form-control" formControlName="email"
                   autocomplete="email">
                 <div *ngIf="checkoutForm.get('email')?.hasError('required') && checkoutForm.get('email')?.touched">
@@ -169,7 +169,7 @@
                 </div>
               </div>
               <div class="form-group m-2 row col-sm-12 text-bg-light border rounded-2">
-                <label class="form-label mb-2" for="telephone">Phone number: <span class="text-danger">*</span></label>
+                <label class="form-label mb-2 text-start" for="telephone">Phone number: <span class="text-danger">*</span></label>
                 <input type="tel" name="telephone" id="telephone" formControlName="telephone" class="form-control"
                   autocomplete="tel">
                 <div
@@ -187,9 +187,9 @@
               </div>
             </div>
           </div>
-          <div class="row my-5 border border-secondary rounded-2 mx-3">
-            <label for="comments" class="text-start text-white-50">Comments </label>
-            <textarea name="comments" id="comments" rows="3"></textarea>
+          <div class="form-group row col-sm-8 my-5 border border-secondary rounded-2 mx-auto">
+            <label for="comments" class="form-label text-start text-white-50">Comments: </label>
+            <textarea name="comments" formControlName="comments" class="form-control" id="comments" rows="3"></textarea>
           </div>
           <div class="d-grid gap-2 col-8 mx-auto my-3">
             <!-- Button submit and trigger modal -->
