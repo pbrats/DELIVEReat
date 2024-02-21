@@ -68,9 +68,24 @@
             <p class="col-sm-6">{{ User.postalCode }}</p> -->
             </div>
             <div class="form-group m-2 row col-sm-10 text-bg-light border rounded-2">
-              <label class="form-label mb-2 text-start" for="password">Password:</label>
+              <label class="form-label mb-2 text-start" for="password">Password:
+                <button type="button" class="btn btn-sm rounded" (click)="togglePasswordVisibility(passwordInput)">
+                  @if
+                  (!showPassword){
+                  <i class="bi bi-eye-fill"></i>
+                  }@else{
+                  <i class="bi bi-eye-slash-fill"></i>
+                  }</button></label>
+              <!-- {{ showPassword ? 'Hide' : 'Show' }} -->
               <input type="password" name="password" id="password" class="form-control" formControlName="password"
-                autocomplete="current-password">
+                autocomplete="current-password" #passwordInput>
+              <!-- <button type="button" class="btn btn-sm rounded" (click)="togglePasswordVisibility(passwordInput)">
+                @if (!showPassword){
+                <i class="bi bi-eye-fill"></i>
+                }@else{
+                <i class="bi bi-eye-slash-fill"></i>
+                }
+              </button> -->
               <div *ngIf="profileForm.get('password')?.hasError('pattern') && profileForm.get('password')?.touched">
                 <span class="text-danger fst-italic">Password must be </span><span class="text-danger fw-bold"> {{
                   processString(
@@ -79,8 +94,10 @@
               <!-- <h4 class="col-sm-6">Password:</h4>
             <p class="col-sm-6">{{ User.password }}</p> -->
             </div>
-            <div *ngIf="updated" class="alert alert-success alert-dismissible mt-3 mx-auto" role="alert" style="width:90%">
-              <div><i class="bi bi-check-circle-fill mx-2"></i>Your profile has been successfully<span class="fw-bold"> updated!</span></div>
+            <div *ngIf="updated" class="alert alert-success alert-dismissible mt-3 mx-auto" role="alert"
+              style="width:90%">
+              <div><i class="bi bi-check-circle-fill mx-2"></i>Your profile has been successfully<span class="fw-bold">
+                  updated!</span></div>
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <div class="col-sm-12 ms-5">

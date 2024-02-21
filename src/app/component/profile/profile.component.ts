@@ -15,6 +15,7 @@ export class ProfileComponent {
   lastVisit: any;
   profileForm!: FormGroup;
   updated: boolean=false;
+  showPassword: boolean = false;
 
   constructor(private titleService: Title, private formBuilder: FormBuilder) {
     titleService.setTitle("Profile");
@@ -83,6 +84,10 @@ export class ProfileComponent {
   processString(inputString: string): string {
     let stringWithHyphen = inputString.replace(/[^0-9a-zA-Z\-{}]/g, '');
     return stringWithHyphen.replace(/{(\d+)}/g, ', with $1');
+  }
+  togglePasswordVisibility(input: HTMLInputElement): void {
+    this.showPassword = !this.showPassword;
+    input.type = this.showPassword ? 'text' : 'password';
   }
   SignOut() {
     sessionStorage.clear();
