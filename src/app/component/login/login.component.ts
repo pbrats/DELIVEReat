@@ -16,6 +16,7 @@ export class LoginComponent {
   loginValues: any;
   userService: UsersService = inject(UsersService);
   showErrorAlert: boolean = false;
+  showPassword: boolean = false;
   // isAuthenticated:boolean=false;
   private currentTime: Date = new Date();
   @Input() showOffcanvas?: boolean;
@@ -120,5 +121,8 @@ export class LoginComponent {
   }
   resetForm() {
     this.loginForm.reset();
+  }
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

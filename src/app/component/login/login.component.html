@@ -32,9 +32,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="my-2" for="password-l">Password: <span class="text-danger">*</span></label>
-                    <input type="password" id="password-l" name="password" class="form-control"
-                        formControlName="password" placeholder="****" autocomplete="current-password">
+                    <div style="display: flex; flex-direction: row; justify-content:space-between;">
+                        <label class="my-2" for="password-l">Password: <span class="text-danger">*</span></label>
+                        <button type="button" class="btn btn-sm rounded" (click)="togglePasswordVisibility()">
+                            <i class="bi text-white {{ showPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill' }}"></i>
+                        </button>
+                    </div>
+                    <input type="{{ showPassword ? 'text':'password'}}" id="password-l" name="password"
+                        class="form-control" formControlName="password" placeholder="****"
+                        autocomplete="current-password">
                     <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
                         <span class="text-danger fst-italic">Password is </span><span class="text-danger fw-bold">
                             required.</span>

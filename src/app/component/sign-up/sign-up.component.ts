@@ -15,6 +15,7 @@ import { passwordValidator } from '../../passwordValidator';
 export class SignUpComponent {
   signUpForm!: FormGroup;
   signUpValues: any;
+  showPassword: boolean = false;
   private currentTime: Date = new Date();
 
   constructor(private router: Router, private route: ActivatedRoute) { }
@@ -37,7 +38,6 @@ export class SignUpComponent {
       confirmPassword: new FormControl("")
     }, { validators: PasswordMatcher.match });
   }
-
   onSubmit() {
     if (this.signUpForm.valid) {
       localStorage.setItem('lastVisit', JSON.stringify(this.currentTime));
@@ -76,5 +76,8 @@ export class SignUpComponent {
     let stringWithHyphen = inputString.replace(/[^0-9\-{}]/g, '');
     // Add comma before numbers inside curly braces
     return stringWithHyphen.replace(/{(\d+)}/g, ', with $1');
+  }
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

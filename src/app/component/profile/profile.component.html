@@ -69,26 +69,18 @@
             </div>
             <div class="form-group m-2 row col-sm-10 text-bg-light border rounded-2">
               <div style="display: flex; flex-direction: row; justify-content:space-between;">
-              <label class="form-label mb-2 text-start" for="password">Password:</label>
+                <label class="form-label mb-2 text-start" for="password">Password:</label>
                 <button type="button" class="btn btn-sm rounded" (click)="togglePasswordVisibility(passwordInput)">
-                 <div *ngIf="!showPassword">
+                  <!-- @if (!showPassword){
                   <i class="bi bi-eye-fill"></i>
-                 </div>
-                  <div *ngIf="showPassword">
+                  }@else{
                   <i class="bi bi-eye-slash-fill"></i>
-                </div>
+                  } -->
+                  <i class="bi {{ showPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill' }}"></i>
                 </button>
               </div>
-              <!-- {{ showPassword ? 'Hide' : 'Show' }} -->
               <input type="password" name="password" id="password" class="form-control" formControlName="password"
                 autocomplete="current-password" #passwordInput>
-              <!-- <button type="button" class="btn btn-sm rounded" (click)="togglePasswordVisibility(passwordInput)">
-                @if (!showPassword){
-                <i class="bi bi-eye-fill"></i>
-                }@else{
-                <i class="bi bi-eye-slash-fill"></i>
-                }
-              </button> -->
               <div *ngIf="profileForm.get('password')?.hasError('pattern') && profileForm.get('password')?.touched">
                 <span class="text-danger fst-italic">Password must be </span><span class="text-danger fw-bold"> {{
                   processString(
