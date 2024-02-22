@@ -68,14 +68,17 @@
             <p class="col-sm-6">{{ User.postalCode }}</p> -->
             </div>
             <div class="form-group m-2 row col-sm-10 text-bg-light border rounded-2">
-              <label class="form-label mb-2 text-start" for="password">Password:
+              <div style="display: flex; flex-direction: row; justify-content:space-between;">
+              <label class="form-label mb-2 text-start" for="password">Password:</label>
                 <button type="button" class="btn btn-sm rounded" (click)="togglePasswordVisibility(passwordInput)">
-                  @if
-                  (!showPassword){
+                 <div *ngIf="!showPassword">
                   <i class="bi bi-eye-fill"></i>
-                  }@else{
+                 </div>
+                  <div *ngIf="showPassword">
                   <i class="bi bi-eye-slash-fill"></i>
-                  }</button></label>
+                </div>
+                </button>
+              </div>
               <!-- {{ showPassword ? 'Hide' : 'Show' }} -->
               <input type="password" name="password" id="password" class="form-control" formControlName="password"
                 autocomplete="current-password" #passwordInput>
@@ -94,13 +97,12 @@
               <!-- <h4 class="col-sm-6">Password:</h4>
             <p class="col-sm-6">{{ User.password }}</p> -->
             </div>
-            <div *ngIf="updated" class="alert alert-success alert-dismissible mt-3 mx-auto" role="alert"
-              style="width:90%">
+            <div *ngIf="updated" class="alert alert-success alert-dismissible mt-3 mx-3" role="alert" style="width:80%">
               <div><i class="bi bi-check-circle-fill mx-2"></i>Your profile has been successfully<span class="fw-bold">
                   updated!</span></div>
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div class="col-sm-12 ms-5">
+            <div class="col-sm-10 text-end">
               <button type="submit" class="btn btn btn-outline-success my-3" [disabled]="!profileForm.valid">Update
                 Profile</button>
             </div>

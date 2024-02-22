@@ -65,7 +65,7 @@ export class SelectedCategoryComponent {
               this.router.navigate(["menu-not-found"]);
             }
           });
-        }, 500);
+        }, 1);
       }
     });
   }

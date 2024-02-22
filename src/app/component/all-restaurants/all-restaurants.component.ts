@@ -42,7 +42,7 @@ export class AllRestaurantsComponent {
             });
             // console.log('After replacement:', this.restaurants);
             this.hasLoadedStores = true;
-          }, 500);
+          }, 1);
         }
       });
   }

@@ -14,7 +14,7 @@ export class ProfileComponent {
   User: any = {};
   lastVisit: any;
   profileForm!: FormGroup;
-  updated: boolean=false;
+  updated: boolean = false;
   showPassword: boolean = false;
 
   constructor(private titleService: Title, private formBuilder: FormBuilder) {
@@ -56,9 +56,12 @@ export class ProfileComponent {
         this.User = JSON.parse(storedUser);
         // console.log("updated user:",this.User);
         console.log("form valid, profile updated");
-        this.updated=true;
+        this.updated = true;
+        // timeout to hide the alert after a certain duration
+        setTimeout(() => {
+          this.updated = false;
+        }, 5000);
       }
-     
     } else {
       console.log("form invalid");
       Object.keys(this.profileForm.controls).forEach(controlName => {

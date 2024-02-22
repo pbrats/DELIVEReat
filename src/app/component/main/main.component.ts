@@ -92,7 +92,7 @@ export class MainComponent {
         this.showAlertFlag = true;
         setTimeout(() => {
           this.showAlertFlag = false;
-        }, 5000);
+        }, 6000);
         // Set the flag in local storage to indicate that the alert has been shown
         localStorage.setItem('alertShown', 'yes');
       }
@@ -126,7 +126,7 @@ export class MainComponent {
           });
           // console.log('After replacement:', this.fCategories);
           this.hasLoadedCategories = true;
-        }, 500);
+        }, 1);
       }
     });
     this.restaurantsService.getRestaurants().subscribe((response) => {
@@ -166,7 +166,7 @@ export class MainComponent {
             // this.categories2 =response;
             // enonei categories if so allazei sto html kai mpainei categories
             // this.categories=this.categories1.concat(this.categories2)
-          }, 500);
+          }, 1);
         }
       });
   }

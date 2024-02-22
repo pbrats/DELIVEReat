@@ -43,7 +43,7 @@ export class CategoriesComponent implements OnInit {
           });
           // console.log('After replacement:', this.fCategories);
           this.hasLoadedCategories = true;
-        }, 500);
+        }, 1);
       }
     });
     this.catPhotoService.getCategoriesPhotos().subscribe((data) => {

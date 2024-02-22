@@ -48,7 +48,7 @@ export class FamousComponent {
             });
             // console.log('After replacement:', this.famousRestaurants);
             this.hasLoadedFamous = true;
-          }, 500);
+          }, 1);
         }
       });
   }
