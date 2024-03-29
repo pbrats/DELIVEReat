@@ -74,9 +74,12 @@ Example4: User without previous orders
 
 Technologies: Angular, HTML, CSS, TypeScript, Bootstrap
 
+
 The application gets all the required data from JSON files.
 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+
 
 ## Development server
 
