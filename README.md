@@ -46,18 +46,31 @@ After initial registration or login, the user can:
 
 
 Information for login with pre-existing accounts:
+
 Example1 : User with previous orders (stores with an existing menu)
+
           "email":johndoe@mail.com
+          
           "password":1234
+          
 Example2 : User with previous orders (stores without an existing menu)
+
           "email":janedoe@mail.com
+          
           "password":1111 
+          
 Example3: User with 1 previous orders (store without an existing menu)
+
           "email":mariap@mail.com
+          
           "password":2222
+          
 Example4: User without previous orders
+
           "email":chucknorris@mail.com
+          
           "password":0000
+          
 
 Technologies: Angular, HTML, CSS, TypeScript, Bootstrap
 
