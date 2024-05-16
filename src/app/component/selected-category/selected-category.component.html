@@ -21,7 +21,7 @@
     </div>
     <ng-template *ngIf="hasLoadedStores; then storesBlock else noStoresBlock"></ng-template>
     <ng-template #storesBlock>
-        <div class="row row-cols-4">
+        <div class="row row-cols-4 card-container">
             <div class="m-4" *ngFor="let store of stores">
                 <div class="col-sm-4 mx-4">
                     <div class="card border border-success m-3" style="width: 300%; height: 100%"

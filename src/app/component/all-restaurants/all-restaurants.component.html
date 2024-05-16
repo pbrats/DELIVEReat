@@ -23,9 +23,9 @@
     </div>
     <ng-template *ngIf="hasLoadedStores; then storesBlock else noStoresBlock"></ng-template>
     <ng-template #storesBlock>
-        <div class="row row-cols-4">
+        <div class="row row-cols-4 card-container">
             @for (restaurant of restaurants; track $index){
-            <div class="col-sm-4 my-2">
+            <div class="col-sm-4 my-4">
                 <div class="card border border-success m-3" style="width: 90%; height: 100%"
                     (click)="onStoreClick(restaurant.name)" title="click for details">
                     <div class="card-body text-center shadow"

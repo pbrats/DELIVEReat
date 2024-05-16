@@ -24,9 +24,9 @@
     </div>
     <ng-template *ngIf="hasLoadedFamous; then famousBlock else noFamousBlock"></ng-template>
     <ng-template #famousBlock>
-        <div class="row row-cols-4">
+        <div class="row row-cols-4 card-container">
             @for (famousRest of famousRestaurants; track $index){
-            <div class="col-sm-4 my-2">
+            <div class="col-sm-4 my-4">
                 <div class="card border border-success m-3" style="width: 90%; height: 100%"
                     (click)="onStoreClick(famousRest.name)" title="click for details">
                     <div class="card-body text-center shadow"

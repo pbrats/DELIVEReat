@@ -20,7 +20,7 @@
                     <td class="text-start border">
                         {{order.store_name}}
                         <div class="text-end" *ngFor="let info of storesInfos">
-                            <div *ngIf="info.name==order.store_name" (click)="onStoreClick(info.name)"
+                            <div class="store-link" *ngIf="info.name==order.store_name" (click)="onStoreClick(info.name)"
                                 title="click for details">
                                 <img [src]="info.logo" class="card-img-top" alt="{{info.name}} store photo"
                                     style="width: 100px; height:10%">

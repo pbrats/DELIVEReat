@@ -44,3 +44,6 @@
 .rate>label:hover~input:checked~label {
     color: #ffc107;
 }
+.store-link{
+    cursor:pointer;
+}
