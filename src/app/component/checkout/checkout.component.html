@@ -28,6 +28,7 @@
             Your total order amount is <span class="fw-bolder"> {{ storeInfos.minimum_order - (total +
               storeInfos.delivery_cost) | number:'1.2-2' }} &euro;</span> less
             than the minimum order amount.</h4>
+            <button class="btn btn-info m-2" [routerLink]="'/stores/'+storeName" routerLinkActive="active">Return to {{storeName}}</button>
             }
             }
         </div>
